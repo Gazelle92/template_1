@@ -45,41 +45,115 @@ export default function Home() {
         end: "+=100%",
         scrub: true,
         pin: true,
-        pinSpacing: true,
+        pinSpacing: false,
       },
     });
 
     tl.to(img, { width: "33vw", height: "47.4vw", ease: "none" }, 0);
-    tl.to(txt, { clipPath: "inset(0% 33% 0% 33%)", opacity: "0", ease: "none" }, 0);
-
+    tl.to(txt, { clipPath: "inset(0% 33% 0% 33%)", opacity: 0, ease: "none" }, 0);
     tl.fromTo(m1s1, { x: "-83vw" }, { x: "0vw", ease: "none" }, 0);
     tl.fromTo(m1s2, { x: "83vw" }, { x: "0vw", ease: "none" }, 0);
 
-    // txt2가 top에 닿는 순간부터 main_1_img_s가 멈춘것처럼 만들기
-    ScrollTrigger.create({
-      trigger: txt2,
-      start: "top top",
-      onEnter: () => {
-        const rect = imgWrap.getBoundingClientRect();
-        const top = rect.top + window.scrollY;
-
-        imgWrap.classList.add("abs_mode");
-        imgWrap.style.top = `${top}px`;
-      },
-      onLeaveBack: () => {
-        imgWrap.classList.remove("abs_mode");
-        imgWrap.style.top = `0px`;
-      },
-    });
-
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
+    // txt2가 top에 닿는 순간 fixed -> absolute
+    
   }, []);
 
+  useEffect(() => {
+  const txt2 = txt2Ref.current;
+  const imgWrap = imgWrapRef.current;
+  if (!txt2 || !imgWrap) return;
+
+  const onScroll = () => {
+    const scrollTop = window.scrollY;
+    const txt2Top = txt2.getBoundingClientRect().top + window.scrollY;
+
+    if (scrollTop >= txt2Top) {
+      imgWrap.classList.add("abs_mode");
+    } else {
+      imgWrap.classList.remove("abs_mode");
+    }
+  };
+
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+
+  return () => {
+    window.removeEventListener("scroll", onScroll);
+  };
+}, []);
+
+const sec2Ref = useRef<HTMLElement | null>(null);
+const listRef = useRef<HTMLUListElement | null>(null);
+useEffect(() => {
+  const wrap = sec2Ref.current;
+  const list = listRef.current;
+  if (!wrap || !list) return;
+
+  const els = Array.from(list.querySelectorAll(".sc_el")) as HTMLLIElement[];
+  if (!els.length) return;
+
+  const baseHeight = 120; // 원하는 기본 높이
+
+  const getInnerHeight = (idx: number) => {
+    const inner = els[idx].querySelector(".sc_el_p") as HTMLElement | null;
+    return inner ? inner.offsetHeight : 0;
+  };
+
+  const floatingList = () => {
+    const scrollTop = window.scrollY;
+    const wrapTop = wrap.getBoundingClientRect().top + window.scrollY;
+
+    const mTop = scrollTop - wrapTop;
+
+    const h0 = getInnerHeight(0);
+    const h1 = getInnerHeight(1);
+    const h2 = getInnerHeight(2);
+
+    if (scrollTop < wrapTop) {
+      els.forEach((el) => (el.style.height = `${baseHeight}px`));
+      return;
+    }
+
+    // 구간 1
+    if (scrollTop >= wrapTop && scrollTop < wrapTop + h0 - baseHeight) {
+      els[0].style.height = `${h0 - mTop}px`;
+      els[1].style.height = `${mTop + baseHeight}px`;
+      els[2].style.height = `${baseHeight}px`;
+    }
+
+    // 구간 2
+    else if (
+      scrollTop >= wrapTop + h0 - baseHeight &&
+      scrollTop < wrapTop + h0 + h1
+    ) {
+      els[0].style.height = `${baseHeight}px`;
+      els[1].style.height = `${h1 * 2 - mTop}px`;
+      els[2].style.height = `${mTop - h0 + baseHeight}px`;
+    }
+
+    // 구간 3 (마지막)
+    else if (scrollTop >= wrapTop + h0 + h1) {
+      els[0].style.height = `${baseHeight}px`;
+      els[1].style.height = `${baseHeight}px`;
+      els[2].style.height = `${h2 * 3 - mTop}px`;
+    }
+  };
+
+  floatingList();
+  window.addEventListener("scroll", floatingList);
+  window.addEventListener("resize", floatingList);
+
+  return () => {
+    window.removeEventListener("scroll", floatingList);
+    window.removeEventListener("resize", floatingList);
+  };
+}, []);
+
+
+
+
   return (
-    <div className="min-h-screen page_main scroll-trigger-ready__worm-wrap">
+    <div className="min-h-screen page_main">
       <main>
         <section className="main_sec_1" ref={sectionRef}>
           <div className="m1_img_w">
@@ -134,8 +208,8 @@ export default function Home() {
           </div>
         </div>
 
-        <section className="main_sec_2">
-          <ul>
+        <section className="main_sec_2 float-wrap" ref={sec2Ref}>
+          <ul ref={listRef} className="float-el">
             <li className="sc_el">
               <div className="sc_el_title">
                 <div className="dot_icon_w">
@@ -186,7 +260,7 @@ export default function Home() {
             </li>
           </ul>
         </section>
-        <section className="main_sec_3">
+        <section className="main_sec_3 ">
           <div className="m3_img_w">
             <img src="/m_sec3_1.png"/>
             <img src="/m_sec3_2.png"/>
