@@ -36,7 +36,7 @@ export default function Header() {
 
         <a
           href="#contact"
-          className="[font-family:'Pretendard_Variable-Medium',Helvetica] font-medium text-black whitespace-nowrap flex items-center justify-center no-underline bg-[#00FFA1] px-[22px] py-[12px] rounded-[8px]"
+          className="[font-family:'Pretendard_Variable-Medium',Helvetica] font-medium text-black whitespace-nowrap flex items-center justify-center no-underline bg-[#f60952] px-[22px] py-[12px] rounded-[8px] text-bold"
         >
           CONTACT
         </a>
