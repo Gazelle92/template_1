@@ -52,7 +52,7 @@ export default function Home() {
       },
     });
 
-    tl.to(img, { width: "33vw", height: "47.4vw", ease: "none" }, 0);
+    tl.fromTo(img, { width: "100vw", height: "100vh"}, { width: "33vw", height: "80vh", ease: "none" }, 0);
     tl.to(txt, { clipPath: "inset(0% 33% 0% 33%)", opacity: 0, ease: "none" }, 0);
     tl.fromTo(m1s1, { x: "-83vw" }, { x: "0vw", ease: "none" }, 0);
     tl.fromTo(m1s2, { x: "83vw" }, { x: "0vw", ease: "none" }, 0);
@@ -272,7 +272,7 @@ useEffect(() => {
     img2,
     { 
       width: "33vw", 
-      height: "47.4vw", 
+      height: "80vh", 
       ease: "none" 
     },
     {
