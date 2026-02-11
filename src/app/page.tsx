@@ -177,7 +177,7 @@ useEffect(() => {
     img2,
     { left: "calc((8% - 0px) / 1 * 1)" },
     {
-      left: "calc((100% - 220px) / 3 * 1)",
+      left: `calc((100% - ${img2.offsetWidth}px) / 3 * 1)`,
       ease: "none",
       scrollTrigger: {
         trigger: sec3,
@@ -192,7 +192,7 @@ useEffect(() => {
     img3,
     { left: "calc((16% - 0px) / 1 * 1)" },
     {
-      left: "calc((100% - 220px) / 3 * 2)",
+      left: `calc((100% - ${img3.offsetWidth}px) / 3 * 2)`,
       ease: "none",
       scrollTrigger: {
         trigger: sec3,
@@ -207,7 +207,7 @@ useEffect(() => {
     img4,
     { left: "24%" },
     {
-      left: "calc(100% - 220px)",
+      left: `calc(100% - ${img4.offsetWidth}px)`,
       ease: "none",
       scrollTrigger: {
         trigger: sec3,
@@ -261,7 +261,33 @@ useEffect(() => {
 }, []);
 
 
+useEffect(() => {
+  const sec4 = document.querySelector(".main_sec_4") as HTMLElement | null;
+  if (!sec4) return;
 
+  const img2 = sec4.querySelector(".sec_4_img") as HTMLElement | null;
+  if (!img2) return;
+
+  gsap.fromTo(
+    img2,
+    { 
+      width: "33vw", 
+      height: "47.4vw", 
+      ease: "none" 
+    },
+    {
+      width: "100vw", 
+      height: "100vh", 
+      ease: "none",
+      scrollTrigger: {
+        trigger: sec4,
+        start: "top top",
+        end: "top+=30%",
+        scrub: true,
+      },
+    }
+  );
+}, []);
   return (
     <div className="min-h-screen page_main">
       <main>
@@ -412,8 +438,9 @@ useEffect(() => {
           </h1>
         </section>
 
-        <section className="float-wrap" style={{ height: "200vh" }}>
-          <img className="float-el" src="/main_last.jpg" alt="Final Image" />
+        <section className="main_sec_4 float-wrap">
+
+            <img className="float-el sec_4_img" src="/main_last.jpg" alt="Final Image" />
         </section>
       </main>
     </div>
