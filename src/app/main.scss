@@ -189,3 +189,8 @@
   div::after{content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 0.256vw; height: 0.256vw; background-color: #00FFA1;}
   span{padding: 0.449vw 0.769vw; border-radius: 0.513vw; background-color: #f6f6f3; display: flex; align-items: center; justify-content: center;}
 }
+
+
+.main_sec_5{padding: 46px 22px; background-color: #000;
+  .inner{width: 100%; background-color: #00FFA1; border-radius: 1.538vw;}
+}

@@ -442,6 +442,19 @@ useEffect(() => {
 
             <img className="float-el sec_4_img" src="/main_last.jpg" alt="Final Image" />
         </section>
+
+        <section className="main_sec_5">
+          <div className="inner">
+            <ul>
+              <li>Home</li>
+              <li>Company</li>
+              <li>Services</li>
+              <li>Projects</li>
+              <li>Contact</li>
+            
+            </ul>
+          </div>
+        </section>
       </main>
     </div>
   );
