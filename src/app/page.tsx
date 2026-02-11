@@ -167,9 +167,9 @@ useEffect(() => {
   const sec3 = document.querySelector(".main_sec_3") as HTMLElement | null;
   if (!sec3) return;
 
-  const img2 = sec3.querySelector(".m3_img_w img:nth-child(2)") as HTMLElement | null;
-  const img3 = sec3.querySelector(".m3_img_w img:nth-child(3)") as HTMLElement | null;
-  const img4 = sec3.querySelector(".m3_img_w img:nth-child(4)") as HTMLElement | null;
+  const img2 = sec3.querySelector(".m3_img_w .m3_el:nth-child(2)") as HTMLElement | null;
+  const img3 = sec3.querySelector(".m3_img_w .m3_el:nth-child(3)") as HTMLElement | null;
+  const img4 = sec3.querySelector(".m3_img_w .m3_el:nth-child(4)") as HTMLElement | null;
 
   if (!img2 || !img3 || !img4) return;
 
@@ -182,7 +182,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
-        end: "+=50%",
+        end: "top+=30%",
         scrub: true,
       },
     }
@@ -197,7 +197,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
-        end: "+=50%",
+        end: "top+=30%",
         scrub: true,
       },
     }
@@ -212,7 +212,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
-        end: "+=50%",
+        end: "top+=30%",
         scrub: true,
       },
     }
@@ -228,7 +228,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sec3,
         start: "top+=30%",
-      end: "+=50%",
+      end: "top+=60%",
 
         scrub: true,
       },
@@ -244,12 +244,19 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sec3,
         start: "top+=30%",
-      end: "+=50%",
+      end: "top+=60%",
 
         scrub: true,
       },
     }
   );
+
+  ScrollTrigger.create({
+    trigger: sec3,
+    start: "top+=60%",
+    toggleClass: { targets: ".m3_img_w", className: "txt_up" },
+  });
+
 
 }, []);
 
@@ -377,10 +384,26 @@ useEffect(() => {
 
         <section className="main_sec_3 float-wrap">
           <div className="m3_img_w float-el">
-            <img src="/m_sec3_1.png" />
-            <img src="/m_sec3_2.png" />
-            <img src="/m_sec3_3.png" />
-            <img src="/m_sec3_4.png " />
+            <div className="m3_el">
+              <img src="/m_sec3_1.png" />
+              <span>Innovation Platform</span>
+            </div>
+            <div className="m3_el">
+              <img src="/m_sec3_2.png" />
+              <span>Biotechnology<br/>Development Program</span>
+            </div>
+            <div className="m3_el">
+              <img src="/m_sec3_3.png" />
+              <span>Data-Driven Life Science Project</span>
+            </div>
+            <div className="m3_el">
+              <img src="/m_sec3_4.png" />
+              <span>Translational Science<br/>Initiative</span>
+            </div>
+
+            
+
+
           </div>
           <h1>
             RECENT
@@ -389,7 +412,9 @@ useEffect(() => {
           </h1>
         </section>
 
-        <section style={{ height: "200vh" }}></section>
+        <section className="float-wrap" style={{ height: "200vh" }}>
+          <img className="float-el" src="/main_last.jpg" alt="Final Image" />
+        </section>
       </main>
     </div>
   );
