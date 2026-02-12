@@ -7,15 +7,6 @@ import "./main.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.timeline({
-  scrollTrigger: {
-    scrub: 1,
-    trigger: ".scroll-trigger-ready__worm-wrap",
-    start: "top 90%",
-    end: "bottom 30%",
-  },
-});
-
 export default function Home() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -38,7 +29,7 @@ export default function Home() {
     const m1s2 = m1s2Ref.current;
     const txt2 = txt2Ref.current;
     const imgWrap = imgWrapRef.current;
-
+    const header = document.querySelector("header");
     if (!section || !img || !txt || !m1s1 || !m1s2 || !txt2 || !imgWrap) return;
 
     const tl = gsap.timeline({
@@ -49,10 +40,21 @@ export default function Home() {
         scrub: true,
         pin: true,
         pinSpacing: false,
+
+        onUpdate: (self) => {
+          if (!header) return;
+
+          if (self.progress > 0.95) {
+            header.classList.add("no-filter");
+          } else {
+            header.classList.remove("no-filter");
+          }
+        },
       },
     });
 
-    tl.fromTo(img, { width: "100vw", height: "100vh"}, { width: "33vw", height: "80vh", ease: "none" }, 0);
+
+    tl.fromTo(img, { width: "calc(100% - 40px)", height: "calc(100vh - 40px)"}, { width: "calc(33% - 0px)", height: "calc(80vh - 0px)", ease: "none" }, 0);
     tl.to(txt, { clipPath: "inset(0% 33% 0% 33%)", opacity: 0, ease: "none" }, 0);
     tl.fromTo(m1s1, { x: "-83vw" }, { x: "0vw", ease: "none" }, 0);
     tl.fromTo(m1s2, { x: "83vw" }, { x: "0vw", ease: "none" }, 0);
@@ -288,6 +290,130 @@ useEffect(() => {
     }
   );
 }, []);
+
+useEffect(() => {
+  const target = document.querySelector(".main_sec_2");
+  if (!(target instanceof HTMLElement)) return;
+
+  const check = () => {
+    const offsetTop = target.offsetTop;
+    const scrollTop = window.scrollY;
+    const diff = offsetTop - scrollTop;
+
+    console.log("scrollTop:", scrollTop);
+    console.log("offsetTop:", offsetTop);
+    console.log("diff:", diff);
+  };
+
+  window.addEventListener("scroll", check);
+  check();
+
+  return () => window.removeEventListener("scroll", check);
+}, []);
+
+
+useEffect(() => {
+  const section = document.querySelector(".main_sec_2");
+  const scEls = document.querySelectorAll(".main_sec_2 .sc_el");
+
+  if (!(section instanceof HTMLElement)) return;
+  if (scEls.length < 2) return;
+
+  const firstEl = scEls[0] as HTMLElement;
+  const secondEl = scEls[1] as HTMLElement;
+
+  const firstTitle = firstEl.querySelector(".sc_el_title");
+  if (!(firstTitle instanceof HTMLElement)) return;
+
+  const check = () => {
+    const diff = section.offsetTop - window.scrollY;
+
+    const firstHeight = firstEl.offsetHeight;
+    const style = window.getComputedStyle(firstEl);
+    const marginBottom = parseFloat(style.marginBottom) || 0;
+    const titleHeight = firstTitle.offsetHeight;
+
+    const maxMoveY = (firstHeight + marginBottom) - titleHeight;
+
+    // progress 계산할 스크롤 구간 (원하는대로 조절 가능)
+    const range = window.innerHeight; // 1스크린 내려가면 100% 이동
+
+    let progress = 0;
+
+    if (diff <= 0) {
+      progress = Math.min(Math.max((-diff / range), 0), 1);
+    }
+
+    const currentMove = maxMoveY * progress;
+
+    secondEl.style.transform = `translateY(-${currentMove}px)`;
+  };
+
+  window.addEventListener("scroll", check);
+  check();
+
+  return () => window.removeEventListener("scroll", check);
+}, []);
+
+useEffect(() => {
+  const section = document.querySelector(".main_sec_2");
+  const scEls = document.querySelectorAll(".main_sec_2 .sc_el");
+
+  if (!(section instanceof HTMLElement)) return;
+  if (scEls.length < 3) return;
+
+  const firstEl = scEls[0] as HTMLElement;
+  const secondEl = scEls[1] as HTMLElement;
+  const thirdEl = scEls[2] as HTMLElement;
+
+  const firstTitle = firstEl.querySelector(".sc_el_title");
+  const secondTitle = secondEl.querySelector(".sc_el_title");
+
+  if (!(firstTitle instanceof HTMLElement)) return;
+  if (!(secondTitle instanceof HTMLElement)) return;
+
+  const check = () => {
+    const diff = section.offsetTop - window.scrollY;
+
+    const range = window.innerHeight; // 전체 애니메이션 스크롤 길이
+
+    let progress = 0;
+    if (diff <= 0) progress = Math.min(Math.max((-diff / range), 0), 1);
+
+    // 0~0.5 구간 progress
+    let progress2 = Math.min(progress / 0.5, 1);
+
+    // 0.5~1 구간 progress
+    let progress3 = progress < 0.5 ? 0 : (progress - 0.5) / 0.5;
+
+    // --- 2번째 이동값 (1번째 기준)
+    const firstStyle = window.getComputedStyle(firstEl);
+    const firstMarginBottom = parseFloat(firstStyle.marginBottom) || 0;
+
+    const moveY2 =
+      (firstEl.offsetHeight + firstMarginBottom) - firstTitle.offsetHeight;
+
+    // --- 3번째 이동값 (2번째 기준)
+    const secondStyle = window.getComputedStyle(secondEl);
+    const secondMarginBottom = parseFloat(secondStyle.marginBottom) || 0;
+
+    const moveY3 =
+      (secondEl.offsetHeight + secondMarginBottom) - secondTitle.offsetHeight;
+
+    // 2번째는 먼저 끝까지 이동
+    secondEl.style.transform = `translateY(-${moveY2 * progress2}px)`;
+
+    // 3번째는 2번째가 끝난 후부터 시작해야하니까 moveY2 포함해서 누적
+    thirdEl.style.transform = `translateY(-${(moveY2 + moveY3 * progress3)}px)`;
+  };
+
+  window.addEventListener("scroll", check);
+  check();
+
+  return () => window.removeEventListener("scroll", check);
+}, []);
+
+
   return (
     <div className="min-h-screen page_main">
       <main>
@@ -344,8 +470,8 @@ useEffect(() => {
           </div>
         </div>
 
-        <section className="main_sec_2 float-wrap" ref={sec2Ref}>
-          <ul ref={listRef} className="float-el">
+        <section className="main_sec_2 float-wrap" >
+          <ul className="float-el">
             <li className="sc_el">
               <div className="sc_el_title">
                 <div className="dot_icon_w">

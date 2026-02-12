@@ -1,4 +1,4 @@
-import "./globals.css";
+import "./globals.scss";
 import Header from "./components/Header";
 import GlobalScrollTrigger from "./components/GlobalScrollTrigger";
 import GlobalFloating from "./components/GlobalFloating";

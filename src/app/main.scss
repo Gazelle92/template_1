@@ -102,7 +102,7 @@
 
     .main_1_txt_1{position: relative; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100vh; z-index: 1; overflow: hidden; white-space: nowrap; clip-path: inset(0% 0%);
       h1{font-size: 6.154vw; font-weight: 200; line-height: 1.1; color: #fff; position: absolute; top: 50%; transform: translateY(-50%); left: 2.564vw;}
-      .main_1_txt_1_b{position: absolute; bottom: 3.846vw; left: 2.564vw; right: 2.564vw; border-top: 1px solid #fff; display: flex; align-items: center; justify-content: flex-start; padding-top: 1.538vw; color: #fff; gap: 1.538vw; font-size: 0.962vw; line-height: 1.5; width: calc(100vw - 5.128vw);}
+      .main_1_txt_1_b{position: absolute; bottom: 3.846vw; left: 60px; right: 60px; border-top: 1px solid #fff; display: flex; align-items: center; justify-content: flex-start; padding-top: 1.538vw; color: #fff; gap: 1.538vw; font-size: 0.962vw; line-height: 1.5; width: calc(100% - 120px);}
       .main_1_txt_1_b img:first-child{width: 4.103vw; height: 4.103vw;}
       .main_1_txt_1_b img:last-child{width: 2.564vw; height: 4.359vw; position: absolute; right: 0; top: 1.795vw;}
     }
@@ -112,7 +112,7 @@
       p{font-size: 0.962vw; line-height: 1.5;}
     }
 
-    .intro_img{width: 100%; height: 100vh; object-fit: cover; position: fixed; left: 50%; top: 50vh; transform: translate(-50%, -50%); border-radius: 1.538vw;}
+    .intro_img{width: calc(100% - 40px); height: calc(100vh - 40px); object-fit: cover; position: fixed; left: 50%; top: 50vh; transform: translate(-50%, -50%); border-radius: 1.538vw;}
   }
 
   .main_1_img_s{position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 5;
@@ -135,7 +135,7 @@
       &.floating{position: fixed; top: 0vw; left: 50%; transform: translateX(-50%);}
       &.float-bottom{position: absolute; top: unset; bottom: 0; transform: unset; left: 0;}
     }
-    .sc_el{background-color: #fff; border-radius: 2.821vw; position: relative; height: unset; width: 100%; padding: 0 0 5.641vw; box-sizing: unset;
+    .sc_el{background-color: #fff; border-radius: 2.821vw; position: relative; height: unset; width: 100%; padding: 0 0 5.641vw; box-sizing: unset; 
       .sc_el_title{gap: 1.795vw; display: flex; align-items: center; padding-left: 2.564vw; padding: 3.077vw 0 2.051vw 2.564vw;
         h4{font-size: 3.077vw; line-height: 1.3;}
       }
@@ -144,7 +144,7 @@
       .sc_el_p{font-size: 0.962vw; line-height: 1.5; padding-left: 14.103vw; display: flex; justify-content: flex-start; gap: 2.051vw;
         img{width: 1.795vw; height: 1.538vw;}
       }
-      &:not(:last-child){margin-bottom: 0vw;}
+      &:not(:last-child){margin-bottom: 6vw;}
     }
   }
 

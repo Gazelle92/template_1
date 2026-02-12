@@ -90,7 +90,20 @@ body {
   color: var(--foreground);
   font-family: 'Barlow', 'Pretendard', sans-serif;
 }
-header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; mix-blend-mode: difference; font-family: 'Barlow';}
+header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 'Barlow';
+  & > a{background-color: rgba(255,255,255,0.1); backdrop-filter: blur(40px); transition: ease 0.3s all;
+    img{filter: invert(0); transition: ease 0.5s filter;}
+  }
+  & > nav{background-color: rgba(255,255,255,0.1); backdrop-filter: blur(40px);transition: ease 0.3s all;}
+  li > a{color: #fff; transition: ease 0.3s all;}
+  &.no-filter{
+    & > a{background-color: #fff;
+      img{filter: invert(1);}
+    }
+    & > nav{background-color: #fff;}
+    li > a{color: #000;}
+  }
+}
 
 
 
