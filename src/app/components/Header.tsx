@@ -8,11 +8,11 @@ const navigationItems = [
 ];
 export default function Header() {
   return (
-    <header className="w-full flex justify-between items-center px-10 pt-[52px] border-black">
-      <Link href="/" className="flex flex-col w-[183px] h-14 items-start gap-2.5 px-4 py-3.5 relative bg-[#ffffff1a] rounded-xl">
-        <div className="relative w-[149.76px] h-7" >
+    <header className="w-full flex justify-between items-center border-black">
+      <Link href="/" className="flex flex-col w-[183px] h-14 items-start gap-2.5  relative bg-[#ffffff1a] rounded-xl">
+        <div className="relative" >
           <Image src="/logo.svg" alt="Logo" width={149.76} height={28} className="w-full h-full object-contain" />
-          </div>
+        </div>
       </Link>
 
       <nav

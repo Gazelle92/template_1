@@ -71,12 +71,6 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -90,9 +84,9 @@ body {
   color: var(--foreground);
   font-family: 'Barlow', 'Pretendard', sans-serif;
 }
-header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 'Barlow';
-  & > a{background-color: rgba(255,255,255,0.1); backdrop-filter: blur(40px); transition: ease 0.3s all;
-    img{filter: invert(0); transition: ease 0.5s filter;}
+header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 'Barlow'; padding: 52px 40px 0;
+  & > a{background-color: rgba(255,255,255,0.1); backdrop-filter: blur(40px); transition: ease 0.3s all;  padding: 14px 16px; height: unset;
+    img{filter: invert(0); transition: ease 0.5s filter; width: 184px;}
   }
   & > nav{background-color: rgba(255,255,255,0.1); backdrop-filter: blur(40px);transition: ease 0.3s all;}
   li > a{color: #fff; transition: ease 0.3s all;}
@@ -107,3 +101,15 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
 
 
 
+@media (max-width: 1024px) {
+  header{padding: 24px 20px 0;
+    & > a{padding: 14px 12px; width: 131px;
+      div{width: unset; 
+        img {width: 107px;}
+      }
+      
+    }
+    nav{display: none;}
+
+  }
+}

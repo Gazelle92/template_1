@@ -22,6 +22,9 @@ export default function Home() {
   const listRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
+  const mm = gsap.matchMedia();
+
+  mm.add("(min-width: 1025px)", () => {
     const section = sectionRef.current;
     const img = imgRef.current;
     const txt = txtRef.current;
@@ -30,6 +33,7 @@ export default function Home() {
     const txt2 = txt2Ref.current;
     const imgWrap = imgWrapRef.current;
     const header = document.querySelector("header");
+
     if (!section || !img || !txt || !m1s1 || !m1s2 || !txt2 || !imgWrap) return;
 
     const tl = gsap.timeline({
@@ -53,12 +57,27 @@ export default function Home() {
       },
     });
 
+    tl.fromTo(
+      img,
+      { width: "calc(100% - 40px)", height: "calc(100vh - 40px)" },
+      { width: "calc(33% - 0px)", height: "calc(80vh - 0px)", ease: "none" },
+      0
+    );
 
-    tl.fromTo(img, { width: "calc(100% - 40px)", height: "calc(100vh - 40px)"}, { width: "calc(33% - 0px)", height: "calc(80vh - 0px)", ease: "none" }, 0);
     tl.to(txt, { clipPath: "inset(0% 33% 0% 33%)", opacity: 0, ease: "none" }, 0);
     tl.fromTo(m1s1, { x: "-83vw" }, { x: "0vw", ease: "none" }, 0);
     tl.fromTo(m1s2, { x: "83vw" }, { x: "0vw", ease: "none" }, 0);
-  }, []);
+
+    return () => {
+      header?.classList.remove("no-filter");
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
+  });
+
+  return () => mm.revert();
+}, []);
+
 
   useEffect(() => {
     const txt2 = txt2Ref.current;
@@ -273,13 +292,15 @@ useEffect(() => {
   gsap.fromTo(
     img2,
     { 
-      width: "33vw", 
+      width: "33%", 
       height: "80vh", 
+      borderRadius: "1.538vw",
       ease: "none" 
     },
     {
-      width: "100vw", 
+      width: "100%", 
       height: "100vh", 
+      borderRadius: "0vw",
       ease: "none",
       scrollTrigger: {
         trigger: sec4,
@@ -289,6 +310,11 @@ useEffect(() => {
       },
     }
   );
+  ScrollTrigger.create({
+    trigger: sec4,
+    start: "bottom bottom+=30%",
+    toggleClass: { targets: ".m_4_txt_w", className: "txt_up" },
+  });
 }, []);
 
 useEffect(() => {
@@ -312,48 +338,6 @@ useEffect(() => {
 }, []);
 
 
-useEffect(() => {
-  const section = document.querySelector(".main_sec_2");
-  const scEls = document.querySelectorAll(".main_sec_2 .sc_el");
-
-  if (!(section instanceof HTMLElement)) return;
-  if (scEls.length < 2) return;
-
-  const firstEl = scEls[0] as HTMLElement;
-  const secondEl = scEls[1] as HTMLElement;
-
-  const firstTitle = firstEl.querySelector(".sc_el_title");
-  if (!(firstTitle instanceof HTMLElement)) return;
-
-  const check = () => {
-    const diff = section.offsetTop - window.scrollY;
-
-    const firstHeight = firstEl.offsetHeight;
-    const style = window.getComputedStyle(firstEl);
-    const marginBottom = parseFloat(style.marginBottom) || 0;
-    const titleHeight = firstTitle.offsetHeight;
-
-    const maxMoveY = (firstHeight + marginBottom) - titleHeight;
-
-    // progress 계산할 스크롤 구간 (원하는대로 조절 가능)
-    const range = window.innerHeight; // 1스크린 내려가면 100% 이동
-
-    let progress = 0;
-
-    if (diff <= 0) {
-      progress = Math.min(Math.max((-diff / range), 0), 1);
-    }
-
-    const currentMove = maxMoveY * progress;
-
-    secondEl.style.transform = `translateY(-${currentMove}px)`;
-  };
-
-  window.addEventListener("scroll", check);
-  check();
-
-  return () => window.removeEventListener("scroll", check);
-}, []);
 
 useEffect(() => {
   const section = document.querySelector(".main_sec_2");
@@ -565,21 +549,48 @@ useEffect(() => {
         </section>
 
         <section className="main_sec_4 float-wrap">
-
-            <img className="float-el sec_4_img" src="/main_last.jpg" alt="Final Image" />
+          <div className="float-el sec_4_img">
+            <img className="float-bg" src="/main_last.jpg" alt="Final Image" />
+            <div className="m_4_txt_w">
+              <div className="dot_icon_w">
+                <div></div>
+                <span>Contact us</span>
+              </div>
+              <h1>Get in Touch With Us</h1>
+              <span>연구 및 기술 협업, 사업 파트너십 등 다양한 협력 가능성에 대해<br/>편하게 문의해 주시기 바랍니다.</span>
+              <a href="#"><span>Contact us</span><img src="/arrow_right.svg"/></a>
+            </div>
+          </div>
         </section>
 
-        <section className="main_sec_5">
+        <section className="footer">
           <div className="inner">
             <ul>
-              <li>Home</li>
-              <li>Company</li>
-              <li>Services</li>
-              <li>Projects</li>
-              <li>Contact</li>
-            
+              <li><a href="/">Home</a></li>
+              <li><a href="/company">Company</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/projects">Projects</a></li>
+              <li><a href="/contact">Contact</a></li>
             </ul>
+            <div className="info_w">
+              <h4>Email</h4>
+              <span className="email">contact@company.com</span>
+              <div className="info_el">
+                <h4>Phone</h4>
+                <span>+82 000 000 0000</span>
+              </div>
+              <div className="info_el">
+                <h4>Address</h4>
+                <span>1F, 00 Sample, Mirae-gu, Seoul Republic of Korea</span>
+              </div>
+            </div>
+            <div className="icon_w">
+              <a href=""><img src="/icon_instagram.svg" alt="" /></a>
+              <a href=""><img src="/icon_youtube.svg" alt="" /></a>
+              
+            </div>
           </div>
+          <span className="copyright">Company name © 2026</span>
         </section>
       </main>
     </div>
