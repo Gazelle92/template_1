@@ -103,86 +103,6 @@ export default function Home() {
     };
   }, []);
 
-  // ✅ main_sec_2 높이 조절 이벤트 (m4ScrollEvent React 변환)
-  /*
-  useEffect(() => {
-    const floatWrap = sec2Ref.current;
-    const floatEl = listRef.current;
-
-    if (!floatWrap || !floatEl) return;
-
-    const handleScroll = () => {
-      const els = floatEl.querySelectorAll(".sc_el") as NodeListOf<HTMLElement>;
-      if (!els.length) return;
-
-      const scrollTop = window.scrollY;
-      const wrapTop = floatWrap.getBoundingClientRect().top + window.scrollY;
-
-      const baseHeight = window.innerWidth > 1024 ? 70 : 90;
-
-      const m4top = scrollTop - wrapTop;
-
-      const innerHeights = Array.from(els).map((el) => el.scrollHeight);
-
-      // max-height 세팅
-      els.forEach((el, i) => {
-        el.style.maxHeight = `${innerHeights[i]}px`;
-      });
-
-      // 기본 height 초기화
-      els.forEach((el) => {
-        el.style.height = `${baseHeight}px`;
-      });
-
-      // wrapTop 위에서는 첫번째만 풀 height 유지
-      if (scrollTop <= wrapTop) {
-        els[0].style.height = `${innerHeights[0]}px`;
-      }
-
-      // 구간1
-      if (
-        scrollTop >= wrapTop &&
-        scrollTop < wrapTop + innerHeights[1] - baseHeight
-      ) {
-        els[0].style.height = `${innerHeights[0] - m4top}px`;
-        els[1].style.height = `${m4top + baseHeight}px`;
-        els[2].style.height = `${baseHeight}px`;
-      }
-
-      // 구간2
-      else if (
-        scrollTop >= wrapTop + innerHeights[1] - baseHeight &&
-        scrollTop < wrapTop + innerHeights[1] + innerHeights[2]
-      ) {
-        els[0].style.height = `${baseHeight}px`;
-        els[1].style.height = `${innerHeights[1] * 2 - m4top}px`;
-        els[2].style.height = `${m4top - innerHeights[1] + baseHeight}px`;
-      }
-
-      // 구간3 (마지막)
-      else if (scrollTop >= wrapTop + innerHeights[2]) {
-        els[0].style.height = `${baseHeight}px`;
-        els[1].style.height = `${baseHeight}px`;
-        els[2].style.height = `${innerHeights[2] * 3 - m4top}px`;
-      }
-
-      // show 클래스 토글
-      els.forEach((el) => {
-        if (el.offsetHeight <= 200) el.classList.remove("show");
-        else el.classList.add("show");
-      });
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
-*/
 
 useEffect(() => {
   const sec3 = document.querySelector(".main_sec_3") as HTMLElement | null;
@@ -551,23 +471,6 @@ useEffect(() => {
           </h1>
         </section>
 
-        <section className="main_sec_4 float-wrap">
-          <div className="float-el sec_4_img">
-            {/*<img className="float-bg" src="/main_last.jpg" alt="Final Image" />*/}
-            <video className="float-bg" autoPlay muted loop>
-              <source src="/video/B01_02.mp4"/>
-            </video>
-            <div className="m_4_txt_w">
-              <div className="dot_icon_w">
-                <div></div>
-                <span>Contact us</span>
-              </div>
-              <h1>Get in Touch With Us</h1>
-              <span>연구 및 기술 협업, 사업 파트너십 등 다양한 협력 가능성에 대해<br/>편하게 문의해 주시기 바랍니다.</span>
-              <a href="#"><span>Contact us</span><img src="/arrow_right.svg"/></a>
-            </div>
-          </div>
-        </section>
 
         <section className="footer">
           <div className="inner">
