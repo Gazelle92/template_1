@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const imgRef = useRef<HTMLImageElement | null>(null);
+  const imgRef = useRef<HTMLVideoElement | null>(null);
   const txtRef = useRef<HTMLDivElement | null>(null);
 
   const m1s1Ref = useRef<HTMLDivElement | null>(null);
@@ -403,7 +403,10 @@ useEffect(() => {
       <main>
         <section className="main_sec_1" ref={sectionRef}>
           <div className="m1_img_w">
-            <img ref={imgRef} src="/main.jpg" alt="Main Visual" className="intro_img" />
+            
+            <video autoPlay muted loop className="intro_img" ref={imgRef}>
+              <source src="/video/B01_01.mp4"/>
+            </video>
           </div>
 
           <div ref={txtRef} className="main_1_txt_1">
@@ -550,7 +553,10 @@ useEffect(() => {
 
         <section className="main_sec_4 float-wrap">
           <div className="float-el sec_4_img">
-            <img className="float-bg" src="/main_last.jpg" alt="Final Image" />
+            {/*<img className="float-bg" src="/main_last.jpg" alt="Final Image" />*/}
+            <video className="float-bg" autoPlay muted loop>
+              <source src="/video/B01_02.mp4"/>
+            </video>
             <div className="m_4_txt_w">
               <div className="dot_icon_w">
                 <div></div>

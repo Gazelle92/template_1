@@ -116,11 +116,11 @@
   }
 
   .main_1_img_s{position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 5;
-    .m1s_1{position: absolute; top: 40%; transform: translate(-83vw, -50%); left: 3.846vw; width: calc((100% / 12) * 3); height: auto; gap: 2.564vw; display: flex; flex-direction: column; align-items: flex-end;
+    .m1s_1{position: absolute; top: 40%; transform: translate(-83vw, -50%); /*left: 3.846vw;*/ left: 60px; width: calc((100% / 12) * 3); height: auto; gap: 2.564vw; display: flex; flex-direction: column; align-items: flex-end;
       img:nth-child(1){width: 100%;}
       img:nth-child(2){width: 55%;}
     }
-    .m1s_2{position: absolute; top: 60%; transform: translate(83vw, -50%); right: 3.846vw; width: calc((100% / 12) * 3); height: auto; gap: 2.564vw; display: flex; flex-direction: column; align-items: flex-start;
+    .m1s_2{position: absolute; top: 60%; transform: translate(83vw, -50%); /*right: 3.846vw;*/ right: 60px; width: calc((100% / 12) * 3); height: auto; gap: 2.564vw; display: flex; flex-direction: column; align-items: flex-start;
       img:nth-child(2){width: 100%;}
       img:nth-child(1){width: 55%;}
     }
@@ -131,9 +131,9 @@
   .main_1_img_s.abs_mode{position:absolute; left:0; top: 200vh;}
 
   .main_sec_2{padding: 0 3.846vw; min-height: 200vh; background-color: #f6f6f3;
-    .float-el{position: absolute; left: 0; top: 0; height: 100vh; width: 100%;
+    .float-el{position: absolute; left: 60px; top: 0; height: 100vh; width: calc(100% - 120px); 
       &.floating{position: fixed; top: 0vw; left: 50%; transform: translateX(-50%);}
-      &.float-bottom{position: absolute; top: unset; bottom: 0; transform: unset; left: 0;}
+      &.float-bottom{position: absolute; top: unset; bottom: 0;}
     }
     .sc_el{background-color: #fff; border-radius: 2.821vw; position: relative; height: unset; width: 100%; padding: 0 0 5.641vw; box-sizing: unset; 
       .sc_el_title{gap: 1.795vw; display: flex; align-items: center; padding-left: 2.564vw; padding: 3.077vw 0 2.051vw 2.564vw;
@@ -235,6 +235,11 @@
       }
       .intro_img{width: calc(100% - 8px)!important; height: calc(100vh - 8px)!important;}
     }
-    .main_1_img_s{position: absolute; top: 100vh;}
+    .main_1_img_s{position: absolute; top: 100vh;
+      &.abs_mode{top: 100vh;}
+      .m1s_1{transform: unset;}
+      .m1s_2{transform: unset;}
+    }
   }
+  .footer{display: none;}
 }
