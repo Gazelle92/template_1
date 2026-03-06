@@ -298,8 +298,8 @@ useEffect(() => {
       ease: "none" 
     },
     {
-      width: "100%", 
-      height: "100vh", 
+      width: "calc(100% - 120px)", 
+      height: "calc(100vh - 120px)", 
       borderRadius: "0vw",
       ease: "none",
       scrollTrigger: {

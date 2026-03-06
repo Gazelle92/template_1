@@ -152,7 +152,7 @@
     }
   }
 
-  .main_sec_3{padding: 0 0 10.256vw; position: relative; background-color: #131313; height: 300vh;
+  .main_sec_3{padding: 0 0 10.256vw; position: relative; background-color: #131313; height: 200vh;
     .float-el{position: absolute; left: 0; top: 0; height: 100vh; width: 100%; max-width: calc(100% - 7.692vw);
       &.floating{position: fixed; bottom: 0; height: calc(100vh - 10.256vw);}
       &.float-bottom{position: absolute; top: unset; bottom: 0; transform: unset;
