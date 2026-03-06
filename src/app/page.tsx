@@ -298,8 +298,8 @@ useEffect(() => {
       ease: "none" 
     },
     {
-      width: "calc(100% - 120px)", 
-      height: "calc(100vh - 120px)", 
+      width: "100%", 
+      height: "100vh", 
       borderRadius: "0vw",
       ease: "none",
       scrollTrigger: {
@@ -535,7 +535,7 @@ useEffect(() => {
             </div>
             <div className="m3_el">
               <img src="/m_sec3_3.png" />
-              <span>Data-Driven Life Science Project</span>
+              <span>Data-Driven Life<br/>Science Project</span>
             </div>
             <div className="m3_el">
               <img src="/m_sec3_4.png" />
