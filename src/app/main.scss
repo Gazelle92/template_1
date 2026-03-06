@@ -153,13 +153,13 @@
   }
 
   .main_sec_3{padding: 0 0 10.256vw; position: relative; background-color: #131313; height: 300vh;
-    .float-el{position: absolute; left: 0; top: 0; height: 100vh; width: 100%; max-width: calc(100% - 7.692vw);
-      &.floating{position: fixed; bottom: 0; height: calc(100vh - 10.256vw);}
+    .float-el{position: absolute; left: 0; top: 0; height: 100vh; width: 100%; max-width: calc(100% - 120px);
+      &.floating{position: fixed; bottom: 0; height: calc(100vh - 160px);}
       &.float-bottom{position: absolute; top: unset; bottom: 0; transform: unset;
         img{top: 10.256vw;}
       }
     }
-    .m3_img_w{position: absolute; left: 3.846vw; right: 3.846vw; top: 10.256vw; z-index: 1;
+    .m3_img_w{position: absolute; left: 60px; right: 60px; top: 160px; z-index: 1;
       .m3_el{width: 14.103vw; position: absolute; top: 0;
         &:nth-child(1){left: 0;}
         &:nth-child(2){left: calc((8% - 0vw) / 1 * 1);}
@@ -179,14 +179,14 @@
     h1{font-size: 17.949vw; line-height: 0.9; text-align: center; font-weight: 400; position: sticky; top: 50%; transform: translateY(-50%);}
   }
 
-  .main_sec_4{position: relative; height: 200vh;
+  .main_sec_4{position: relative; height: 200vh; background-color: #131313;
     .float-el{position: absolute; left: 0; top: 0; height: 100vh; width: 100%;
       &.floating{position: fixed; top: 50%; left: 50%;}
-      &.float-bottom{position: absolute; top: unset; bottom: 0; transform: unset; left: 0;}
+      &.float-bottom{position: absolute; top: unset; bottom: 60px; transform: unset; left: 60px;}
     }
     .sec_4_img{height: 47.4vw; width: 33vw; object-fit: cover; top: 50vh; left: 50%; transform: translate(-50%, -50%); border-radius: 1.538vw; overflow: hidden;
       .float-bg{height: 100vh; width: 100vw; max-width: 100%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); object-fit: cover;}
-      .m_4_txt_w{position: absolute; left: 0; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center;align-items: center; color: #fff; opacity: 0; transition: ease 0.5s opacity;
+      .m_4_txt_w{position: absolute; left: 0; width: 100%; height: calc(100vh - 120px); display: flex; flex-direction: column; justify-content: center;align-items: center; color: #fff; opacity: 0; transition: ease 0.5s opacity;
         &>h1{margin: 20px 0 40px; font-size: 48px; line-height: 1.2; text-align: center;}
         &>span{font-size: 15px; text-align: center;}
         &>a{width: 200px; height: 48px; border-radius: 8px; background-color: #00FFA1; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 600;  text-transform: uppercase; gap: 20px;margin-top: 80px;

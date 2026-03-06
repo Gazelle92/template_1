@@ -274,7 +274,7 @@ useEffect(() => {
 
   ScrollTrigger.create({
     trigger: sec3,
-    start: "top+=60%",
+    start: "top+=30%",
     toggleClass: { targets: ".m3_img_w", className: "txt_up" },
   });
 
@@ -294,13 +294,11 @@ useEffect(() => {
     { 
       width: "33%", 
       height: "80vh", 
-      borderRadius: "1.538vw",
       ease: "none" 
     },
     {
-      width: "100%", 
-      height: "100vh", 
-      borderRadius: "0vw",
+      width: "calc(100% - 120px)", 
+      height: "calc(100vh - 120px)", 
       ease: "none",
       scrollTrigger: {
         trigger: sec4,
