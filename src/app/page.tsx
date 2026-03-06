@@ -203,7 +203,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
-        end: "top+=30%",
+        end: "top+=20%",
         scrub: true,
       },
     }
@@ -218,7 +218,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
-        end: "top+=30%",
+        end: "top+=20%",
         scrub: true,
       },
     }
@@ -233,7 +233,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
-        end: "top+=30%",
+        end: "top+=20%",
         scrub: true,
       },
     }
@@ -248,8 +248,8 @@ useEffect(() => {
       ease: "none",
       scrollTrigger: {
         trigger: sec3,
-        start: "top+=30%",
-      end: "top+=60%",
+        start: "top+=20%",
+      end: "top+=50%",
 
         scrub: true,
       },
@@ -264,8 +264,8 @@ useEffect(() => {
       ease: "none",
       scrollTrigger: {
         trigger: sec3,
-        start: "top+=30%",
-      end: "top+=60%",
+        start: "top+=20%",
+      end: "top+=50%",
 
         scrub: true,
       },
@@ -274,7 +274,7 @@ useEffect(() => {
 
   ScrollTrigger.create({
     trigger: sec3,
-    start: "top+=30%",
+    start: "top+=20%",
     toggleClass: { targets: ".m3_img_w", className: "txt_up" },
   });
 
@@ -310,7 +310,7 @@ useEffect(() => {
   );
   ScrollTrigger.create({
     trigger: sec4,
-    start: "bottom bottom+=30%",
+    start: "bottom bottom+=50%",
     toggleClass: { targets: ".m_4_txt_w", className: "txt_up" },
   });
 }, []);
@@ -396,6 +396,42 @@ useEffect(() => {
 }, []);
 
 
+useEffect(() => {
+  const elements = document.querySelectorAll<HTMLElement>(".sym");
+
+  const startTranslate = 15; // 최대 이동값
+
+  const handleScroll = () => {
+    const vh = window.innerHeight;
+
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const elementCenter = rect.top + rect.height / 2;
+      const viewportCenter = vh / 2;
+
+      // -1 ~ 1
+      let progress = (elementCenter - viewportCenter) / viewportCenter;
+
+      progress = Math.max(-1, Math.min(1, progress));
+
+      const translate = progress * startTranslate;
+
+      el.style.transform = `translateY(${translate}%) scale(calc(1 + (${startTranslate}) * 0.02))`;
+    });
+  };
+
+  handleScroll();
+
+  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("resize", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    window.removeEventListener("resize", handleScroll);
+  };
+}, []);
+
+
   return (
     <div className="min-h-screen page_main">
       <main>
@@ -427,6 +463,15 @@ useEffect(() => {
 
           <div ref={txt2Ref} className="main_1_txt_2">
 
+            <div className="m1s_1 mob">
+              <div className="sym_w">
+                <img src="/main_1_img_s_1.png" alt="Secondary Image" className="sym" />
+              </div>
+              <div className="sym_w">
+              <img src="/main_1_img_s_2.png" alt="Secondary Image" className="sym" />
+              </div>
+            </div>
+
             <div className="dot_icon_w">
               <div></div>
               <span>OUR COMPANY</span>
@@ -441,19 +486,36 @@ useEffect(() => {
               <br />
               생명과학의 가능성을 확장하고, 현실적인 문제 해결에 집중합니다.
             </p>
+
+            <div className="m1s_2 mob">
+              <div className="sym_w">
+              <img src="/main_1_img_s_3.png" alt="Secondary Image" className="sym"/>
+              </div>
+              <div className="sym_w">
+              <img src="/main_1_img_s_4.png" alt="Secondary Image" className="sym"/>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* fixed 요소는 pin되는 section 밖으로 빼야함 */}
-        <div ref={imgWrapRef} data-speed="0" className="main_1_img_s">
+        <div ref={imgWrapRef} data-speed="0" className="main_1_img_s pc">
           <div ref={m1s1Ref} className="m1s_1">
-            <img src="/main_1_img_s_1.png" alt="Secondary Image" />
-            <img src="/main_1_img_s_2.png" alt="Secondary Image" />
+            <div className="sym_w">
+              <img src="/main_1_img_s_1.png" alt="Secondary Image" className="sym"/>
+            </div>
+            <div className="sym_w">
+              <img src="/main_1_img_s_2.png" alt="Secondary Image" className="sym"/>
+            </div>
           </div>
 
           <div ref={m1s2Ref} className="m1s_2">
-            <img src="/main_1_img_s_3.png" alt="Secondary Image" />
-            <img src="/main_1_img_s_4.png" alt="Secondary Image" />
+            <div className="sym_w">
+              <img src="/main_1_img_s_3.png" alt="Secondary Image" className="sym"/>
+            </div>
+            <div className="sym_w">
+              <img src="/main_1_img_s_4.png" alt="Secondary Image" className="sym"/>
+            </div>
           </div>
         </div>
 

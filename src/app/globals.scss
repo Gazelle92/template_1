@@ -100,8 +100,11 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
 }
 
 
-
+@media (min-width: 1025px) {
+  .mob{display: none!important;}
+}
 @media (max-width: 1024px) {
+  .pc{display: none!important;}
   header{padding: 24px 20px 0;
     & > a{padding: 14px 12px; width: 131px;
       div{width: unset; 
