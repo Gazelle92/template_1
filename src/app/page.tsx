@@ -397,7 +397,7 @@ useEffect(() => {
 
 
 useEffect(() => {
-  const elements = document.querySelectorAll<HTMLElement>(".sym");
+  const elements = document.querySelectorAll<HTMLElement>(".sym_w > img");
 
   const startTranslate = 15; // 최대 이동값
 
@@ -468,7 +468,7 @@ useEffect(() => {
                 <img src="/main_1_img_s_1.png" alt="Secondary Image" className="sym" />
               </div>
               <div className="sym_w">
-              <img src="/main_1_img_s_2.png" alt="Secondary Image" className="sym" />
+                <img src="/main_1_img_s_2.png" alt="Secondary Image" className="sym" />
               </div>
             </div>
 
@@ -530,7 +530,10 @@ useEffect(() => {
                 <h4>Research & Development</h4>
               </div>
               <div className="sc_el_line"></div>
-              <img src="/sc_el_1.png" alt="Service 1 Image" />
+              
+              <div className="sym_w">
+                <img src="/sc_el_1.png" alt="Service 1 Image" />
+              </div>
               <div className="sc_el_p">
                 <img src="/dots.svg" />
                 <p>
@@ -550,7 +553,9 @@ useEffect(() => {
                 <h4>Biotechnology Solutions</h4>
               </div>
               <div className="sc_el_line"></div>
-              <img src="/sc_el_2.png" alt="Service 2 Image" />
+              <div className="sym_w">
+                <img src="/sc_el_2.png" alt="Service 1 Image" />
+              </div>
               <div className="sc_el_p">
                 <img src="/dots.svg" />
                 <p>
@@ -570,7 +575,9 @@ useEffect(() => {
                 <h4>Data-Driven Innovation</h4>
               </div>
               <div className="sc_el_line"></div>
-              <img src="/sc_el_3.png" alt="Service 3 Image" />
+              <div className="sym_w">
+                <img src="/sc_el_3.png" alt="Service 1 Image" />
+              </div>
               <div className="sc_el_p">
                 <img src="/dots.svg" />
                 <p>
@@ -586,25 +593,29 @@ useEffect(() => {
         <section className="main_sec_3 float-wrap">
           <div className="m3_img_w float-el">
             <div className="m3_el">
-              <img src="/m_sec3_1.png" />
+              <div className="sym_w">
+                <img src="/m_sec3_1.png" className="sym" />
+              </div>
               <span>Innovation Platform</span>
             </div>
             <div className="m3_el">
-              <img src="/m_sec3_2.png" />
+              <div className="sym_w">
+                <img src="/m_sec3_2.png" className="sym" />
+              </div>
               <span>Biotechnology<br/>Development Program</span>
             </div>
             <div className="m3_el">
-              <img src="/m_sec3_3.png" />
+              <div className="sym_w">
+                <img src="/m_sec3_3.png" className="sym" />
+              </div>
               <span>Data-Driven Life<br/>Science Project</span>
             </div>
             <div className="m3_el">
-              <img src="/m_sec3_4.png" />
+              <div className="sym_w">
+                <img src="/m_sec3_4.png" className="sym" />
+              </div>
               <span>Translational Science<br/>Initiative</span>
             </div>
-
-            
-
-
           </div>
           <h1>
             RECENT

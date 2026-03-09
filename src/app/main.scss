@@ -48,7 +48,7 @@
       .sc_el_title{gap: 1.795vw; display: flex; align-items: center; padding-left: 2.564vw; padding: 3.077vw 0 2.051vw 2.564vw;
         h4{font-size: 3.077vw; line-height: 1.3;}
       }
-      & > img{width: 12.821vw; height: 12.821vw; right: 2.564vw; top: 2.564vw; position: absolute;}
+      & > .sym_w{width: 12.821vw; height: 12.821vw; right: 2.564vw; top: 2.564vw; position: absolute; border-radius: 100%;}
       .sc_el_line{margin: 0vw 0 2.564vw; width: 100%; height: 1px; background-color: #e7e7e7;}
       .sc_el_p{font-size: 0.962vw; line-height: 1.5; padding-left: 14.103vw; display: flex; justify-content: flex-start; gap: 2.051vw;
         img{width: 1.795vw; height: 1.538vw;}
@@ -66,6 +66,7 @@
     }
     .m3_img_w{position: absolute; left: 60px; right: 60px; top: 160px; z-index: 1;
       .m3_el{width: 14.103vw; position: absolute; top: 0;
+        .sym_w{border-radius: 40px;}
         &:nth-child(1){left: 0;}
         &:nth-child(2){left: calc((8% - 0vw) / 1 * 1);}
         &:nth-child(3){left: calc((16% - 0vw) / 1 * 1);} 
@@ -296,7 +297,7 @@
             img{width: 3.889vw; height: 3.889vw;}
             p{width: calc(100% - 7.222vw);}
           }
-          > img{width: 16.667vw; height: 16.667vw; right: 5.556vw; bottom: 5.556vw; top: unset;}
+          > .sym_w{width: 16.667vw; height: 16.667vw; right: 5.556vw; bottom: 5.556vw; top: unset;}
           &:not(:last-child){margin-bottom: 11.111vw;}
         }
       }
