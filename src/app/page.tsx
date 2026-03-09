@@ -438,7 +438,7 @@ useEffect(() => {
         <section className="main_sec_1" ref={sectionRef}>
           <div className="m1_img_w">
             
-            <video autoPlay muted loop className="intro_img" ref={imgRef}>
+            <video autoPlay muted loop playsInline className="intro_img" ref={imgRef}>
               <source src="/video/B01_01.mp4"/>
             </video>
           </div>
@@ -627,7 +627,7 @@ useEffect(() => {
         <section className="main_sec_4 float-wrap">
           <div className="float-el sec_4_img">
             {/*<img className="float-bg" src="/main_last.jpg" alt="Final Image" />*/}
-            <video className="float-bg" autoPlay muted loop>
+            <video className="float-bg" autoPlay muted loop playsInline>
               <source src="/video/B01_02.mp4"/>
             </video>
             <div className="m_4_txt_w">

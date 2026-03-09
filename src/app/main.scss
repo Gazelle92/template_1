@@ -319,7 +319,7 @@
           span{position: unset; margin-top: 3.333vw; border-radius: 1.111vw; padding: 1.111vw 2.222vw 1.111vw 5.556vw; top: calc(100%); font-size: 3.056vw; transform: unset!important; opacity: 1!important; white-space: nowrap;
             &::before{left: 2.222vw; width: 1.111vw; height: 1.111vw; top: 2.778vw;}
           }
-          img{width: calc((100vw / 14) * 4)}
+          .sym_w{width: calc((100vw / 14) * 4); border-radius: 4.444vw;}
         }
         &.txt_up .m3_el span{transform:unset!important; }
       }
