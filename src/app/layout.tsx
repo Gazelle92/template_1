@@ -1,7 +1,7 @@
 import "./globals.scss";
 import Header from "./components/common/Header";
 import GlobalScrollTrigger from "./lib/GlobalScrollTrigger";
-import StandaloneLoadingPage from "./components/common/StandaloneLoadingPage";
+import Loading from "./components/common/Loading";
 
 import GlobalFloating from "./lib/GlobalFloating";
 import LenisProvider from "./lib/Lenis";
@@ -37,7 +37,7 @@ export default function RootLayout({
         <div id="smooth-content">
           {children}
         </div>
-        <StandaloneLoadingPage/>
+        <Loading/>
       </body>
     </html>
   );

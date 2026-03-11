@@ -7,7 +7,7 @@ import "./loading.scss"
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function StandaloneLoadingPage() {
+export default function Loading() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
