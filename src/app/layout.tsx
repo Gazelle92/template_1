@@ -1,6 +1,8 @@
 import "./globals.scss";
-import Header from "./components/Header";
+import Header from "./components/common/Header";
 import GlobalScrollTrigger from "./lib/GlobalScrollTrigger";
+import StandaloneLoadingPage from "./components/common/StandaloneLoadingPage";
+
 import GlobalFloating from "./lib/GlobalFloating";
 import LenisProvider from "./lib/Lenis";
 import QuoteAnimation from "./lib/QuoteAnimation";
@@ -31,15 +33,11 @@ export default function RootLayout({
         <QuoteAnimation/>
         <GlobalFloating />
         <GlobalScrollTrigger />
-        
+      
         <div id="smooth-content">
-        
-         
-         
-        {/*children*/}
-
           {children}
-          </div>
+        </div>
+        <StandaloneLoadingPage/>
       </body>
     </html>
   );
