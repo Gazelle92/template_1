@@ -255,7 +255,7 @@
   .page_main {
     .main_sec_1 {height: unset;
       .intro_img{position: absolute;}
-      .main_1_txt_1{opacity: 1!important; clip-path: unset!important; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 5.556vw 20px; height: 820px;
+      .main_1_txt_1{opacity: 1!important; clip-path: unset!important; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 5.556vw 20px; height: 720px;
         h1{position: unset; position: unset; font-size: 6.667vw;}
         .main_1_txt_1_b{left: 3.333vw; bottom: 11.111vw; position: unset;font-size: 3.056vw; width: 100%; gap: 3.333vw; padding-top: 5.556vw;
           img:first-child{width: 11.111vw; height: 11.111vw;}
@@ -279,14 +279,14 @@
           .sym_w:last-child{width: calc((100% / 12) * 6); margin-left:calc((100% / 12) * 6);  border-radius: 24px;}
         }
       }
-      .intro_img{width: calc(100% - 4.444vw)!important; height: 800px!important; top: 20px; transform: translateX(-50%);}
+      .intro_img{width: calc(100% - 4.444vw)!important; height: 700px!important; top: 20px; transform: translateX(-50%);}
     }
     .main_1_img_s{position: absolute; top: 100vh; pointer-events: none;
       &.abs_mode{top: 100vh;}
       .m1s_1{transform: unset;}
       .m1s_2{transform: unset;}
     }
-    .main_sec_2{padding: 22.222vw 20px; 
+    .main_sec_2{padding: 22.222vw 20px; height: 400vw; min-height: unset;
       .float-el{padding-top: 80px; width: calc(100% - 40px); left: 20px;
         .sc_el{ padding: 0 0 31.944vw; border-radius: 4.444vw;
           .sc_el_title{flex-direction: column; align-items: flex-start; padding: 5.556vw 4.444vw 6.667vw;
