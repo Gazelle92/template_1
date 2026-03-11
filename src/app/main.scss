@@ -5,7 +5,7 @@
     position: relative;
 
     .main_1_txt_1{position: relative; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100vh; z-index: 1; overflow: hidden; white-space: nowrap; clip-path: inset(0% 0%);
-      h1{font-size: 6.154vw; font-weight: 200; line-height: 1.1; color: #fff; position: absolute; top: 50%; transform: translateY(-50%); left: 2.564vw;}
+      h1{font-size: 6.154vw; font-weight: 200; line-height: 1.1; color: #fff; color: red; position: absolute; top: 50%; transform: translateY(-50%); left: 2.564vw;}
       .main_1_txt_1_b{position: absolute; bottom: 3.846vw; left: 60px; right: 60px; border-top: 1px solid #fff; display: flex; align-items: center; justify-content: flex-start; padding-top: 1.538vw; color: #fff; gap: 1.538vw; font-size: 0.962vw; line-height: 1.5; width: calc(100% - 120px);}
       .main_1_txt_1_b img:first-child{width: 4.103vw; height: 4.103vw;}
       .main_1_txt_1_b img:last-child{width: 2.564vw; height: 4.359vw; position: absolute; right: 0; top: 1.795vw;}
@@ -39,7 +39,7 @@
   .main_1_img_s{position:fixed; top:0; left:0; width:100%; height:100vh; z-index:5; /*pointer-events: none;*/}
   .main_1_img_s.abs_mode{position:absolute; left:0; top: 200vh;}
 
-  .main_sec_2{padding: 0 3.846vw; min-height: 200vh; background-color: #f6f6f3;
+  .main_sec_2{padding: 0 3.846vw; min-height: 250vh; background-color: #f6f6f3;
     .float-el{position: absolute; left: 60px; top: 0; height: 100vh; width: calc(100% - 120px); padding-top: 130px;
       &.floating{position: fixed; top: 0vw; left: 50%; transform: translateX(-50%);}
       &.float-bottom{position: absolute; top: unset; bottom: 0;}
@@ -286,9 +286,9 @@
       .m1s_1{transform: unset;}
       .m1s_2{transform: unset;}
     }
-    .main_sec_2{height: unset; min-height: unset; padding: 22.222vw 20px; 
-      .float-el{position: unset!important; transform: unset!important; width: 100%; height: unset; padding-top: 0;
-        .sc_el{transform: unset!important; padding: 0 0 31.944vw; border-radius: 4.444vw;
+    .main_sec_2{padding: 22.222vw 20px; 
+      .float-el{padding-top: 80px; width: calc(100% - 40px); left: 20px;
+        .sc_el{ padding: 0 0 31.944vw; border-radius: 4.444vw;
           .sc_el_title{flex-direction: column; align-items: flex-start; padding: 5.556vw 4.444vw 6.667vw;
             h4{font-size: 6.667vw; line-height: 1.2;}
           }

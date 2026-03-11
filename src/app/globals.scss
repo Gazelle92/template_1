@@ -99,6 +99,10 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
   }
 }
 
+.float-el{position: absolute; top: 0; height: 100vh;
+  &.floating{position: fixed; top: 0; }
+  &.float-bottom{position: absolute; top: unset; bottom: 0;}
+}
 
 @media (min-width: 1025px) {
   .mob{display: none!important;}

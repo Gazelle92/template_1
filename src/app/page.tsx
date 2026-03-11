@@ -64,7 +64,13 @@ export default function Home() {
       0
     );
 
-    tl.to(txt, { clipPath: "inset(0% 33% 0% 33%)", opacity: 0, ease: "none" }, 0);
+    tl.fromTo(
+      txt,
+      { clipPath: "inset(40px 40px 40px 40px)", opacity: 1, ease: "none" },
+      { clipPath: "inset(10% 33% 10% 33%)", opacity: 0, ease: "none" },
+      0
+    );
+
     tl.fromTo(m1s1, { x: "-83vw" }, { x: "0vw", ease: "none" }, 0);
     tl.fromTo(m1s2, { x: "83vw" }, { x: "0vw", ease: "none" }, 0);
 
@@ -102,87 +108,6 @@ export default function Home() {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
-
-  // ✅ main_sec_2 높이 조절 이벤트 (m4ScrollEvent React 변환)
-  /*
-  useEffect(() => {
-    const floatWrap = sec2Ref.current;
-    const floatEl = listRef.current;
-
-    if (!floatWrap || !floatEl) return;
-
-    const handleScroll = () => {
-      const els = floatEl.querySelectorAll(".sc_el") as NodeListOf<HTMLElement>;
-      if (!els.length) return;
-
-      const scrollTop = window.scrollY;
-      const wrapTop = floatWrap.getBoundingClientRect().top + window.scrollY;
-
-      const baseHeight = window.innerWidth > 1024 ? 70 : 90;
-
-      const m4top = scrollTop - wrapTop;
-
-      const innerHeights = Array.from(els).map((el) => el.scrollHeight);
-
-      // max-height 세팅
-      els.forEach((el, i) => {
-        el.style.maxHeight = `${innerHeights[i]}px`;
-      });
-
-      // 기본 height 초기화
-      els.forEach((el) => {
-        el.style.height = `${baseHeight}px`;
-      });
-
-      // wrapTop 위에서는 첫번째만 풀 height 유지
-      if (scrollTop <= wrapTop) {
-        els[0].style.height = `${innerHeights[0]}px`;
-      }
-
-      // 구간1
-      if (
-        scrollTop >= wrapTop &&
-        scrollTop < wrapTop + innerHeights[1] - baseHeight
-      ) {
-        els[0].style.height = `${innerHeights[0] - m4top}px`;
-        els[1].style.height = `${m4top + baseHeight}px`;
-        els[2].style.height = `${baseHeight}px`;
-      }
-
-      // 구간2
-      else if (
-        scrollTop >= wrapTop + innerHeights[1] - baseHeight &&
-        scrollTop < wrapTop + innerHeights[1] + innerHeights[2]
-      ) {
-        els[0].style.height = `${baseHeight}px`;
-        els[1].style.height = `${innerHeights[1] * 2 - m4top}px`;
-        els[2].style.height = `${m4top - innerHeights[1] + baseHeight}px`;
-      }
-
-      // 구간3 (마지막)
-      else if (scrollTop >= wrapTop + innerHeights[2]) {
-        els[0].style.height = `${baseHeight}px`;
-        els[1].style.height = `${baseHeight}px`;
-        els[2].style.height = `${innerHeights[2] * 3 - m4top}px`;
-      }
-
-      // show 클래스 토글
-      els.forEach((el) => {
-        if (el.offsetHeight <= 200) el.classList.remove("show");
-        else el.classList.add("show");
-      });
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
-*/
 
 useEffect(() => {
   const sec3 = document.querySelector(".main_sec_3") as HTMLElement | null;
@@ -373,19 +298,17 @@ useEffect(() => {
     const firstMarginBottom = parseFloat(firstStyle.marginBottom) || 0;
 
     const moveY2 =
-      (firstEl.offsetHeight + firstMarginBottom) - firstTitle.offsetHeight;
+      (firstEl.offsetHeight + firstMarginBottom) - firstTitle.offsetHeight - 1;
 
     // --- 3번째 이동값 (2번째 기준)
     const secondStyle = window.getComputedStyle(secondEl);
     const secondMarginBottom = parseFloat(secondStyle.marginBottom) || 0;
 
     const moveY3 =
-      (secondEl.offsetHeight + secondMarginBottom) - secondTitle.offsetHeight;
+      (secondEl.offsetHeight + secondMarginBottom) - secondTitle.offsetHeight - 2;
 
-    // 2번째는 먼저 끝까지 이동
     secondEl.style.transform = `translateY(-${moveY2 * progress2}px)`;
 
-    // 3번째는 2번째가 끝난 후부터 시작해야하니까 moveY2 포함해서 누적
     thirdEl.style.transform = `translateY(-${(moveY2 + moveY3 * progress3)}px)`;
   };
 
@@ -476,12 +399,12 @@ useEffect(() => {
               <div></div>
               <span>OUR COMPANY</span>
             </div>
-            <h1>
+            <h1 className="quote">
               Focused on Research
               <br />
               Built for Impact
             </h1>
-            <p>
+            <p className="quote">
               우리는 연구와 데이터에 기반한 과학적 접근과 기술적 전문성을 통해
               <br />
               생명과학의 가능성을 확장하고, 현실적인 문제 해결에 집중합니다.
@@ -498,7 +421,6 @@ useEffect(() => {
           </div>
         </section>
 
-        {/* fixed 요소는 pin되는 section 밖으로 빼야함 */}
         <div ref={imgWrapRef} data-speed="0" className="main_1_img_s pc">
           <div ref={m1s1Ref} className="m1s_1">
             <div className="sym_w">
@@ -525,9 +447,9 @@ useEffect(() => {
               <div className="sc_el_title">
                 <div className="dot_icon_w">
                   <div></div>
-                  <span>our sErvice 01</span>
+                  <span>our service 01</span>
                 </div>
-                <h4>Research & Development</h4>
+                <h4 className="quote">Research & Development</h4>
               </div>
               <div className="sc_el_line"></div>
               
@@ -536,7 +458,13 @@ useEffect(() => {
               </div>
               <div className="sc_el_p">
                 <img src="/dots.svg" />
-                <p>
+                <p className="quote">
+                  우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며,
+                  <br />
+                  과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다.
+                  우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며,
+                  <br />
+                  과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다.
                   우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며,
                   <br />
                   과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다.
@@ -550,7 +478,7 @@ useEffect(() => {
                   <div></div>
                   <span>our sErvice 02</span>
                 </div>
-                <h4>Biotechnology Solutions</h4>
+                <h4 className="quote">Biotechnology Solutions</h4>
               </div>
               <div className="sc_el_line"></div>
               <div className="sym_w">
@@ -558,7 +486,7 @@ useEffect(() => {
               </div>
               <div className="sc_el_p">
                 <img src="/dots.svg" />
-                <p>
+                <p className="quote">
                   생명과학에 대한 깊은 이해와 기술적 전문성을 결합해 현실적인 문제 해결에 집중한 솔루션을 개발하며,
                   <br />
                   연구 환경과 산업 현장의 요구를 고려한 접근을 통해 실질적인 적용 가능성과 확장성을 확보합니다.
@@ -572,7 +500,7 @@ useEffect(() => {
                   <div></div>
                   <span>our sErvice 03</span>
                 </div>
-                <h4>Data-Driven Innovation</h4>
+                <h4 className="quote">Data-Driven Innovation</h4>
               </div>
               <div className="sc_el_line"></div>
               <div className="sym_w">
@@ -580,7 +508,7 @@ useEffect(() => {
               </div>
               <div className="sc_el_p">
                 <img src="/dots.svg" />
-                <p>
+                <p className="quote">
                   연구 데이터와 분석 결과를 기반으로 의사결정의 정확성과 효율성을 높이고,
                   <br />
                   데이터 중심의 접근 방식을 통해 지속 가능한 혁신과 장기적인 가치를 만들어갑니다.
@@ -626,7 +554,6 @@ useEffect(() => {
 
         <section className="main_sec_4 float-wrap">
           <div className="float-el sec_4_img">
-            {/*<img className="float-bg" src="/main_last.jpg" alt="Final Image" />*/}
             <video className="float-bg" autoPlay muted loop playsInline>
               <source src="/video/B01_02.mp4"/>
             </video>
