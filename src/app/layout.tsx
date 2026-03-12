@@ -1,5 +1,6 @@
 import "./globals.scss";
 import Header from "./components/common/Header";
+import Footer from "./components/common/Footer";
 import GlobalScrollTrigger from "./lib/GlobalScrollTrigger";
 import Loading from "./components/common/Loading";
 
@@ -37,7 +38,9 @@ export default function RootLayout({
         <div id="smooth-content">
           {children}
         </div>
+        <Footer />
         <Loading/>
+        
       </body>
     </html>
   );
