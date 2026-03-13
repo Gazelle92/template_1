@@ -44,7 +44,7 @@ useEffect(() => {
     window.removeEventListener("resize", handleScroll);
   };
 }, []);
-/*
+
 useEffect(() => {
   const section = document.querySelector(".sc_el_w");
   const scEls = document.querySelectorAll(".sc_el_w .sc_el");
@@ -100,7 +100,6 @@ useEffect(() => {
 
   return () => window.removeEventListener("scroll", check);
 }, []);
-*/
 
   return (
     <div className="page_service">
