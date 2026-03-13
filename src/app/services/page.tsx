@@ -104,9 +104,11 @@ useEffect(() => {
 
   return (
     <div className="page_service">
-      <video autoPlay muted loop playsInline className="page_service_bg" >
-        <source src="/video/B01_01.mp4"/>
-      </video>
+      <div className="page_service_bg">
+        <video autoPlay muted loop playsInline  >
+          <source src="/video/B01_01.mp4"/>
+        </video>
+      </div>
       <section className="sec_1">
         <div className="txt_w">
           <h1 className="quote">Services</h1>
