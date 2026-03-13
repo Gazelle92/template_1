@@ -2,13 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 const navigationItems = [
-  { label: "COMPANY", href: "#company" },
-  { label: "SERVICES", href: "#services" },
-  { label: "NEWSROOM", href: "#newsroom" },
+  { label: "COMPANY", href: "company" },
+  { label: "SERVICES", href: "services" },
+  { label: "NEWSROOM", href: "newsroom" },
 ];
 export default function Header() {
   return (
-    <header className="w-full flex justify-between items-center border-black">
+    <header className="w-full flex justify-between items-center border-black no-filter">
       <Link href="/" className="flex flex-col w-[183px] h-14 items-start gap-2.5  relative bg-[#ffffff1a] rounded-xl">
         <div className="relative" >
           <Image src="/logo.svg" alt="Logo" width={149.76} height={28} className="w-full h-full object-contain" />
