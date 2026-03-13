@@ -44,7 +44,7 @@ useEffect(() => {
     window.removeEventListener("resize", handleScroll);
   };
 }, []);
-
+/*
 useEffect(() => {
   const section = document.querySelector(".sc_el_w");
   const scEls = document.querySelectorAll(".sc_el_w .sc_el");
@@ -100,11 +100,13 @@ useEffect(() => {
 
   return () => window.removeEventListener("scroll", check);
 }, []);
-
+*/
 
   return (
     <div className="page_service">
-      <img className="page_service_bg" src="/service_bg.jpg"/>
+      <video autoPlay muted loop playsInline className="page_service_bg" >
+        <source src="/video/B01_01.mp4"/>
+      </video>
       <section className="sec_1">
         <div className="txt_w">
           <h1 className="quote">Services</h1>
