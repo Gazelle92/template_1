@@ -291,7 +291,35 @@ useEffect(() => {
               <img src="/s_s_3_3.jpg"/>
             </div>
           </li>
-<li className="sc_el">
+          <li className="sc_el">
+            <div className="sc_el_title">
+              <div className="dot_icon_w">
+                <div></div>
+                <span>our service 03</span>
+              </div>
+              <h4 className="quote">Data-Driven Innovation</h4>
+            </div>
+
+            <div className="sc_el_line"></div>
+
+            <div className="sym_w">
+              <img src="/sc_el_3.png" alt="Data Driven Innovation" />
+            </div>
+
+            <div className="sc_el_p">
+              <img src="/dots.svg" />
+              <p className="quote">
+                연구 데이터와 분석 결과를 기반으로 의사결정의 정확성과 효율성을 높이고, <br/>데이터 중심의 접근 방식을 통해 지속 가능한 혁신과 장기적인 가치를 만들어갑니다.
+              </p>
+            </div>
+            <div className="sc_el_img_w">
+              <img src="/s_s_3_1.jpg"/>
+              <img src="/s_s_3_2.jpg"/>
+              <img src="/s_s_3_3.jpg"/>
+            </div>
+          </li>
+
+          <li className="sc_el opacity-0">
             <div className="sc_el_title">
               <div className="dot_icon_w">
                 <div></div>
