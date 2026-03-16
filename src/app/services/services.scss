@@ -58,7 +58,7 @@
   }
 
   .sec_2{padding: 0 40px 40px;  position: relative; min-height: 250vh;
-    .float-el{position: relative; left: 0; top: 0; width: calc(100% - 00px); padding-top: 130px; height: unset; height: 100vh;
+    .sc_clip_el{position: relative; left: 0; top: 0; width: calc(100% - 00px); padding-top: 130px; height: unset; height: calc(82vw - 130px);
       &.floating{position: fixed; top: 0vw; left: 50%; transform: translateX(-50%); width: calc(100% - 120px);}
       &.float-bottom{position: absolute; top: unset; bottom: 0;  width: calc(100% - 80px);}
     }
@@ -77,6 +77,7 @@
       }
     }
   }
+  .sec_3{height: 100vh;}
 
  
 
@@ -127,3 +128,10 @@
     }
   }
 }
+.sec_2{position: relative; min-height: 300vh; padding: 20px;}
+
+.sc_clip{position: sticky; top: 0;}
+
+.float-el{position: relative;}
+
+.sc_el{position: relative; will-change: transform;}

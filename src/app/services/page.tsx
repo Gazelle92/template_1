@@ -47,60 +47,115 @@ useEffect(() => {
 
 useEffect(() => {
   const section = document.querySelector(".sc_el_w");
+  const clip = document.querySelector(".sc_clip");
+  const clipEl = document.querySelector(".sc_clip_el");
   const scEls = document.querySelectorAll(".sc_el_w .sc_el");
 
   if (!(section instanceof HTMLElement)) return;
-  if (scEls.length < 3) return;
+  if (!(clip instanceof HTMLElement)) return;
+  if (!(clipEl instanceof HTMLElement)) return;
+  if (scEls.length < 2) return;
 
-  const firstEl = scEls[0] as HTMLElement;
-  const secondEl = scEls[1] as HTMLElement;
-  const thirdEl = scEls[2] as HTMLElement;
+  const els = Array.from(scEls) as HTMLElement[];
 
-  const firstTitle = firstEl.querySelector(".sc_el_title");
-  const secondTitle = secondEl.querySelector(".sc_el_title");
+  const getTitle = (el: HTMLElement) => el.querySelector(".sc_el_title") as HTMLElement | null;
 
-  if (!(firstTitle instanceof HTMLElement)) return;
-  if (!(secondTitle instanceof HTMLElement)) return;
+  const setLayout = () => {
+    let collapsedHeight = 0;
+
+    els.forEach((el, index) => {
+      const isLast = index === els.length - 1;
+
+      if (isLast) {
+        collapsedHeight += el.offsetHeight;
+      } else {
+        const title = getTitle(el);
+        if (title) collapsedHeight += title.offsetHeight;
+      }
+    });
+
+    clipEl.style.height = `${collapsedHeight}px`;
+
+    const totalMove = els.slice(0, -1).reduce((acc, el) => {
+      const title = getTitle(el);
+      if (!title) return acc;
+
+      const style = window.getComputedStyle(el);
+      const marginBottom = parseFloat(style.marginBottom) || 0;
+
+      return acc + (el.offsetHeight + marginBottom - title.offsetHeight);
+    }, 0);
+
+    section.style.minHeight = `${window.innerHeight + totalMove}px`;
+  };
 
   const check = () => {
-    const diff = section.offsetTop - window.scrollY;
+    const sectionTop = section.offsetTop;
+    const scrollY = window.scrollY;
+    const maxScroll = section.offsetHeight - window.innerHeight;
 
-    const range = window.innerHeight; // 전체 애니메이션 스크롤 길이
+    if (maxScroll <= 0) return;
 
-    let progress = 0;
-    if (diff <= 0) progress = Math.min(Math.max((-diff / range), 0), 1);
+    let progress = (scrollY - sectionTop) / maxScroll;
+    progress = Math.max(0, Math.min(1, progress));
 
-    // 0~0.5 구간 progress
-    let progress2 = Math.min(progress / 0.5, 1);
+    const moveValues = els.slice(0, -1).map((el) => {
+      const title = getTitle(el);
+      if (!title) return 0;
 
-    // 0.5~1 구간 progress
-    let progress3 = progress < 0.5 ? 0 : (progress - 0.5) / 0.5;
+      const style = window.getComputedStyle(el);
+      const marginBottom = parseFloat(style.marginBottom) || 0;
 
-    // --- 2번째 이동값 (1번째 기준)
-    const firstStyle = window.getComputedStyle(firstEl);
-    const firstMarginBottom = parseFloat(firstStyle.marginBottom) || 0;
+      return el.offsetHeight + marginBottom - title.offsetHeight;
+    });
 
-    const moveY2 =
-      (firstEl.offsetHeight + firstMarginBottom) - firstTitle.offsetHeight - 1;
+    const totalMove = moveValues.reduce((acc, cur) => acc + cur, 0);
+    if (totalMove <= 0) return;
 
-    // --- 3번째 이동값 (2번째 기준)
-    const secondStyle = window.getComputedStyle(secondEl);
-    const secondMarginBottom = parseFloat(secondStyle.marginBottom) || 0;
+    let accumulatedMove = 0;
+    let accumulatedRatio = 0;
 
-    const moveY3 =
-      (secondEl.offsetHeight + secondMarginBottom) - secondTitle.offsetHeight - 2;
+    els.forEach((el, index) => {
+      if (index === 0) return;
 
-    secondEl.style.transform = `translateY(-${moveY2 * progress2}px)`;
+      const prevMove = moveValues[index - 1];
+      const prevRatio = prevMove / totalMove;
 
-    thirdEl.style.transform = `translateY(-${(moveY2 + moveY3 * progress3)}px)`;
+      const localStart = accumulatedRatio;
+      const localEnd = accumulatedRatio + prevRatio;
+
+      let localProgress = 0;
+
+      if (progress <= localStart) {
+        localProgress = 0;
+      } else if (progress >= localEnd) {
+        localProgress = 1;
+      } else {
+        localProgress = (progress - localStart) / prevRatio;
+      }
+
+      accumulatedMove += prevMove * localProgress;
+      el.style.transform = `translateY(-${accumulatedMove}px)`;
+
+      accumulatedRatio += prevRatio;
+    });
+  };
+
+  const init = () => {
+    setLayout();
+    check();
   };
 
   window.addEventListener("scroll", check);
-  check();
+  window.addEventListener("resize", init);
 
-  return () => window.removeEventListener("scroll", check);
+  init();
+
+  return () => {
+    window.removeEventListener("scroll", check);
+    window.removeEventListener("resize", init);
+  };
 }, []);
-
   return (
     <div className="page_service">
       <div className="page_service_bg">
@@ -116,7 +171,8 @@ useEffect(() => {
       </section>
 
       <section className="sec_2 sc_el_w float-wrap">
-        <ul className="float-el">
+        <div className="sc_clip">
+        <ul className="sc_clip_el">
 
           <li className="sc_el">
             <div className="sc_el_title">
@@ -205,7 +261,9 @@ useEffect(() => {
           </li>
 
         </ul>
+        </div>
       </section>
+      <section className="sec_32"></section>
     </div>
   );
 }
