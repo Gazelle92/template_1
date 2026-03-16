@@ -45,51 +45,58 @@ useEffect(() => {
   };
 }, []);
 
+
 useEffect(() => {
   const section = document.querySelector(".sc_el_w");
-  const clip = document.querySelector(".sc_clip");
   const clipEl = document.querySelector(".sc_clip_el");
-  const scEls = document.querySelectorAll(".sc_el_w .sc_el");
+  const scEls = Array.from(document.querySelectorAll(".sc_el_w .sc_el")) as HTMLElement[];
 
   if (!(section instanceof HTMLElement)) return;
-  if (!(clip instanceof HTMLElement)) return;
   if (!(clipEl instanceof HTMLElement)) return;
   if (scEls.length < 2) return;
 
-  const els = Array.from(scEls) as HTMLElement[];
+  const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 
-  const getTitle = (el: HTMLElement) => el.querySelector(".sc_el_title") as HTMLElement | null;
+  let gaps: number[] = [];
+  let titleHeights: number[] = [];
+  let stageDistances: number[] = [];
 
   const setLayout = () => {
-    let collapsedHeight = 0;
-
-    els.forEach((el, index) => {
-      const isLast = index === els.length - 1;
-
-      if (isLast) {
-        collapsedHeight += el.offsetHeight;
-      } else {
-        const title = getTitle(el);
-        if (title) collapsedHeight += title.offsetHeight;
-      }
+    scEls.forEach((el) => {
+      el.style.transform = `translateY(0px)`;
     });
 
-    clipEl.style.height = `${collapsedHeight}px`;
+    const rects = scEls.map((el) => el.getBoundingClientRect());
 
-    const totalMove = els.slice(0, -1).reduce((acc, el) => {
-      const title = getTitle(el);
-      if (!title) return acc;
+    gaps = [];
+    titleHeights = [];
+    stageDistances = [];
 
-      const style = window.getComputedStyle(el);
-      const marginBottom = parseFloat(style.marginBottom) || 0;
+    scEls.forEach((el, index) => {
+      const title = el.querySelector(".sc_el_title") as HTMLElement | null;
+      titleHeights[index] = title ? title.offsetHeight : 0;
+    });
 
-      return acc + (el.offsetHeight + marginBottom - title.offsetHeight);
-    }, 0);
+    for (let i = 0; i < scEls.length - 1; i++) {
+      const gap = rects[i + 1].top - rects[i].top;
+      gaps[i] = gap;
 
-    section.style.minHeight = `${window.innerHeight + totalMove}px`;
+      // 각 stage의 전체 스크롤 길이
+      // = 다음 슬라이드가 올라오는 거리 + 현재 슬라이드 title 접히는 거리
+      stageDistances[i] = gap + titleHeights[i];
+    }
+
+    const totalDistance = stageDistances.reduce((acc, cur) => acc + cur, 0);
+
+    section.style.minHeight = `${window.innerHeight + totalDistance + 200}px`;
   };
 
   const check = () => {
+    if (!stageDistances.length) return;
+
+    const totalDistance = stageDistances.reduce((acc, cur) => acc + cur, 0);
+    if (totalDistance <= 0) return;
+
     const sectionTop = section.offsetTop;
     const scrollY = window.scrollY;
     const maxScroll = section.offsetHeight - window.innerHeight;
@@ -97,63 +104,58 @@ useEffect(() => {
     if (maxScroll <= 0) return;
 
     let progress = (scrollY - sectionTop) / maxScroll;
-    progress = Math.max(0, Math.min(1, progress));
+    progress = clamp(progress, 0, 1);
 
-    const moveValues = els.slice(0, -1).map((el) => {
-      const title = getTitle(el);
-      if (!title) return 0;
+    const currentDistance = totalDistance * progress;
+    const y = new Array(scEls.length).fill(0);
 
-      const style = window.getComputedStyle(el);
-      const marginBottom = parseFloat(style.marginBottom) || 0;
+    let passed = 0;
 
-      return el.offsetHeight + marginBottom - title.offsetHeight;
-    });
+    for (let stage = 0; stage < scEls.length - 1; stage++) {
+      const stageDistance = stageDistances[stage];
+      const local = clamp((currentDistance - passed) / stageDistance, 0, 1);
 
-    const totalMove = moveValues.reduce((acc, cur) => acc + cur, 0);
-    if (totalMove <= 0) return;
+      const gap = gaps[stage];
+      const titleH = titleHeights[stage];
 
-    let accumulatedMove = 0;
-    let accumulatedRatio = 0;
-
-    els.forEach((el, index) => {
-      if (index === 0) return;
-
-      const prevMove = moveValues[index - 1];
-      const prevRatio = prevMove / totalMove;
-
-      const localStart = accumulatedRatio;
-      const localEnd = accumulatedRatio + prevRatio;
-
-      let localProgress = 0;
-
-      if (progress <= localStart) {
-        localProgress = 0;
-      } else if (progress >= localEnd) {
-        localProgress = 1;
-      } else {
-        localProgress = (progress - localStart) / prevRatio;
+      for (let i = 0; i < scEls.length; i++) {
+        if (i < stage + 1) {
+          // 이미 위에 쌓여있는 슬라이드들
+          y[i] -= titleH * local;
+        } else if (i === stage + 1) {
+          // 현재 올라오는 슬라이드
+          y[i] -= (gap + (stage > 0 ? titleH : 0)) * local;
+        } else {
+          // 아직 아래에 남아있는 슬라이드들
+          y[i] -= gap * local;
+        }
       }
 
-      accumulatedMove += prevMove * localProgress;
-      el.style.transform = `translateY(-${accumulatedMove}px)`;
+      passed += stageDistance;
+    }
 
-      accumulatedRatio += prevRatio;
+    scEls.forEach((el, index) => {
+      el.style.transform = `translateY(${y[index]}px)`;
     });
   };
 
   const init = () => {
-    setLayout();
-    check();
+    requestAnimationFrame(() => {
+      setLayout();
+      check();
+    });
   };
 
   window.addEventListener("scroll", check);
   window.addEventListener("resize", init);
+  window.addEventListener("load", init);
 
   init();
 
   return () => {
     window.removeEventListener("scroll", check);
     window.removeEventListener("resize", init);
+    window.removeEventListener("load", init);
   };
 }, []);
   return (
@@ -259,7 +261,33 @@ useEffect(() => {
               <img src="/s_s_3_3.jpg"/>
             </div>
           </li>
+<li className="sc_el">
+            <div className="sc_el_title">
+              <div className="dot_icon_w">
+                <div></div>
+                <span>our service 03</span>
+              </div>
+              <h4 className="quote">Data-Driven Innovation</h4>
+            </div>
 
+            <div className="sc_el_line"></div>
+
+            <div className="sym_w">
+              <img src="/sc_el_3.png" alt="Data Driven Innovation" />
+            </div>
+
+            <div className="sc_el_p">
+              <img src="/dots.svg" />
+              <p className="quote">
+                연구 데이터와 분석 결과를 기반으로 의사결정의 정확성과 효율성을 높이고, <br/>데이터 중심의 접근 방식을 통해 지속 가능한 혁신과 장기적인 가치를 만들어갑니다.
+              </p>
+            </div>
+            <div className="sc_el_img_w">
+              <img src="/s_s_3_1.jpg"/>
+              <img src="/s_s_3_2.jpg"/>
+              <img src="/s_s_3_3.jpg"/>
+            </div>
+          </li>
         </ul>
         </div>
       </section>
