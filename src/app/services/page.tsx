@@ -48,17 +48,15 @@ useEffect(() => {
 
 useEffect(() => {
   const section = document.querySelector(".sc_el_w");
-  const clipEl = document.querySelector(".sc_clip_el");
   const scEls = Array.from(document.querySelectorAll(".sc_el_w .sc_el")) as HTMLElement[];
 
   if (!(section instanceof HTMLElement)) return;
-  if (!(clipEl instanceof HTMLElement)) return;
   if (scEls.length < 2) return;
 
   const clamp = (num: number, min: number, max: number) => Math.min(Math.max(num, min), max);
 
   let gaps: number[] = [];
-  let titleHeights: number[] = [];
+  let titleStops: number[] = [];
   let stageDistances: number[] = [];
 
   const setLayout = () => {
@@ -69,26 +67,30 @@ useEffect(() => {
     const rects = scEls.map((el) => el.getBoundingClientRect());
 
     gaps = [];
-    titleHeights = [];
+    titleStops = [];
     stageDistances = [];
 
-    scEls.forEach((el, index) => {
+    scEls.forEach((el) => {
       const title = el.querySelector(".sc_el_title") as HTMLElement | null;
-      titleHeights[index] = title ? title.offsetHeight : 0;
+      if (!title) {
+        titleStops.push(0);
+        return;
+      }
+
+      const elRect = el.getBoundingClientRect();
+      const titleRect = title.getBoundingClientRect();
+
+      return titleStops.push(titleRect.bottom - elRect.top);
     });
 
     for (let i = 0; i < scEls.length - 1; i++) {
       const gap = rects[i + 1].top - rects[i].top;
       gaps[i] = gap;
-
-      // 각 stage의 전체 스크롤 길이
-      // = 다음 슬라이드가 올라오는 거리 + 현재 슬라이드 title 접히는 거리
-      stageDistances[i] = gap + titleHeights[i];
+      stageDistances[i] = gap;
     }
 
     const totalDistance = stageDistances.reduce((acc, cur) => acc + cur, 0);
-
-    section.style.minHeight = `${window.innerHeight + totalDistance + 200}px`;
+    section.style.minHeight = `${window.innerHeight + totalDistance + 10}px`;
   };
 
   const check = () => {
@@ -113,20 +115,21 @@ useEffect(() => {
 
     for (let stage = 0; stage < scEls.length - 1; stage++) {
       const stageDistance = stageDistances[stage];
-      const local = clamp((currentDistance - passed) / stageDistance, 0, 1);
-
       const gap = gaps[stage];
-      const titleH = titleHeights[stage];
+      const title = titleStops[stage];
+
+      const localRaw = clamp((currentDistance - passed) / stageDistance, 0, 1);
+      const local = 1 - Math.pow(1 - localRaw, 2);
 
       for (let i = 0; i < scEls.length; i++) {
         if (i < stage + 1) {
-          // 이미 위에 쌓여있는 슬라이드들
-          y[i] -= titleH * local;
+          // 이미 위에 쌓인 요소들
+          y[i] -= title * local;
         } else if (i === stage + 1) {
-          // 현재 올라오는 슬라이드
-          y[i] -= (gap + (stage > 0 ? titleH : 0)) * local;
+          // 현재 올라오는 요소
+          y[i] -= gap * local;
         } else {
-          // 아직 아래에 남아있는 슬라이드들
+          // 아직 아래 있는 요소들
           y[i] -= gap * local;
         }
       }
@@ -234,6 +237,33 @@ useEffect(() => {
           </li>
 
 
+          <li className="sc_el">
+            <div className="sc_el_title">
+              <div className="dot_icon_w">
+                <div></div>
+                <span>our service 03</span>
+              </div>
+              <h4 className="quote">Data-Driven Innovation</h4>
+            </div>
+
+            <div className="sc_el_line"></div>
+
+            <div className="sym_w">
+              <img src="/sc_el_3.png" alt="Data Driven Innovation" />
+            </div>
+
+            <div className="sc_el_p">
+              <img src="/dots.svg" />
+              <p className="quote">
+                연구 데이터와 분석 결과를 기반으로 의사결정의 정확성과 효율성을 높이고, <br/>데이터 중심의 접근 방식을 통해 지속 가능한 혁신과 장기적인 가치를 만들어갑니다.
+              </p>
+            </div>
+            <div className="sc_el_img_w">
+              <img src="/s_s_3_1.jpg"/>
+              <img src="/s_s_3_2.jpg"/>
+              <img src="/s_s_3_3.jpg"/>
+            </div>
+          </li>
           <li className="sc_el">
             <div className="sc_el_title">
               <div className="dot_icon_w">
