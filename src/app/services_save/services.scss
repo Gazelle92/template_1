@@ -58,7 +58,9 @@
   }
 
   .sec_2{padding: 0 40px 40px;  position: relative; min-height: 250vh;
-    .float-el{position: relative; left: 0; top: 0; width: calc(100% - 00px); padding-top: 130px; height: unset; height: calc(82vw - 130px); position: sticky!important; top: 0;
+    .sc_clip_el{position: relative; left: 0; top: 0; width: calc(100% - 00px); padding-top: 130px; height: unset; height: calc(82vw - 130px);
+      &.floating{position: fixed; top: 0vw; left: 50%; transform: translateX(-50%); width: calc(100% - 120px);}
+      &.float-bottom{position: absolute; top: unset; bottom: 0;  width: calc(100% - 80px);}
     }
     .sc_el{background-color: #fff; border-radius: 2.821vw; position: relative; height: unset; width: 100%; padding: 0 0 40px; box-sizing: unset; 
       .sc_el_title{gap: 1.795vw; display: flex; align-items: center; padding-left: 2.564vw; padding: 3.077vw 0 2.051vw 2.564vw;
