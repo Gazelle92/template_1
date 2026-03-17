@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./services.scss";
@@ -83,6 +83,46 @@ export default function Services() {
     return () => window.removeEventListener("scroll", check);
   }, []);
 
+
+
+  const floatRef = useRef<HTMLUListElement | null>(null);
+
+  useEffect(() => {
+    const setHeight = () => {
+      const floatEl = floatRef.current;
+      if (!floatEl) return;
+
+      const items = floatEl.querySelectorAll<HTMLElement>(".sc_el");
+      if (!items.length) return;
+
+      let total = 0;
+
+      items.forEach((el, i) => {
+        const isLast = i === items.length - 1;
+
+        if (isLast) {
+          total += el.offsetHeight;
+        } else {
+          const title = el.querySelector<HTMLElement>(".sc_el_title");
+          if (title) total += title.offsetHeight;
+        }
+      });
+
+      floatEl.style.height = `${total}px`;
+    };
+
+    setHeight();
+
+    window.addEventListener("resize", setHeight);
+    window.addEventListener("load", setHeight);
+
+    return () => {
+      window.removeEventListener("resize", setHeight);
+      window.removeEventListener("load", setHeight);
+    };
+  }, []);
+
+
   return (
     <div className="page_service">
       <div className="page_service_bg">
@@ -103,7 +143,7 @@ export default function Services() {
       </section>
 
       <section className="sec_2 sc_el_w float-wrap">
-        <ul className="float-el">
+        <ul className="float-el" ref={floatRef}>
           <li className="sc_el">
             <div className="sc_el_title">
               <div className="dot_icon_w">
@@ -115,9 +155,7 @@ export default function Services() {
 
             <div className="sc_el_line"></div>
 
-            <div className="sym_w">
-              <img src="/sc_el_1.png" alt="Research & Development" />
-            </div>
+            
 
             <div className="sc_el_p">
               <img src="/dots.svg" />
@@ -126,6 +164,9 @@ export default function Services() {
                 <br />
                 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다.
               </p>
+            </div>
+            <div className="sym_w">
+              <img src="/sc_el_1.png" alt="Research & Development" />
             </div>
 
             <div className="sc_el_img_w">
@@ -146,9 +187,7 @@ export default function Services() {
 
             <div className="sc_el_line"></div>
 
-            <div className="sym_w">
-              <img src="/sc_el_2.png" alt="Biotechnology Solutions" />
-            </div>
+            
 
             <div className="sc_el_p">
               <img src="/dots.svg" />
@@ -157,6 +196,9 @@ export default function Services() {
                 <br />
                 연구 환경과 산업 현장의 요구를 고려한 접근을 통해 실질적인 적용 가능성과 확장성을 확보합니다.
               </p>
+            </div>
+            <div className="sym_w">
+              <img src="/sc_el_2.png" alt="Biotechnology Solutions" />
             </div>
 
             <div className="sc_el_img_w">
@@ -177,9 +219,7 @@ export default function Services() {
 
             <div className="sc_el_line"></div>
 
-            <div className="sym_w">
-              <img src="/sc_el_3.png" alt="Data Driven Innovation" />
-            </div>
+           
 
             <div className="sc_el_p">
               <img src="/dots.svg" />
@@ -188,6 +228,10 @@ export default function Services() {
                 <br />
                 데이터 중심의 접근 방식을 통해 지속 가능한 혁신과 장기적인 가치를 만들어갑니다.
               </p>
+            </div>
+
+             <div className="sym_w">
+              <img src="/sc_el_3.png" alt="Data Driven Innovation" />
             </div>
 
             <div className="sc_el_img_w">
