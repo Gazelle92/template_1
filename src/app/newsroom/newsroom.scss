@@ -139,7 +139,9 @@
     .list_head{justify-content: unset; flex-direction: column; border-bottom: 0px; padding-bottom: 10vw; align-items: unset;
       h1{font-size: 11.111vw; padding-bottom: 5.556vw; margin-bottom: 4.444vw; border-bottom: 1px solid #000;}
       .tag_w{padding-bottom: 0; gap: 2.222vw;
-        div{padding: 1.111vw 2.222vw; border-radius: 1.111vw; font-size: 2.222vw;}
+        div{padding: 1.111vw 2.222vw; border-radius: 1.111vw; font-size: 2.222vw;
+          &:nth-child(1){background-color:#00FFA1 ;}
+        }
       }
     }
 

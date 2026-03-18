@@ -38,6 +38,100 @@ export default function Newsroom() {
     };
   }, []);
 
+  useEffect(() => {
+  const items = gsap.utils.toArray<HTMLElement>(".grid_4x4 > li");
+
+  if (!items.length) return;
+
+  gsap.set(items, { y: 10, opacity: 0 });
+
+  const rows: HTMLElement[][] = [];
+  let currentRow: HTMLElement[] = [];
+  let lastTop: number | null = null;
+  const tolerance = 10;
+
+  items.forEach((item) => {
+    const top = Math.round(item.offsetTop);
+
+    if (lastTop === null || Math.abs(top - lastTop) <= tolerance) {
+      currentRow.push(item);
+    } else {
+      rows.push(currentRow);
+      currentRow = [item];
+    }
+
+    lastTop = top;
+  });
+
+  if (currentRow.length) rows.push(currentRow);
+
+  rows.forEach((row) => {
+    gsap.to(row, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: "power2.out",
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: row[0],
+        start: "top bottom-=10%",
+        once: true,
+      },
+    });
+  });
+
+  const handleResize = () => {
+    ScrollTrigger.getAll().forEach((trigger) => {
+      if (trigger.vars.trigger && (trigger.vars.trigger as Element).matches?.(".grid_4x4 > li")) {
+        trigger.kill();
+      }
+    });
+
+    gsap.set(items, { y: 10, opacity: 0 });
+
+    const newRows: HTMLElement[][] = [];
+    let newCurrentRow: HTMLElement[] = [];
+    let newLastTop: number | null = null;
+
+    items.forEach((item) => {
+      const top = Math.round(item.offsetTop);
+
+      if (newLastTop === null || Math.abs(top - newLastTop) <= tolerance) {
+        newCurrentRow.push(item);
+      } else {
+        newRows.push(newCurrentRow);
+        newCurrentRow = [item];
+      }
+
+      newLastTop = top;
+    });
+
+    if (newCurrentRow.length) newRows.push(newCurrentRow);
+
+    newRows.forEach((row) => {
+      gsap.to(row, {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: row[0],
+          start: "top bottom-=10%",
+          once: true,
+        },
+      });
+    });
+
+    ScrollTrigger.refresh();
+  };
+
+  window.addEventListener("resize", handleResize);
+
+  return () => {
+    window.removeEventListener("resize", handleResize);
+  };
+}, []);
 
 
   return (
@@ -54,7 +148,7 @@ export default function Newsroom() {
       </section>
       <section className="list_body">
         <ul className="grid_4x4">
-          <li>
+          <li className="ani">
             <a href="">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
