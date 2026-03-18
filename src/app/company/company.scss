@@ -47,7 +47,8 @@
   }*/
   .sec_1{height:43.59vw; position: relative;
     img{width: calc(100% - 2.56vw); height: calc(100% - 2.56vw); position: absolute; left: 1.28vw; top: 1.28vw; object-fit: cover; border-radius: 1.54vw;}
-    .txt_w{position: absolute; left: 3.85vw; right: 3.85vw; bottom: 2.56vw; border-top: 1px solid #fff; padding-top: 1.28vw; display: flex; justify-content: space-between; align-items: flex-end; color: #fff;
+    .txt_w{position: absolute; left: 3.85vw; right: 3.85vw; bottom: 2.56vw; padding-top: 1.28vw; display: flex; justify-content: space-between; align-items: flex-end; color: #fff;
+      &::after{position: absolute; top: 0; left:0; background-color: #fff;}
       h1{font-size: 6.15vw; font-weight: 300; line-height: 1.1;}
       span{font-size: 0.96vw; line-height: 1.5;}
     }
@@ -56,6 +57,7 @@
   .sec_2{ padding: 12.82vw 60px; display: flex; flex-direction: column; gap: 7.69vw;
     .flex{display: flex; align-items: flex-start; gap: calc((100% / 12) * 1);
       .txt_w{width: calc((100% / 12) * 6); padding-top: 2.56vw;
+        &.bar::after{display: none;}
         .dot_icon_w{}
         h1{font-size: 3.08vw; line-height: 1.2; margin: 1.28vw 0 2.56vw; font-weight: 400;}
         > span{font-size: 0.96vw; line-height: 1.5; display: block; width: calc((100% / 6) * 5);}
@@ -148,7 +150,11 @@
     .sec_1{height: 143.333vw;
       img{width: calc(100% - 4.444vw); height: calc(100% - 4.444vw); position: absolute; left: 2.222vw; top: 2.222vw; object-fit: cover; border-radius: 4.444vw;}
       .txt_w{bottom: 5.556vw; left: 7.778vw; right: 7.778vw; flex-direction: column; border-top: 0; align-items: flex-start;
-        h1{font-size: 11.111vw; padding-bottom: 5.556vw; margin-bottom: 5.556vw; width: 100%; border-bottom: 0.278vw solid rgba(255, 255, 255, 0.2);}
+        &::after{display: none;}
+        h1{font-size: 11.111vw; padding-bottom: 5.556vw; margin-bottom: 5.556vw; width: 100%; position: relative;
+          &::after{content: ''; display: block; width: 0; height: 1px; background-color: rgba(255, 255, 255, 0.2); left: 0; bottom: 0; position: absolute; transition: ease 0.8s all;}
+          &.active::after{width: 100%;}
+        }
         span{font-size: 3.056vw; text-wrap: balance;}
         br{display: none;}
       }

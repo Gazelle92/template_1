@@ -9,104 +9,109 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function QuoteAnimationProvider() {
   useEffect(() => {
-    const quotes = document.querySelectorAll<HTMLElement>(".quote");
-    const splits: SplitType[] = [];
+    const timer = window.setTimeout(() => {
+      const quotes = document.querySelectorAll<HTMLElement>(".quote");
+      const splits: SplitType[] = [];
 
-    quotes.forEach((el) => {
-      if (el.dataset.animated === "true") return;
+      quotes.forEach((el) => {
+        if (el.dataset.animated === "true") return;
 
-      const split = new SplitType(el, { types: "words" });
-      const words = split.words;
+        const split = new SplitType(el, { types: "words" });
+        const words = split.words;
 
-      if (!words || words.length === 0) return;
+        if (!words || words.length === 0) return;
 
-      splits.push(split);
+        splits.push(split);
 
-      words.forEach((word) => {
-        word.style.display = "inline-block";
+        words.forEach((word) => {
+          word.style.display = "inline-block";
+        });
+
+        gsap.set(words, {
+          y: 10,
+          opacity: 0,
+        });
+
+        let enterTween: gsap.core.Tween | null = null;
+
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 95%",
+
+          onEnter: () => {
+            enterTween?.kill();
+            el.classList.add("active");
+
+            enterTween = gsap.to(words, {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              delay: 0.2,
+              stagger: 0.01,
+              ease: "power3.out",
+            });
+          },
+
+          onLeaveBack: () => {
+            enterTween?.kill();
+            el.classList.remove("active");
+
+            gsap.to([...words].reverse(), {
+              y: 10,
+              opacity: 0,
+              duration: 0.15,
+              stagger: 0.01,
+              ease: "power2.in",
+            });
+          },
+        });
+
+        el.dataset.animated = "true";
       });
 
-      // 초기 상태
-      gsap.set(words, {
-        y: 10,
-        opacity: 0,
-      });
-      let enterTween: gsap.core.Tween | null = null;
+      ScrollTrigger.refresh();
 
-
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 95%",
-
-        onEnter: () => {
-          // 기존 애니메이션 있으면 제거
-          enterTween?.kill();
-          el.classList.add("active");
-
-          enterTween = gsap.to(words, {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            delay: 0.2,
-            stagger: 0.01,
-            ease: "power3.out",
-          });
-        },
-
-        onLeaveBack: () => {
-          // 등장 애니메이션 중이면 취소
-          enterTween?.kill();
-          el.classList.remove("active");
-          gsap.to([...words].reverse(), {
-            y: 10,
-            opacity: 0,
-            duration: 0.15,
-            stagger: 0.01,
-            ease: "power2.in",
-          });
-        },
-      });
-
-      el.dataset.animated = "true";
-    });
-
-    ScrollTrigger.refresh();
+      (window as any).__quoteSplits = splits;
+    }, 500);
 
     return () => {
+      window.clearTimeout(timer);
+
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      splits.forEach((split) => split.revert());
+
+      const savedSplits = (window as any).__quoteSplits as SplitType[] | undefined;
+      savedSplits?.forEach((split) => split.revert());
     };
   }, []);
 
-
   useEffect(() => {
-    const ani = document.querySelectorAll<HTMLElement>(".ani");
+    const timer = window.setTimeout(() => {
+      const ani = document.querySelectorAll<HTMLElement>(".ani");
 
-    ani.forEach((el) => {
-      if (el.dataset.animated === "true") return;
+      ani.forEach((el) => {
+        if (el.dataset.animated === "true") return;
 
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 90%",
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 90%",
 
-        onEnter: () => {
+          onEnter: () => {
+            el.classList.add("active");
+          },
 
-          el.classList.add("active");
+          /*onLeaveBack: () => {
+            el.classList.remove("active");
+          },*/
+        });
 
-
-        },
-
-        /*onLeaveBack: () => {
-          el.classList.remove("active");
-        },*/
+        el.dataset.animated = "true";
       });
 
-      el.dataset.animated = "true";
-    });
-
-    ScrollTrigger.refresh();
+      ScrollTrigger.refresh();
+    }, 1000);
 
     return () => {
+      window.clearTimeout(timer);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);

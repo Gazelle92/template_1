@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,7 +9,13 @@ import "./loading.scss"
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Loading() {
-  const [isLoading, setIsLoading] = useState(true);
+
+  const pathname = usePathname(); // ← 현재 경로
+  //const isMain = pathname === "/"; // ← 메인 체크
+  const isMain = pathname === "/test"
+
+  const [isLoading, setIsLoading] = useState(isMain);
+  //const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;

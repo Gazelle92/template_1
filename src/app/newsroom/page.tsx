@@ -138,7 +138,7 @@ export default function Newsroom() {
     <div className="page_newsroom">
       <section className="list_head">
         <h1 className="quote">Newsroom</h1>
-        <div className="tag_w">
+        <div className="tag_w ani hide">
           <div>View ALL</div>
           <div>Company News</div>
           <div>Press Release</div>

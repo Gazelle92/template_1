@@ -74,7 +74,7 @@ useEffect(() => {
       <section className="sec_1">
         
         <img src="/company_bg.jpg"/>
-        <div className="txt_w">
+        <div className="txt_w bar ani">
           <h1 className="quote">Company</h1>
           <span className="quote">우리는 연구와 데이터에 기반한 혁신적인 생명과학 솔루션을 개발하며,과학적 검증과 기술적<br/>전문성을 바탕으로지속 가능하고 장기적인 가치를 꾸준히 만들어갑니다.</span>
         </div>
@@ -82,7 +82,7 @@ useEffect(() => {
       <section className="sec_2">
         <div className="flex">
           <div className="txt_w">
-            <div className="dot_icon_w white">
+            <div className="dot_icon_w white ani hide">
               <div></div>
               <span>OUR Mission</span>
             </div>
@@ -101,7 +101,7 @@ useEffect(() => {
           </div>
           
           <div className="txt_w">
-            <div className="dot_icon_w white">
+            <div className="dot_icon_w white ani hide">
               <div></div>
               <span>OUR PHILOSOPHY</span>
             </div>

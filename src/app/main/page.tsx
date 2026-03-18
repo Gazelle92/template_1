@@ -404,20 +404,20 @@ const floatRef = useRef<HTMLUListElement | null>(null);
           </div>
 
           <div ref={txtRef} className="main_1_txt_1">
-            <h1>
+            <h1 className="quote">
               Advancing Biology
               <br />
               Through Precision Science
             </h1>
 
-            <div className="main_1_txt_1_b">
+            <div className="main_1_txt_1_b ani bar">
               <img src="/main_1_icon_1.png" alt="Icon 1" />
-              <span>
+              <span className="quote">
                 우리는 연구와 데이터에 기반한 혁신적인
                 <br />
                 생명과학 솔루션을 개발하며, 장기적인 가치를 추구합니다.
               </span>
-              <img src="/main_1_icon_2.png" alt="Icon 2" />
+              <img className="ani hide" src="/main_1_icon_2.png" alt="Icon 2" />
             </div>
           </div>
 
@@ -482,7 +482,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
           <ul className="float-el" ref={floatRef}>
             <li className="sc_el">
               <div className="sc_el_title">
-                <div className="dot_icon_w">
+                <div className="dot_icon_w ani hide">
                   <div></div>
                   <span>our service 01</span>
                 </div>
@@ -494,7 +494,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
                 <img src="/sc_el_1.png" alt="Service 1 Image" />
               </div>
               <div className="sc_el_p">
-                <img src="/dots.svg" />
+                <img className="ani hide" src="/dots.svg" />
                 <p className="quote">
                   우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며,
                   <br />
@@ -505,7 +505,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
 
             <li className="sc_el">
               <div className="sc_el_title">
-                <div className="dot_icon_w">
+                <div className="dot_icon_w ani hide">
                   <div></div>
                   <span>our sErvice 02</span>
                 </div>
@@ -516,7 +516,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
                 <img src="/sc_el_2.png" alt="Service 1 Image" />
               </div>
               <div className="sc_el_p">
-                <img src="/dots.svg" />
+                <img className="ani hide" src="/dots.svg" />
                 <p className="quote">
                   생명과학에 대한 깊은 이해와 기술적 전문성을 결합해 현실적인 문제 해결에 집중한 솔루션을 개발하며,
                   <br />
@@ -527,7 +527,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
 
             <li className="sc_el">
               <div className="sc_el_title">
-                <div className="dot_icon_w">
+                <div className="dot_icon_w ani hide">
                   <div></div>
                   <span>our sErvice 03</span>
                 </div>
@@ -538,7 +538,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
                 <img src="/sc_el_3.png" alt="Service 1 Image" />
               </div>
               <div className="sc_el_p">
-                <img src="/dots.svg" />
+                <img className="ani hide" src="/dots.svg" />
                 <p className="quote">
                   연구 데이터와 분석 결과를 기반으로 의사결정의 정확성과 효율성을 높이고,
                   <br />
