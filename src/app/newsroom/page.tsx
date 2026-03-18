@@ -137,7 +137,7 @@ export default function Newsroom() {
   return (
     <div className="page_newsroom">
       <section className="list_head">
-        <h1>Newsroom</h1>
+        <h1 className="quote">Newsroom</h1>
         <div className="tag_w">
           <div>View ALL</div>
           <div>Company News</div>
@@ -149,7 +149,7 @@ export default function Newsroom() {
       <section className="list_body">
         <ul className="grid_4x4">
           <li className="ani">
-            <a href="">
+            <a href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
@@ -158,7 +158,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/15/2026</span>
               <span className="tag tag_2">Press Release</span>
               <h4 className="title">글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
@@ -167,7 +167,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">11/06/2026</span>
               <span className="tag tag_3">Partnership</span>
               <h4 className="title">미래 바이오 산업 대응을 위한 기술 혁신 추진</h4>
@@ -176,7 +176,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
@@ -185,7 +185,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
@@ -194,7 +194,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/15/2026</span>
               <span className="tag tag_2">Press Release</span>
               <h4 className="title">글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
@@ -203,7 +203,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">11/06/2026</span>
               <span className="tag tag_3">Partnership</span>
               <h4 className="title">미래 바이오 산업 대응을 위한 기술 혁신 추진</h4>
@@ -212,7 +212,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
@@ -221,7 +221,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
@@ -230,7 +230,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/15/2026</span>
               <span className="tag tag_2">Press Release</span>
               <h4 className="title">글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
@@ -239,7 +239,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">11/06/2026</span>
               <span className="tag tag_3">Partnership</span>
               <h4 className="title">미래 바이오 산업 대응을 위한 기술 혁신 추진</h4>
@@ -248,7 +248,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
@@ -257,7 +257,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
@@ -266,7 +266,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/15/2026</span>
               <span className="tag tag_2">Press Release</span>
               <h4 className="title">글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
@@ -275,7 +275,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">11/06/2026</span>
               <span className="tag tag_3">Partnership</span>
               <h4 className="title">미래 바이오 산업 대응을 위한 기술 혁신 추진</h4>
@@ -284,7 +284,7 @@ export default function Newsroom() {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>

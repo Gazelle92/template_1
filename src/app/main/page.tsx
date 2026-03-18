@@ -22,67 +22,66 @@ export default function Home() {
   const listRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
-  const mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 1025px)", () => {
+      const section = sectionRef.current;
+      const img = imgRef.current;
+      const txt = txtRef.current;
+      const m1s1 = m1s1Ref.current;
+      const m1s2 = m1s2Ref.current;
+      const txt2 = txt2Ref.current;
+      const imgWrap = imgWrapRef.current;
+      const header = document.querySelector("header");
 
-  mm.add("(min-width: 1025px)", () => {
-    const section = sectionRef.current;
-    const img = imgRef.current;
-    const txt = txtRef.current;
-    const m1s1 = m1s1Ref.current;
-    const m1s2 = m1s2Ref.current;
-    const txt2 = txt2Ref.current;
-    const imgWrap = imgWrapRef.current;
-    const header = document.querySelector("header");
+      if (!section || !img || !txt || !m1s1 || !m1s2 || !txt2 || !imgWrap) return;
 
-    if (!section || !img || !txt || !m1s1 || !m1s2 || !txt2 || !imgWrap) return;
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=100%",
+          scrub: true,
+          pin: true,
+          pinSpacing: false,
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "+=100%",
-        scrub: true,
-        pin: true,
-        pinSpacing: false,
+          onUpdate: (self) => {
+            if (!header) return;
 
-        onUpdate: (self) => {
-          if (!header) return;
-
-          if (self.progress > 0.95) {
-            header.classList.add("no-filter");
-          } else {
-            header.classList.remove("no-filter");
-          }
+            if (self.progress > 0.95) {
+              header.classList.add("no-filter");
+            } else {
+              header.classList.remove("no-filter");
+            }
+          },
         },
-      },
+      });
+
+      tl.fromTo(
+        img,
+        { width: "calc(100% - 40px)", height: "calc(100vh - 40px)" },
+        { width: "calc(33% - 0px)", height: "calc(80vh - 0px)", ease: "power1.inOut", },
+        0
+      );
+
+      tl.fromTo(
+        txt,
+        { clipPath: "inset(40px 40px 40px 40px)", opacity: 1, ease: "none" },
+        { clipPath: "inset(10% 33% 10% 33%)", opacity: 0, ease: "power1.inOut", },
+        0
+      );
+
+      tl.fromTo(m1s1, { x: "-83vw" }, { x: "0vw", duration: 0.5 , ease: "power1.inOut" }, 0);
+      tl.fromTo(m1s2, { x: "83vw" }, { x: "0vw", duration: 0.5 , ease: "power1.inOut" }, 0);
+
+      return () => {
+        header?.classList.remove("no-filter");
+        tl.scrollTrigger?.kill();
+        tl.kill();
+      };
     });
 
-    tl.fromTo(
-      img,
-      { width: "calc(100% - 40px)", height: "calc(100vh - 40px)" },
-      { width: "calc(33% - 0px)", height: "calc(80vh - 0px)", ease: "none" },
-      0
-    );
-
-    tl.fromTo(
-      txt,
-      { clipPath: "inset(40px 40px 40px 40px)", opacity: 1, ease: "none" },
-      { clipPath: "inset(10% 33% 10% 33%)", opacity: 0, ease: "none" },
-      0
-    );
-
-    tl.fromTo(m1s1, { x: "-83vw" }, { x: "0vw", ease: "none" }, 0);
-    tl.fromTo(m1s2, { x: "83vw" }, { x: "0vw", ease: "none" }, 0);
-
-    return () => {
-      header?.classList.remove("no-filter");
-      tl.scrollTrigger?.kill();
-      tl.kill();
-    };
-  });
-
-  return () => mm.revert();
-}, []);
+    return () => mm.revert();
+  }, []);
 
 
   useEffect(() => {
@@ -124,7 +123,7 @@ useEffect(() => {
     { left: "calc((8% - 0px) / 1 * 1)" },
     {
       left: `calc((100% - ${img2.offsetWidth}px) / 3 * 1)`,
-      ease: "none",
+      duration: 0.5 , ease: "power1.inOut",
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
@@ -139,7 +138,7 @@ useEffect(() => {
     { left: "calc((16% - 0px) / 1 * 1)" },
     {
       left: `calc((100% - ${img3.offsetWidth}px) / 3 * 2)`,
-      ease: "none",
+      duration: 0.5 , ease: "power1.inOut",
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
@@ -154,7 +153,7 @@ useEffect(() => {
     { left: "24%" },
     {
       left: `calc(100% - ${img4.offsetWidth}px)`,
-      ease: "none",
+      duration: 0.5 , ease: "power1.inOut",
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
@@ -170,7 +169,7 @@ useEffect(() => {
     { yPercent: 0 },
     {
       yPercent: 100,
-      ease: "none",
+      duration: 0.5 , ease: "power1.inOut",
       scrollTrigger: {
         trigger: sec3,
         start: "top+=20%",
@@ -186,7 +185,7 @@ useEffect(() => {
     { yPercent: 0 },
     {
       yPercent: 100,
-      ease: "none",
+      duration: 0.5 , ease: "power1.inOut",
       scrollTrigger: {
         trigger: sec3,
         start: "top+=20%",
@@ -199,7 +198,7 @@ useEffect(() => {
 
   ScrollTrigger.create({
     trigger: sec3,
-    start: "top+=20%",
+    start: "top+=10%",
     toggleClass: { targets: ".m3_img_w", className: "txt_up" },
   });
 
@@ -219,12 +218,12 @@ useEffect(() => {
     { 
       width: "33%", 
       height: "80vh", 
-      ease: "none" 
+      duration: 0.5 , ease: "power1.inOut",
     },
     {
       width: "calc(100% - 120px)", 
       height: "calc(100vh - 120px)", 
-      ease: "none",
+      duration: 0.5 , ease: "power1.inOut",
       scrollTrigger: {
         trigger: sec4,
         start: "top top",
@@ -355,6 +354,44 @@ useEffect(() => {
 }, []);
 
 
+const floatRef = useRef<HTMLUListElement | null>(null);
+
+  useEffect(() => {
+    const setHeight = () => {
+      const floatEl = floatRef.current;
+      if (!floatEl) return;
+
+      const items = floatEl.querySelectorAll<HTMLElement>(".sc_el");
+      if (!items.length) return;
+
+      let total = 0;
+
+      items.forEach((el, i) => {
+        const isLast = i === items.length - 1;
+
+        if (isLast) {
+          total += el.offsetHeight;
+        } else {
+          const title = el.querySelector<HTMLElement>(".sc_el_title");
+          if (title) total += title.offsetHeight;
+        }
+      });
+
+      floatEl.style.height = `${total}px`;
+    };
+
+    setHeight();
+
+    window.addEventListener("resize", setHeight);
+    window.addEventListener("load", setHeight);
+
+    return () => {
+      window.removeEventListener("resize", setHeight);
+      window.removeEventListener("load", setHeight);
+    };
+  }, []);
+
+
   return (
     <div className="min-h-screen page_main">
       <main>
@@ -387,10 +424,10 @@ useEffect(() => {
           <div ref={txt2Ref} className="main_1_txt_2">
 
             <div className="m1s_1 mob">
-              <div className="sym_w">
+              <div className="sym_w ani">
                 <img src="/main_1_img_s_1.png" alt="Secondary Image" className="sym" />
               </div>
-              <div className="sym_w">
+              <div className="sym_w ani">
                 <img src="/main_1_img_s_2.png" alt="Secondary Image" className="sym" />
               </div>
             </div>
@@ -411,10 +448,10 @@ useEffect(() => {
             </p>
 
             <div className="m1s_2 mob">
-              <div className="sym_w">
+              <div className="sym_w ani">
               <img src="/main_1_img_s_3.png" alt="Secondary Image" className="sym"/>
               </div>
-              <div className="sym_w">
+              <div className="sym_w ani">
               <img src="/main_1_img_s_4.png" alt="Secondary Image" className="sym"/>
               </div>
             </div>
@@ -442,7 +479,7 @@ useEffect(() => {
         </div>
 
         <section className="main_sec_2 float-wrap" >
-          <ul className="float-el">
+          <ul className="float-el" ref={floatRef}>
             <li className="sc_el">
               <div className="sc_el_title">
                 <div className="dot_icon_w">
@@ -514,25 +551,25 @@ useEffect(() => {
 
         <section className="main_sec_3 float-wrap">
           <div className="m3_img_w float-el">
-            <div className="m3_el">
+            <div className="m3_el ani">
               <div className="sym_w">
                 <img src="/m_sec3_1.png" className="sym" />
               </div>
               <span>Innovation Platform</span>
             </div>
-            <div className="m3_el">
+            <div className="m3_el ani">
               <div className="sym_w">
                 <img src="/m_sec3_2.png" className="sym" />
               </div>
               <span>Biotechnology<br/>Development Program</span>
             </div>
-            <div className="m3_el">
+            <div className="m3_el ani">
               <div className="sym_w">
                 <img src="/m_sec3_3.png" className="sym" />
               </div>
               <span>Data-Driven Life<br/>Science Project</span>
             </div>
-            <div className="m3_el">
+            <div className="m3_el ani">
               <div className="sym_w">
                 <img src="/m_sec3_4.png" className="sym" />
               </div>

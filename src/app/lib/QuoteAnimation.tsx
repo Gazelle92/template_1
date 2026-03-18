@@ -41,6 +41,7 @@ export default function QuoteAnimationProvider() {
         onEnter: () => {
           // 기존 애니메이션 있으면 제거
           enterTween?.kill();
+          el.classList.add("active");
 
           enterTween = gsap.to(words, {
             y: 0,
@@ -55,7 +56,7 @@ export default function QuoteAnimationProvider() {
         onLeaveBack: () => {
           // 등장 애니메이션 중이면 취소
           enterTween?.kill();
-
+          el.classList.remove("active");
           gsap.to([...words].reverse(), {
             y: 10,
             opacity: 0,
@@ -74,6 +75,39 @@ export default function QuoteAnimationProvider() {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       splits.forEach((split) => split.revert());
+    };
+  }, []);
+
+
+  useEffect(() => {
+    const ani = document.querySelectorAll<HTMLElement>(".ani");
+
+    ani.forEach((el) => {
+      if (el.dataset.animated === "true") return;
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 90%",
+
+        onEnter: () => {
+
+          el.classList.add("active");
+
+
+        },
+
+        /*onLeaveBack: () => {
+          el.classList.remove("active");
+        },*/
+      });
+
+      el.dataset.animated = "true";
+    });
+
+    ScrollTrigger.refresh();
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 

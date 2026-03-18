@@ -48,7 +48,7 @@ export default function Detail() {
           <div className="tag_1">Company News</div>
         </div>
         <div className="title">
-          <h1>차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h1>
+          <h1 className="quote">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h1>
           <div className="infos">
             <div className="view">
               <span>Views</span>
