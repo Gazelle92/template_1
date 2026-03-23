@@ -25,7 +25,7 @@ export default function Loading() {
   //const [isLoading, setIsLoading] = useState(true);
 
 
-  /*useEffect(() => {
+  useEffect(() => {
     const lenis = (window as any).lenis;
 
     if (lenis) {
@@ -34,7 +34,7 @@ export default function Loading() {
       window.scrollTo(0, 0);
     }
   }, [pathname, searchParams]);
-*/
+
   useEffect(() => {
 
     let cancelled = false;
