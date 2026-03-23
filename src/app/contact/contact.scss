@@ -1,0 +1,189 @@
+.footer {display: none;
+}
+/*
+.page_contact{background-color: #00FFA1; padding: 148px 60px 60px; position: relative; min-height: 100vh;
+  .contact_inner{background-color: #fff; border-radius: 24px; padding:60px 0 80px;
+    .contact_head{display: flex; align-items: flex-end; position: relative; padding: 0 calc(100% / 12) 32px; 
+      h1{flex: 4; font-size: 96px; font-weight: 200; line-height: 1.1;}
+      &>span{flex: 4; font-size: 15px; line-height: 1.5;}
+      .mail_w{flex: 2; display: flex; justify-content: flex-end;
+        .mail{ font-size: 15px; padding: 8px 12px; border-radius: 40px; border: 1px solid #000; display: flex; justify-content: center; align-items: center;}
+      }
+      &::after{position: absolute; bottom: 0; left: 0; height: 8px; background-color: #F6F6F3;}
+    }
+    .contact_body{ padding: 120px calc(100% / 12) 0;
+      .flex{display: flex; gap: 80px; margin-bottom: 60px;
+        label{flex: 1; position: relative;  font-size: 20px; color: #A0A096; transition: ease 0.3s color;
+          span{position: absolute; top: 0; left: 0; transition: ease 0.3s all; pointer-events: none;}
+          input{width: 100%;  outline: none; padding-bottom: 12px; color: #A0A096; transition: ease 0.3s border; border-bottom: 1px solid #A0A096; cursor: pointer;}
+          input:focus, input:not(:placeholder-shown){border-bottom: 1px solid #000; color: #000;}
+          input:focus + span, input:not(:placeholder-shown) + span{top: -28px; font-size: 12px; color: #000;}
+          &.active{
+            
+          }
+
+
+        } 
+      } 
+      .textarea_w{
+        span{font-size: 20px;}
+        .textarea_inner{ height: 320px; padding: 22px 8px 22px 32px; border: 1px solid #A0A096; border-radius: 16px; margin-top: 12px;
+          textarea{width: 100%; background-color: unset; resize: none; height: 100%;   cursor: pointer; border: 0; outline: unset; font-size: 15px;}
+          textarea::-webkit-scrollbar {    width: 2px;  }
+          textarea::-webkit-scrollbar-thumb {   background: #A0A096;    border-radius: 2px;}
+          textarea::-webkit-scrollbar-track {    background: rgba(255, 255, 255, 0);}
+        }
+      }
+
+    }
+    .contact_bottom{ padding: 30px calc(100% / 12) 0; 
+      .contact_bottom_inner{width: 100%; display: flex; align-items: center; justify-content: space-between; position: relative;
+        .file_w{padding: 8px 30px; border-radius: 8px; background-color: #F6F6F3;
+          input{display: none;}
+        }
+
+        .file_list{}
+        .failed{position: absolute; right: 240px; color: #FF0000;}
+        .submit{padding: 12px 52px 9px; background-color: #00FFA1; border-radius: 8px;
+          span{font-weight: 600; font-size: 24px; line-height: 1;}
+          input{display: none;}
+        }
+      }
+      
+    }
+  }
+  
+  
+}*/
+.page_contact{background-color: #00FFA1; padding: 146px 60px 84px; position: relative; min-height: 100vh;
+  .contact_inner{background-color: #fff; border-radius: 1.538vw; padding:3.846vw 0 5.128vw;
+    .contact_head{display: flex; align-items: flex-end; position: relative; padding: 0 calc(100% / 12) 2.051vw; 
+      h1{flex: 4; font-size: 6.154vw; font-weight: 200; line-height: 1.1;}
+      &>span{flex: 4; font-size: 0.962vw; line-height: 1.5;}
+      .mail_w{flex: 2; display: flex; justify-content: flex-end;
+        .mail{ font-size: 0.962vw; padding: 0.513vw 0.769vw; border-radius: 2.564vw; border: 1px solid #000; display: flex; justify-content: center; align-items: center;}
+      }
+      &::after{position: absolute; bottom: 0; left: 0; height: 8px; background-color: #F6F6F3;}
+    }
+    .contact_body{ padding: 7.692vw calc(100% / 12) 0;
+      .flex{display: flex; gap: 5.128vw; margin-bottom: 3.846vw;
+        label{flex: 1; position: relative;  font-size: 1.282vw; color: #A0A096; transition: ease 0.3s color;
+          span{position: absolute; top: 0; left: 0; transition: ease 0.3s all; pointer-events: none;}
+          input{width: 100%;  outline: none; padding-bottom: 0.769vw; color: #A0A096; transition: ease 0.3s border; border-bottom: 1px solid #A0A096; cursor: pointer;}
+          input:focus, input:not(:placeholder-shown){border-bottom: 1px solid #000; color: #000;}
+          input:focus + span, input:not(:placeholder-shown) + span{top: -1.795vw; font-size: 0.769vw; color: #000;}
+          &.active{
+            
+          }
+        } 
+      } 
+      .textarea_w{
+        span{font-size: 1.282vw;}
+        .textarea_inner{ height: 20.513vw; padding: 1.410vw 0.513vw 1.410vw 2.051vw; border: 1px solid #A0A096; border-radius: 1.026vw; margin-top: 0.769vw;
+          textarea{width: 100%; background-color: unset; resize: none; height: 100%;   cursor: pointer; border: 0; outline: unset; font-size: 0.962vw;}
+          textarea::-webkit-scrollbar { width: 0.128vw; }
+          textarea::-webkit-scrollbar-thumb { background: #A0A096; border-radius: 0.128vw;}
+          textarea::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0);}
+        }
+      }
+    }
+    .contact_bottom{ padding: 1.923vw calc(100% / 12) 0; 
+      .contact_bottom_inner{width: 100%; display: flex; align-items: center; justify-content: space-between; position: relative;
+        .file_w{padding: 0.513vw 1.923vw; border-radius: 0.513vw; background-color: #F6F6F3;
+          input{display: none;}
+        }
+
+        .file_list{}
+        .failed{position: absolute; right: 15.385vw; color: #FF0000;}
+        .submit{padding: 0.769vw 3.333vw 0.577vw; background-color: #00FFA1; border-radius: 0.513vw;
+          span{font-weight: 600; font-size: 1.538vw; line-height: 1;}
+          input{display: none;}
+        }
+      }
+    }
+  }
+}
+
+/*
+@media(max-width:1024px){
+  .page_contact{padding: 92px 20px 26px;
+    .contact_inner{border-radius: 16px; padding:40px 0 94px;
+      .contact_head{flex-direction: column; align-items: flex-start;
+        h1{font-size: 40px;}
+        span{font-size: 11px; margin: 20px 0 40px; display: block;}
+        .mail_w{
+          .mail{font-size: 11px; padding: 7px 12px 9px; line-height: 1;}
+        }
+      }
+      .contact_body{ padding: 80px 20px 0;
+        .flex{flex-direction: column; gap: 28px; margin-bottom: 28px;
+          label{font-size: 14px;
+            span{}
+            input{}
+            input:focus, input:not(:placeholder-shown){}
+            input:focus + span, input:not(:placeholder-shown) + span{top: -14px; font-size: 8px;}
+          } 
+        }
+        .textarea_w{
+          span{font-size: 14px;}
+          .textarea_inner{ height: 320px; padding: 16px 8px 16px 16px; border: 1px solid #A0A096; border-radius: 16px; margin-top: 12px;
+            textarea{font-size: 11px;}
+            textarea::-webkit-scrollbar {    width: 2px;  }
+          }
+        }
+      }
+      .contact_bottom{padding: 16px 20px 0;
+        .contact_bottom_inner{
+          .file_w{padding: 6px 16px; border-radius: 8px; font-size: 11px;}
+          .submit{padding: 12px 22px 12px; border-radius: 8px; line-height: 1;
+            span{font-size: 16px; }
+          }
+          .failed{top: 56px; font-size: 11px; right: 0;}
+        }
+        
+      }
+    }
+  }
+}
+*/
+@media(max-width:1024px){
+  .page_contact{padding: 25.556vw 20px 7.222vw;
+    .contact_inner{border-radius: 4.444vw; padding:11.111vw 0 26.111vw;
+      .contact_head{flex-direction: column; align-items: flex-start; padding: 0 20px 9.56vw;
+        h1{font-size: 11.111vw;}
+        span{font-size: 3.056vw; margin: 5.556vw 0 11.111vw; display: block;}
+        .mail_w{
+          .mail{font-size: 3.056vw; padding: 1.944vw 3.333vw 2.5vw; line-height: 1;}
+        }
+        &::after{height: 8px;;}
+      }
+      .contact_body{ padding: 22.222vw 20px 0;
+        .flex{flex-direction: column; gap: 7.778vw; margin-bottom: 7.778vw;
+          label{font-size: 3.889vw;
+            span{}
+            input{}
+            input:focus, input:not(:placeholder-shown){}
+            input:focus + span, input:not(:placeholder-shown) + span{top: -3.889vw; font-size: 2.222vw;}
+          } 
+        }
+        .textarea_w{
+          span{font-size: 3.889vw;}
+          .textarea_inner{ height: 88.889vw; padding: 4.444vw 2.222vw 4.444vw 4.444vw; border: 1px solid #A0A096; border-radius: 4.444vw; margin-top: 3.333vw;
+            textarea{font-size: 3.056vw;}
+            textarea::-webkit-scrollbar { width: 0.556vw; }
+          }
+        }
+      }
+      .contact_bottom{padding: 4.444vw 20px 0;
+        .contact_bottom_inner{
+          .file_w{padding: 1.667vw 4.444vw; border-radius: 2.222vw; font-size: 3.056vw;}
+          .submit{padding: 3.333vw 6.111vw 3.333vw; border-radius: 2.222vw; line-height: 1;
+            span{font-size: 4.444vw;}
+          }
+          .failed{top: 15.556vw; font-size: 3.056vw; right: 0;}
+        }
+        
+      }
+    }
+  }
+}
