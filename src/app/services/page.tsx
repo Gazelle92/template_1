@@ -132,8 +132,8 @@ export default function Services() {
       </div>
 
       <section className="sec_1">
-        <div className="txt_w">
-          <h1 className="quote">Services</h1>
+        <div className="txt_w bar ani">
+          <h1 className="quote bar ani">Services</h1>
           <span className="quote">
             우리는 연구와 데이터에 기반한 혁신적인 생명과학 솔루션을 개발하며,과학적 검증과 기술적
             <br />
@@ -142,7 +142,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="sec_2 sc_el_w float-wrap">
+      <section className="sec_2 sc_el_w float-wrap ani hide">
         <ul className="float-el" ref={floatRef}>
           <li className="sc_el">
             <div className="sc_el_title">

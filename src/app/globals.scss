@@ -134,6 +134,9 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
 .ani.hide{opacity: 0; transition: ease 0.5s opacity;
   &.active{opacity: 1;}
 }
+
+.ani .hide{opacity: 0; transition: ease 0.5s opacity;}
+.ani.active .hide{opacity: 1;}
 .quote{opacity: 0;
   &.active{opacity: 1;}
 }

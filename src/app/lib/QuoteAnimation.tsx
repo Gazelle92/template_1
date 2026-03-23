@@ -86,6 +86,7 @@ export default function QuoteAnimationProvider() {
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
+      ScrollTrigger.refresh();
       const ani = document.querySelectorAll<HTMLElement>(".ani");
 
       ani.forEach((el) => {
@@ -106,8 +107,8 @@ export default function QuoteAnimationProvider() {
 
         el.dataset.animated = "true";
       });
-
-      ScrollTrigger.refresh();
+      
+      
     }, 1000);
 
     return () => {

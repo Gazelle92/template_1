@@ -42,14 +42,14 @@ export default function Detail() {
 
   return (
     <div className="page_detail">
-      <section className="detail_head">
+      <section className="detail_head ani bar">
         
-        <div className="tag_w">
+        <div className="tag_w hide">
           <div className="tag_1">Company News</div>
         </div>
         <div className="title">
           <h1 className="quote">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h1>
-          <div className="infos">
+          <div className="infos hide">
             <div className="view">
               <span>Views</span>
               <span className="view_count">1230</span>
@@ -61,8 +61,8 @@ export default function Detail() {
       </section>
       <section className="detail_body">
         <div className="detail_contents">
-          <img src="/list_el.jpg" alt="" />
-          <span>
+          <img src="/list_el.jpg" className="ani hide" alt="" />
+          <span className="quote">
             당사는 차세대 바이오 기술 경쟁력 강화를 위한 연구 성과를 발표하고, 핵심 기술 고도화를 위한 연구개발을 지속적으로 추진하고 있습니다. 이번 연구는 생명과학 분야의 혁신적 접근을 기반으로 바이오 기술의 정밀도와 효율성을 높이는 데 중점을 두고 진행되었습니다.
             <br/><br/>
             최근 바이오 산업은 정밀 의료와 맞춤형 치료 기술의 발전과 함께 빠르게 변화하고 있습니다. 이러한 환경 속에서 당사는 축적된 연구 데이터를 바탕으로 차세대 바이오 플랫폼을 고도화하고, 보다 안정적이고 효율적인 연구 체계를 구축하기 위해 다양한 연구 프로젝트를 진행하고 있습니다.
@@ -78,14 +78,14 @@ export default function Detail() {
         </div>
         
       </section>
-      <section className="detail_foot">
-        <a href="" className="prev">
+      <section className="detail_foot ani bar">
+        <a href="" className="prev hide">
           <span>PREV</span>
           <h4>신규 바이오 플랫폼 개발로 연구 경쟁력 강화</h4>
         </a>
 
-        <a href="/newsroom" className="to_list">LIST PAGE</a>
-        <a href="" className="next">
+        <a href="/newsroom" className="to_list  hide">LIST PAGE</a>
+        <a href="" className="next  hide">
           <span>NEXT</span>
           <h4>글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
         </a>
