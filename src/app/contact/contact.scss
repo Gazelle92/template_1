@@ -69,16 +69,27 @@
       .flex{display: flex; gap: 5.128vw; margin-bottom: 3.846vw;
         label{flex: 1; position: relative;  font-size: 1.282vw; color: #A0A096; transition: ease 0.3s color;
           span{position: absolute; top: 0; left: 0; transition: ease 0.3s all; pointer-events: none;}
-          input{width: 100%;  outline: none; padding-bottom: 0.769vw; color: #A0A096; transition: ease 0.3s border; border-bottom: 1px solid #A0A096; cursor: pointer;}
-          input:focus, input:not(:placeholder-shown){border-bottom: 1px solid #000; color: #000;}
-          input:focus + span, input:not(:placeholder-shown) + span{top: -1.795vw; font-size: 0.769vw; color: #000;}
-          &.active{
-            
+          input{width: 100%;  outline: none; padding-bottom: 0.769vw; color: #000; transition: ease 0.3s border; /*border-bottom: 1px solid #A0A096;*/ cursor: pointer;}
+          &:has(input:focus), &:has(input:not(:placeholder-shown)){
+            input{color: #000;}
+            &::after{background-color: #000;}
           }
+          input:focus + span, input:not(:placeholder-shown) + span{top: -1.795vw; font-size: 0.769vw; color: #000;}
+          &::after{content: ''; display: block; width: 0%; height: 1px; bottom: 0; left: 0; background-color: #A0A096; position: absolute; transition: ease 0.5s width, ease 0.5s background;}
+          &.active::after{width: 100%;}
+
+          &:not(.active){
+            span{transform: translateY(10px); opacity: 0;}
+          }
+          span{transform: translateY(00px); opacity: 1; transition: ease 0.8s opacity, ease 0.8s transform, ease 0.3s top, ease 0.3s font-size;}
         } 
       } 
       .textarea_w{
-        span{font-size: 1.282vw;}
+        span{font-size: 1.282vw; display: block;}
+        &:not(.active){
+          span{transform: translateY(10px); opacity: 0;}
+        }
+        span{transform: translateY(00px); opacity: 1; transition: ease 0.8s opacity, ease 0.8s transform, ease 0.3s top, ease 0.3s font-size;}
         .textarea_inner{ height: 20.513vw; padding: 1.410vw 0.513vw 1.410vw 2.051vw; border: 1px solid #A0A096; border-radius: 1.026vw; margin-top: 0.769vw;
           textarea{width: 100%; background-color: unset; resize: none; height: 100%;   cursor: pointer; border: 0; outline: unset; font-size: 0.962vw;}
           textarea::-webkit-scrollbar { width: 0.128vw; }
@@ -88,14 +99,20 @@
       }
     }
     .contact_bottom{ padding: 1.923vw calc(100% / 12) 0; 
-      .contact_bottom_inner{width: 100%; display: flex; align-items: center; justify-content: space-between; position: relative;
-        .file_w{padding: 0.513vw 1.923vw; border-radius: 0.513vw; background-color: #F6F6F3;
+      .contact_bottom_inner{width: 100%; display: flex; align-items: flex-start; justify-content: flex-start; position: relative; gap: 20px;
+        .file_w{padding: 0.513vw 1.923vw; border-radius: 0.513vw; background-color: #F6F6F3; cursor: pointer;
           input{display: none;}
         }
 
-        .file_list{}
-        .failed{position: absolute; right: 15.385vw; color: #FF0000;}
-        .submit{padding: 0.769vw 3.333vw 0.577vw; background-color: #00FFA1; border-radius: 0.513vw;
+        .file_list{display: flex; flex-direction: column; gap: 12px;
+          li{display: flex; align-items: center; font-size: 15px; gap: 12px;
+            img{width: 18px; cursor: pointer;}
+          }
+        }
+        .failed{position: absolute; right: 15.385vw; color: #FF0000; display: none; top: 0.6vw;
+          &.active{display: block;}
+        }
+        .submit{padding: 0.769vw 3.333vw 0.577vw; background-color: #00FFA1; border-radius: 0.513vw; cursor: pointer; position: absolute; right: 0; top: 0;
           span{font-weight: 600; font-size: 1.538vw; line-height: 1;}
           input{display: none;}
         }
