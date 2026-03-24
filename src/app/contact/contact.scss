@@ -100,13 +100,15 @@
     }
     .contact_bottom{ padding: 1.923vw calc(100% / 12) 0; 
       .contact_bottom_inner{width: 100%; display: flex; align-items: flex-start; justify-content: flex-start; position: relative; gap: 20px;
-        .file_w{padding: 0.513vw 1.923vw; border-radius: 0.513vw; background-color: #F6F6F3; cursor: pointer;
+        .file_w{padding: 0.513vw 1.923vw; border-radius: 0.513vw; background-color: #F6F6F3; cursor: pointer; margin-top: 0.513vw;
           input{display: none;}
         }
 
         .file_list{display: flex; flex-direction: column; gap: 12px;
           li{display: flex; align-items: center; font-size: 15px; gap: 12px;
+            &:first-child{padding-top: 0.833vw;}
             img{width: 18px; cursor: pointer;}
+            span{max-width: 200px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;}
           }
         }
         .failed{position: absolute; right: 15.385vw; color: #FF0000; display: none; top: 0.6vw;
@@ -191,15 +193,21 @@
           }
         }
       }
-      .contact_bottom{padding: 4.444vw 20px 0;
-        .contact_bottom_inner{
-          .file_w{padding: 1.667vw 4.444vw; border-radius: 2.222vw; font-size: 3.056vw;}
+      .contact_bottom{padding: 4.444vw 5.556vw 0;
+        .contact_bottom_inner{flex-direction: column; gap: 6.1vw;
+          .file_w{padding: 1.667vw 4.444vw; border-radius: 2.222vw; font-size: 3.056vw; margin-top: 1.667vw;}
+
+          .file_list{gap: 2.222vw;
+            li{font-size: 3.056vw; gap: 1.111vw;
+              &:first-child{padding-top: 0;}
+              span{max-width: calc(50vw - 22.222vw);}
+            }
+          }
           .submit{padding: 3.333vw 6.111vw 3.333vw; border-radius: 2.222vw; line-height: 1;
             span{font-size: 4.444vw;}
           }
           .failed{top: 15.556vw; font-size: 3.056vw; right: 0;}
         }
-        
       }
     }
   }
