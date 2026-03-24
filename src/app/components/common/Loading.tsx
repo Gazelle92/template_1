@@ -10,11 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Loading() {
 
-  
-
-  
-
-
   const pathname = usePathname(); // ← 현재 경로
   //const searchParams = useSearchParams();
 
@@ -65,6 +60,9 @@ export default function Loading() {
       setTimeout(() => {
         if (cancelled) return;
         setIsLoading(false);
+        
+        window.dispatchEvent(new CustomEvent("main-loading-finished"));
+
         setTimeout(() => {
           ScrollTrigger.refresh();
         }, 100);
@@ -88,14 +86,7 @@ export default function Loading() {
   return (
 
       <div className={`fixed bg-black inset-0 z-[9999] text-black transition-all duration-500 ${isLoading ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"} loading_w`}>
-        {/*<div className="flex h-full w-full items-center justify-center">
-          <div className="text-center">
-            <div className="mb-3 text-xs tracking-[0.35em]">LOADING</div>
-            <div className="h-[2px] w-36 overflow-hidden bg-black/10">
-              <div className={`h-full bg-black transition-all duration-700 ${isLoading ? "w-20" : "w-full"}`} />
-            </div>
-          </div>
-        </div>*/}
+
         <div id="load">
           <div>G</div>
           <div>N</div>
