@@ -10,10 +10,28 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Contact() {
   const contactRef = useRef<HTMLDivElement | null>(null);
   const [isFailed, setIsFailed] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e: React.MouseEvent<HTMLLabelElement>) => {
+  const [form, setForm] = useState({
+    company: "",
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    setIsFailed(false);
+  };
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLLabelElement>) => {
     e.preventDefault();
 
+    if (isSending) return;
     if (!contactRef.current) return;
 
     const requiredFields = contactRef.current.querySelectorAll<
@@ -23,15 +41,45 @@ export default function Contact() {
     let hasEmpty = false;
 
     requiredFields.forEach((field) => {
-      if (!field.value.trim()) {
-        hasEmpty = true;
-      }
+      if (!field.value.trim()) hasEmpty = true;
     });
 
     setIsFailed(hasEmpty);
+    if (hasEmpty) return;
 
-    if (!hasEmpty) {
-      console.log("submit");
+    try {
+      setIsSending(true);
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        alert(data.message || "메일 전송에 실패했습니다.");
+        return;
+      }
+
+      alert("문의가 정상적으로 접수되었습니다.");
+
+      setForm({
+        company: "",
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+      setFiles([]);
+      setIsFailed(false);
+    } catch (error) {
+      alert("메일 전송에 실패했습니다.");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -40,7 +88,6 @@ export default function Contact() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files;
     if (!selected) return;
-
     setFiles((prev) => [...prev, ...Array.from(selected)]);
   };
 
@@ -62,57 +109,98 @@ export default function Contact() {
             <div className="mail">divcontact@company.com</div>
           </div>
         </div>
+
         <div className="contact_body">
           <div className="flex">
             <label className="ani">
-              <input required placeholder="" type="text" />
+              <input
+                required
+                placeholder=""
+                type="text"
+                name="company"
+                value={form.company}
+                onChange={handleChange}
+              />
               <span>상호명*</span>
             </label>
+
             <label className="ani">
-              <input required placeholder="" type="text" />
+              <input
+                required
+                placeholder=""
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+              />
               <span>성함*</span>
             </label>
           </div>
+
           <div className="flex">
             <label className="ani">
-              <input required placeholder="" type="text" />
+              <input
+                required
+                placeholder=""
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+              />
               <span>이메일*</span>
             </label>
+
             <label className="ani">
-              <input required placeholder="" type="text" />
+              <input
+                required
+                placeholder=""
+                type="text"
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+              />
               <span>연락처*</span>
             </label>
           </div>
+
           <div className="textarea_w ani">
             <span>문의내용*</span>
-
             <div className="textarea_inner hide scrollable">
-              <textarea required></textarea>
+              <textarea
+                required
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>
+
         <div className="contact_bottom hide ani">
           <div className="contact_bottom_inner">
             <label className="file_w">
-            <input type="file" onChange={handleFileChange} />
-            <span>파일첨부 +</span>
-          </label>
+              <input type="file" onChange={handleFileChange} />
+              <span>파일첨부 +</span>
+            </label>
+
             <ul className="file_list">
               {files.map((file, idx) => (
                 <li key={idx}>
                   <span className="file_name">{file.name}</span>
                   <button type="button" onClick={() => handleRemoveFile(idx)}>
-                    <img src="/icon_delete.svg"/>
+                    <img src="/icon_delete.svg" alt="" />
                   </button>
                 </li>
               ))}
             </ul>
+
             <span className={`failed ${isFailed ? "active" : ""}`}>
               필수 입력값이 누락되었습니다.
             </span>
+
             <label className="submit" onClick={handleSubmit}>
               <input type="submit" />
-              <span>SEND</span>
+              <span>{isSending ? "SENDING..." : "SEND"}</span>
             </label>
           </div>
         </div>
