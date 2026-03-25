@@ -9,6 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
   const contactRef = useRef<HTMLDivElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   const [isFailed, setIsFailed] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
@@ -20,12 +22,46 @@ export default function Contact() {
     message: "",
   });
 
+  const [files, setFiles] = useState<File[]>([]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
     setIsFailed(false);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selected = e.target.files;
+    if (!selected) return;
+
+    const newFiles = Array.from(selected);
+
+    setFiles((prev) => {
+      const merged = [...prev, ...newFiles];
+
+      const uniqueFiles = merged.filter(
+        (file, index, self) =>
+          index ===
+          self.findIndex(
+            (f) =>
+              f.name === file.name &&
+              f.size === file.size &&
+              f.lastModified === file.lastModified
+          )
+      );
+
+      return uniqueFiles;
+    });
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const handleRemoveFile = (index: number) => {
+    setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.MouseEvent<HTMLLabelElement>) => {
@@ -50,17 +86,25 @@ export default function Contact() {
     try {
       setIsSending(true);
 
+      const formData = new FormData();
+      formData.append("company", form.company);
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("phone", form.phone);
+      formData.append("message", form.message);
+
+      files.forEach((file) => {
+        formData.append("files", file);
+      });
+
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
+        body: formData,
       });
 
       const data = await res.json();
 
-      if (!res.ok || !data.ok) {
+      if (!res.ok || !data.success) {
         alert(data.message || "메일 전송에 실패했습니다.");
         return;
       }
@@ -81,18 +125,6 @@ export default function Contact() {
     } finally {
       setIsSending(false);
     }
-  };
-
-  const [files, setFiles] = useState<File[]>([]);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selected = e.target.files;
-    if (!selected) return;
-    setFiles((prev) => [...prev, ...Array.from(selected)]);
-  };
-
-  const handleRemoveFile = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -179,13 +211,18 @@ export default function Contact() {
         <div className="contact_bottom hide ani">
           <div className="contact_bottom_inner">
             <label className="file_w">
-              <input type="file" onChange={handleFileChange} />
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                onChange={handleFileChange}
+              />
               <span>파일첨부 +</span>
             </label>
 
             <ul className="file_list">
               {files.map((file, idx) => (
-                <li key={idx}>
+                <li key={`${file.name}-${file.size}-${file.lastModified}`}>
                   <span className="file_name">{file.name}</span>
                   <button type="button" onClick={() => handleRemoveFile(idx)}>
                     <img src="/icon_delete.svg" alt="" />

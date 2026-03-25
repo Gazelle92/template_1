@@ -3,106 +3,128 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-
-    const company = String(body.company ?? "").trim();
-    const name = String(body.name ?? "").trim();
-    const email = String(body.email ?? "").trim();
-    const phone = String(body.phone ?? "").trim();
-    const message = String(body.message ?? "").trim();
-
-    if (!company || !name || !email || !phone || !message) {
+    if (
+      !process.env.SMTP_HOST ||
+      !process.env.SMTP_PORT ||
+      !process.env.SMTP_USER ||
+      !process.env.SMTP_PASS ||
+      !process.env.MAIL_TO
+    ) {
       return NextResponse.json(
-        { ok: false, message: "필수 입력값이 누락되었습니다." },
-        { status: 400 }
-      );
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { ok: false, message: "이메일 형식이 올바르지 않습니다." },
-        { status: 400 }
-      );
-    }
-
-    const host = process.env.SMTP_HOST;
-    const port = Number(process.env.SMTP_PORT || 465);
-    const secure = process.env.SMTP_SECURE === "true";
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
-    const to = process.env.MAIL_TO;
-
-    if (!host || !user || !pass || !to) {
-      return NextResponse.json(
-        { ok: false, message: "메일 환경변수가 설정되지 않았습니다." },
+        { success: false, message: "메일 환경변수가 설정되지 않았습니다." },
         { status: 500 }
       );
     }
 
+    const formData = await req.formData();
+
+    const company = String(formData.get("company") || "");
+    const name = String(formData.get("name") || "");
+    const email = String(formData.get("email") || "");
+    const phone = String(formData.get("phone") || "");
+    const message = String(formData.get("message") || "");
+
+    if (!company || !name || !email || !phone || !message) {
+      return NextResponse.json(
+        { success: false, message: "필수값이 누락되었습니다." },
+        { status: 400 }
+      );
+    }
+
+    const uploadedFiles = formData.getAll("files").filter((item) => item instanceof File) as File[];
+
+    const maxFileSize = 10 * 1024 * 1024;
+    const allowedTypes = [
+      "application/pdf",
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "application/zip",
+      "application/x-zip-compressed",
+      "application/illustrator",
+      "application/postscript",
+    ];
+
+    for (const file of uploadedFiles) {
+      if (file.size > maxFileSize) {
+        return NextResponse.json(
+          { success: false, message: `${file.name} 파일은 10MB 이하만 업로드 가능합니다.` },
+          { status: 400 }
+        );
+      }
+
+      if (file.type && !allowedTypes.includes(file.type)) {
+        return NextResponse.json(
+          { success: false, message: `${file.name} 파일 형식은 업로드할 수 없습니다.` },
+          { status: 400 }
+        );
+      }
+    }
+
+    const attachments = await Promise.all(
+      uploadedFiles.map(async (file) => {
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        return {
+          filename: file.name,
+          content: buffer,
+          contentType: file.type || undefined,
+        };
+      })
+    );
+
     const transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure,
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: process.env.SMTP_SECURE === "true",
       auth: {
-        user,
-        pass,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
     });
 
-    const subject = `[CONTACT] ${company} / ${name}`;
-
-    const text = [
-      "새 문의가 접수되었습니다.",
-      "",
-      `상호명: ${company}`,
-      `성함: ${name}`,
-      `이메일: ${email}`,
-      `연락처: ${phone}`,
-      "",
-      "문의내용:",
-      message,
-      "",
-      `Time: ${new Date().toISOString()}`,
-    ].join("\n");
-
-    const html = `
-      <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111;">
-        <h2 style="margin:0 0 16px;">새 문의가 접수되었습니다.</h2>
-        <table style="border-collapse:collapse;width:100%;max-width:720px;">
-          <tr><td style="padding:8px 0;font-weight:700;width:120px;">상호명</td><td style="padding:8px 0;">${escapeHtml(company)}</td></tr>
-          <tr><td style="padding:8px 0;font-weight:700;">성함</td><td style="padding:8px 0;">${escapeHtml(name)}</td></tr>
-          <tr><td style="padding:8px 0;font-weight:700;">이메일</td><td style="padding:8px 0;">${escapeHtml(email)}</td></tr>
-          <tr><td style="padding:8px 0;font-weight:700;">연락처</td><td style="padding:8px 0;">${escapeHtml(phone)}</td></tr>
-          <tr><td style="padding:8px 0;font-weight:700;vertical-align:top;">문의내용</td><td style="padding:8px 0;white-space:pre-wrap;">${escapeHtml(message)}</td></tr>
-        </table>
-      </div>
-    `;
-
     await transporter.sendMail({
-      from: `"Website Contact" <${user}>`,
-      to,
+      from: `"${name}" <${process.env.SMTP_USER}>`,
+      to: process.env.MAIL_TO,
       replyTo: email,
-      subject,
-      text,
-      html,
+      subject: `[문의] ${name}님의 문의입니다`,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <h2>새 문의가 도착했습니다</h2>
+          <p><strong>상호명:</strong> ${escapeHtml(company)}</p>
+          <p><strong>성함:</strong> ${escapeHtml(name)}</p>
+          <p><strong>이메일:</strong> ${escapeHtml(email)}</p>
+          <p><strong>연락처:</strong> ${escapeHtml(phone)}</p>
+          <p><strong>첨부파일 개수:</strong> ${attachments.length}개</p>
+          <p><strong>문의내용:</strong></p>
+          <div style="white-space: pre-wrap; border: 1px solid #ddd; padding: 12px; border-radius: 8px;">
+            ${escapeHtml(message)}
+          </div>
+        </div>
+      `,
+      attachments,
     });
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({
+      success: true,
+      message: "메일이 성공적으로 전송되었습니다.",
+    });
   } catch (error) {
-    console.error(error);
+    console.error("메일 전송 오류:", error);
+
     return NextResponse.json(
-      { ok: false, message: "메일 전송에 실패했습니다." },
+      { success: false, message: "메일 전송에 실패했습니다." },
       { status: 500 }
     );
   }
 }
 
-function escapeHtml(value: string) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
+function escapeHtml(str: string) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
