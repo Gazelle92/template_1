@@ -10,15 +10,13 @@ const navigationItems = [
 export default function Header() {
   return (
     <header className="w-full flex justify-between items-center border-black no-filter">
-      <Link
-        href="/"
-        scroll={false}
+      <a href="/"
         className="flex flex-col w-[183px] h-14 items-start gap-2.5 relative bg-[#ffffff1a] rounded-xl"
       >
         <div className="relative">
           <Image src="/logo.svg" alt="Logo" width={149.76} height={28} className="w-full h-full object-contain" />
         </div>
-      </Link>
+      </a>
 
       <nav
         className="relative h-[56px] pr-[6px] pl-[36px] text-[15px] tracking-[0] leading-[21px] bg-[#ffffff1a] rounded-xl absolute flex items-center gap-10"
@@ -28,24 +26,24 @@ export default function Header() {
         <ul className="flex items-center gap-10 rounded-[8px]">
           {navigationItems.map((item, index) => (
             <li key={index}>
-              <Link
+              <a
                 href={item.href}
-                scroll={false}
+                
                 className="relative w-fit mt-[-1px] [font-family:'Barlow-Medium',Helvetica] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
               >
                 {item.label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
 
-        <Link
+        <a
           href="/contact"
-          scroll={false}
+        
           className="[font-family:'Pretendard'] leading-[1] font-medium text-black whitespace-nowrap flex items-center justify-center no-underline bg-[#00FFA1] px-[22px] py-[12px] rounded-[8px] text-bold"
         >
           CONTACT
-        </Link>
+        </a>
       </nav>
     </header>
   );
