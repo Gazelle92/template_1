@@ -30,7 +30,6 @@ export function defaultTransition(
     {
       y: "-300px",
       opacity: 1,
-      scale: 0.8,
       duration: 1.2,
       force3D: true,
       ease: customEases.pageTransition,

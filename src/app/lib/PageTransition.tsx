@@ -145,7 +145,7 @@ export default function PageTransition({ namespace, children }: Props) {
         ref={exitingHostRef}
         aria-hidden="true"
         style={{
-          position: "absolute",
+          position: "fixed",
           inset: 0,
           width: "100%",
           zIndex: 8,

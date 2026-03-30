@@ -83,9 +83,9 @@ body{
  -ms-overflow-style: none;
  background-color: #000;
  }
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
   display: none;
-}
+}*/
 body {
   background: var(--background);
   background-color: #f6f6f3;
@@ -201,3 +201,7 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
   }
 }
 
+[data-layer="old"] {
+  opacity: 0.8!important;
+  z-index: 3;
+}
