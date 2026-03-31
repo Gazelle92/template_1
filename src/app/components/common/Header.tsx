@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import TransitionLink from "../../lib/TransitionLink";
+
 const navigationItems = [
   { label: "COMPANY", href: "/company" },
   { label: "SERVICES", href: "/services" },
@@ -7,11 +11,17 @@ const navigationItems = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+
+  const isMain = pathname === "/";
+
   return (
-    <header className="w-full flex justify-between items-center border-black no-filter">
+    <header
+      className={`w-full flex justify-between items-center border-black`}
+    >
       <TransitionLink
         href="/"
-
+        removeHeaderFilter
         className="flex flex-col w-[183px] h-14 items-start gap-2.5 relative bg-[#ffffff1a] rounded-xl"
       >
         <div className="relative">
@@ -29,8 +39,7 @@ export default function Header() {
             <li key={index}>
               <TransitionLink
                 href={item.href}
-
-                className="relative w-fit mt-[-1px] [font-family:'Barlow-Medium',Helvetica] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
+                className="relative w-fit mt-[-1px] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
               >
                 {item.label}
               </TransitionLink>
@@ -40,8 +49,7 @@ export default function Header() {
 
         <TransitionLink
           href="/contact"
-
-          className="[font-family:'Pretendard'] leading-[1] font-medium text-black whitespace-nowrap flex items-center justify-center no-underline bg-[#00FFA1] px-[22px] py-[12px] rounded-[8px] text-bold"
+          className="font-medium text-black whitespace-nowrap flex items-center justify-center no-underline bg-[#00FFA1] px-[22px] py-[12px] rounded-[8px]"
         >
           CONTACT
         </TransitionLink>

@@ -74,7 +74,7 @@ export default function Home() {
       tl.fromTo(m1s2, { x: "83vw" }, { x: "0vw", duration: 0.5 , ease: "power1.inOut" }, 0);
 
       return () => {
-        header?.classList.remove("no-filter");
+        //header?.classList.remove("no-filter");
         tl.scrollTrigger?.kill();
         tl.kill();
       };

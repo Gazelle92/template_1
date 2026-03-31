@@ -34,6 +34,24 @@ export default function PageTransitionProvider({
   const pendingHrefRef = useRef<string | null>(null);
   const prevPathnameRef = useRef(pathname);
 
+  const stopLenis = useCallback(() => {
+    const lenis = (window as any).lenis;
+    if (!lenis) return;
+
+    lenis.stop();
+
+    // 관성으로 더 움직이는 것 방지
+    if (typeof window !== "undefined") {
+      lenis.scrollTo(window.scrollY, { immediate: true });
+    }
+  }, []);
+
+  const startLenis = useCallback(() => {
+    const lenis = (window as any).lenis;
+    if (!lenis) return;
+    lenis.start();
+  }, []);
+
   const createOldLayer = useCallback(() => {
     const current = document.getElementById("page-content");
     if (!current) return null;
@@ -49,7 +67,7 @@ export default function PageTransitionProvider({
     clone.style.margin = "0";
     clone.style.pointerEvents = "none";
     clone.style.zIndex = "100";
-    clone.style.transform = "translateY(0%)";
+    clone.style.transform = "translateY(0)";
     clone.style.willChange = "transform";
     clone.style.background = getComputedStyle(document.body).backgroundColor || "#fff";
     clone.setAttribute("data-old-layer", "true");
@@ -61,6 +79,8 @@ export default function PageTransitionProvider({
     (href: string) => {
       if (isTransitioning) return;
       if (href === pathname) return;
+
+      stopLenis();
 
       const overlay = overlayRef.current;
       if (!overlay) {
@@ -84,7 +104,7 @@ export default function PageTransitionProvider({
 
       router.push(href);
     },
-    [createOldLayer, isTransitioning, pathname, router]
+    [createOldLayer, isTransitioning, pathname, router, stopLenis]
   );
 
   useEffect(() => {
@@ -103,6 +123,7 @@ export default function PageTransitionProvider({
       setIsTransitioning(false);
       document.documentElement.classList.remove("is-page-transitioning");
       prevPathnameRef.current = pathname;
+      startLenis();
       return;
     }
 
@@ -120,13 +141,23 @@ export default function PageTransitionProvider({
 
     const tl = gsap.timeline({
       onComplete: () => {
+        gsap.set(newLayer, {
+          clearProps: "transform,willChange,zIndex,position",
+        });
+
         oldLayer.remove();
         overlay.innerHTML = "";
+        oldLayerRef.current = null;
+        pendingHrefRef.current = null;
+
         setIsTransitioning(false);
+        document.documentElement.classList.remove("is-page-transitioning");
+        prevPathnameRef.current = pathname;
+
+        startLenis();
       },
     });
 
-    // ❗ 동시에 실행 (둘 다 0초 시작)
     tl.to(
       oldLayer,
       {
@@ -148,7 +179,7 @@ export default function PageTransitionProvider({
     return () => {
       tl.kill();
     };
-  }, [pathname, isTransitioning]);
+  }, [pathname, isTransitioning, startLenis]);
 
   return (
     <TransitionContext.Provider value={{ navigate, isTransitioning }}>

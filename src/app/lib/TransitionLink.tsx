@@ -1,16 +1,22 @@
 "use client";
 
-import { MouseEvent } from "react";
 import Link from "next/link";
+import { MouseEvent, ReactNode } from "react";
 import { usePageTransition } from "./PageTransitionProvider";
 
 type Props = {
   href: string;
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
+  removeHeaderFilter?: boolean; // 👈 추가
 };
 
-export default function TransitionLink({ href, className, children }: Props) {
+export default function TransitionLink({
+  href,
+  className,
+  children,
+  removeHeaderFilter,
+}: Props) {
   const { navigate, isTransitioning } = usePageTransition();
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -25,6 +31,17 @@ export default function TransitionLink({ href, className, children }: Props) {
     if (isModified) return;
 
     e.preventDefault();
+
+    // 👇 여기서 header 제어
+    const header = document.querySelector("header");
+    if (header) {
+      if (removeHeaderFilter) {
+        header.classList.remove("no-filter");
+      } else {
+        header.classList.add("no-filter");
+      }
+    }
+
     navigate(href);
   };
 
