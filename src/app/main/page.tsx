@@ -262,9 +262,9 @@ useEffect(() => {
     const scrollTop = window.scrollY;
     const diff = offsetTop - scrollTop;
 
-    console.log("scrollTop:", scrollTop);
-    console.log("offsetTop:", offsetTop);
-    console.log("diff:", diff);
+    //console.log("scrollTop:", scrollTop);
+    //console.log("offsetTop:", offsetTop);
+    //console.log("diff:", diff);
   };
 
   window.addEventListener("scroll", check);
@@ -413,7 +413,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
           <div className="m1_img_w">
             
             <video autoPlay muted loop playsInline className="intro_img" ref={imgRef}>
-              <source src="/video/B01_01.mp4"/>
+              <source src="https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_039eb4db2afd4f41aa39155e34c21e14/video/video_folder/templete_video_1.mp4"/>
             </video>
           </div>
 
@@ -600,7 +600,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
         <section className="main_sec_4 float-wrap">
           <div className="float-el sec_4_img">
             <video className="float-bg" autoPlay muted loop playsInline>
-              <source src="/video/B01_02.mp4"/>
+              <source src="https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_039eb4db2afd4f41aa39155e34c21e14/video/video_folder/templete_video_2.mp4"/>
             </video>
             <div className="m_4_txt_w">
               <div className="dot_icon_w">

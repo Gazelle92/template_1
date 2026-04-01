@@ -127,7 +127,7 @@ export default function Services() {
     <div className="page_service">
       <div className="page_service_bg">
         <video autoPlay muted loop playsInline>
-          <source src="/video/B01_01.mp4" />
+          <source src="https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_039eb4db2afd4f41aa39155e34c21e14/video/video_folder/templete_video_1.mp4"/>
         </video>
       </div>
 

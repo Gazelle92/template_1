@@ -72,8 +72,9 @@ useEffect(() => {
   return (
     <div className="page_company">
       <section className="sec_1">
-        
-        <img src="/company_bg.jpg"/>
+        <video className="float-bg" autoPlay muted loop playsInline>
+          <source src="https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_039eb4db2afd4f41aa39155e34c21e14/video/video_folder/templete_video_3.mp4"/>
+        </video>
         <div className="txt_w bar ani">
           <h1 className="quote">Company</h1>
           <span className="quote">우리는 연구와 데이터에 기반한 혁신적인 생명과학 솔루션을 개발하며,과학적 검증과 기술적<br/>전문성을 바탕으로지속 가능하고 장기적인 가치를 꾸준히 만들어갑니다.</span>
