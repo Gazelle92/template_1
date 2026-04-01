@@ -111,7 +111,10 @@ export default function Services() {
       floatEl.style.height = `${total}px`;
     };
 
-    setHeight();
+    
+    setTimeout(() => {
+      setHeight();
+    }, 500);
 
     window.addEventListener("resize", setHeight);
     window.addEventListener("load", setHeight);
@@ -129,6 +132,11 @@ export default function Services() {
         <video autoPlay muted loop playsInline>
           <source src="https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_039eb4db2afd4f41aa39155e34c21e14/video/video_folder/templete_video_1.mp4"/>
         </video>
+      </div>
+      <div className="parent">
+        <div className="child">
+          {/* Content goes here */}
+        </div>
       </div>
 
       <section className="sec_1">

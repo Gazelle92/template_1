@@ -207,6 +207,7 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
   z-index: 3;
 }
 
-.page-content{opacity:1; transition:opacity .5s ease;}
+.page-content{opacity:1; transition:opacity .8s ease;}
 .page-content.page-leave{opacity:0;}
-.page-content.page-enter{opacity: 0;}
+.page-content:not(.page-leave){opacity: 1;}
+/*.page-content.page-enter{opacity: 0;}*/

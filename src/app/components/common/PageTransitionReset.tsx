@@ -12,13 +12,14 @@ export default function PageTransitionReset() {
     const page = document.querySelector(".page-content");
     if (!page) return;
 
-    page.classList.remove("page-leave");
+    //page.classList.remove("page-leave");
 
     requestAnimationFrame(() => {
       page.classList.add("page-enter");
     });
 
     const timer = setTimeout(() => {
+      page.classList.remove("page-leave");
       page.classList.remove("page-enter");
     }, 300);
 
