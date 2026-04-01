@@ -1,18 +1,23 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./contact.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
+type SubmitStatus = "idle" | "loading" | "success" | "error";
+
+const CIRCLE_LENGTH = 204.2;
+
 export default function Contact() {
   const contactRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [isFailed, setIsFailed] = useState(false);
-  const [isSending, setIsSending] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const [progress, setProgress] = useState(0);
 
   const [form, setForm] = useState({
     company: "",
@@ -23,6 +28,35 @@ export default function Contact() {
   });
 
   const [files, setFiles] = useState<File[]>([]);
+
+  useEffect(() => {
+    if (submitStatus !== "loading") return;
+
+    let current = 0;
+    const timer = setInterval(() => {
+      current += (1 - current) * 0.18;
+
+      if (current >= 0.94) {
+        current = 0.94;
+        clearInterval(timer);
+      }
+
+      setProgress(current);
+    }, 120);
+
+    return () => clearInterval(timer);
+  }, [submitStatus]);
+
+  useEffect(() => {
+    if (submitStatus === "success" || submitStatus === "error") {
+      const timer = setTimeout(() => {
+        setSubmitStatus("idle");
+        setProgress(0);
+      }, 1800);
+
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -67,7 +101,7 @@ export default function Contact() {
   const handleSubmit = async (e: React.MouseEvent<HTMLLabelElement>) => {
     e.preventDefault();
 
-    if (isSending) return;
+    if (submitStatus === "loading") return;
     if (!contactRef.current) return;
 
     const requiredFields = contactRef.current.querySelectorAll<
@@ -81,10 +115,15 @@ export default function Contact() {
     });
 
     setIsFailed(hasEmpty);
-    if (hasEmpty) return;
+
+    if (hasEmpty) {
+      setSubmitStatus("error");
+      return;
+    }
 
     try {
-      setIsSending(true);
+      setSubmitStatus("loading");
+      setProgress(0.08);
 
       const formData = new FormData();
       formData.append("company", form.company);
@@ -102,30 +141,51 @@ export default function Contact() {
         body: formData,
       });
 
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
-        alert(data.message || "메일 전송에 실패했습니다.");
-        return;
+      let data: any = null;
+      try {
+        data = await res.json();
+      } catch {
+        data = null;
       }
 
-      alert("문의가 정상적으로 접수되었습니다.");
+      setProgress(1);
 
-      setForm({
-        company: "",
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-      setFiles([]);
-      setIsFailed(false);
+      setTimeout(() => {
+        if (!res.ok || !data?.success) {
+          setSubmitStatus("error");
+          return;
+        }
+
+        setSubmitStatus("success");
+        setForm({
+          company: "",
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+        setFiles([]);
+        setIsFailed(false);
+      }, 300);
     } catch (error) {
-      alert("메일 전송에 실패했습니다.");
-    } finally {
-      setIsSending(false);
+      setProgress(1);
+
+      setTimeout(() => {
+        setSubmitStatus("error");
+      }, 300);
     }
   };
+
+  const buttonClassName = [
+    "submit progress-button",
+    submitStatus === "loading" ? "loading" : "",
+    submitStatus === "success" ? "success" : "",
+    submitStatus === "error" ? "error" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const circleOffset = CIRCLE_LENGTH * (1 - progress);
 
   return (
     <div className="page_contact">
@@ -235,9 +295,40 @@ export default function Contact() {
               필수 입력값이 누락되었습니다.
             </span>
 
-            <label className="submit" onClick={handleSubmit}>
+            <label className={buttonClassName} onClick={handleSubmit}>
               <input type="submit" />
-              <span>{isSending ? "SENDING..." : "SEND"}</span>
+              <button type="button">
+                <span>
+                  {submitStatus === "loading"
+                    ? "SENDING"
+                    : submitStatus === "success"
+                    ? "DONE"
+                    : submitStatus === "error"
+                    ? "ERROR"
+                    : "SEND"}
+                </span>
+              </button>
+              <svg className="progress-circle" width="70" height="70" viewBox="0 0 70 70">
+                <circle
+                  cx="35"
+                  cy="35"
+                  r="32.5"
+                  pathLength="204.2"
+                  style={{
+                    strokeDasharray: CIRCLE_LENGTH,
+                    strokeDashoffset: circleOffset,
+                  }}
+                />
+              </svg>
+
+              <svg className="checkmark" width="70" height="70" viewBox="0 0 70 70">
+                <path d="M23 37.5L31 45L47 25" />
+              </svg>
+
+              <svg className="cross" width="70" height="70" viewBox="0 0 70 70">
+                <path d="M25 25L45 45" />
+                <path d="M45 25L25 45" />
+              </svg>
             </label>
           </div>
         </div>

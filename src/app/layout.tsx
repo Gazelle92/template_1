@@ -7,7 +7,7 @@ import GlobalFloating from "./lib/GlobalFloating";
 import LenisProvider from "./lib/Lenis";
 import QuoteAnimation from "./lib/QuoteAnimation";
 import PageTransitionWrapper from "./lib/PageTransitionWrapper";
-import PageTransitionProvider from "./lib/PageTransitionProvider";
+import PageTransitionReset from "./components/common/PageTransitionReset";
 
 export const metadata = {
   title: "My Next Project",
@@ -32,14 +32,13 @@ export default function RootLayout({
       <body className="bg-white text-black smooth-wrapper">
         
         
-        <PageTransitionProvider>
+        
           <Header />
-          <div id="page-content">
+          <PageTransitionReset/>
+          <div className="page-content">
             {children}
             <Footer />
           </div>
-          
-        </PageTransitionProvider>
 
         <LenisProvider />
         <QuoteAnimation />

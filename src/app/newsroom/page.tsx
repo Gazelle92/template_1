@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./newsroom.scss";
-
+import TransitionLink from "../components/common/TransitionLink";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Newsroom() {
@@ -161,161 +161,161 @@ export default function Newsroom() {
       <section className="list_body">
         <ul className="grid_4x4">
           <li className="ani">
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/15/2026</span>
               <span className="tag tag_2">Press Release</span>
               <h4 className="title">글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">11/06/2026</span>
               <span className="tag tag_3">Partnership</span>
               <h4 className="title">미래 바이오 산업 대응을 위한 기술 혁신 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/15/2026</span>
               <span className="tag tag_2">Press Release</span>
               <h4 className="title">글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">11/06/2026</span>
               <span className="tag tag_3">Partnership</span>
               <h4 className="title">미래 바이오 산업 대응을 위한 기술 혁신 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/15/2026</span>
               <span className="tag tag_2">Press Release</span>
               <h4 className="title">글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">11/06/2026</span>
               <span className="tag tag_3">Partnership</span>
               <h4 className="title">미래 바이오 산업 대응을 위한 기술 혁신 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/15/2026</span>
               <span className="tag tag_2">Press Release</span>
               <h4 className="title">글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">11/06/2026</span>
               <span className="tag tag_3">Partnership</span>
               <h4 className="title">미래 바이오 산업 대응을 위한 기술 혁신 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           <li>
-            <a href="/detail">
+            <TransitionLink href="/detail">
               <span className="date">12/24/2026</span>
               <span className="tag tag_1">Company News</span>
               <h4 className="title">차세대 바이오 연구 성과 발표 및 기술 고도화 추진</h4>
               <div className="more"><span>Read more →</span></div>
               <img src="/list_el.jpg" alt="" />
-            </a>
+            </TransitionLink>
           </li>
           
         </ul>
         <div className="pagenation">
-          <a href=""><img className="p_first" src="/arrow_left.svg" alt="" /></a>
+          <TransitionLink href=""><img className="p_first" src="/arrow_left.svg" alt="" /></TransitionLink>
           <div className="number">
-            <a href="" className="active">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <a href="">4</a>
-            <a href="">5</a>
+            <TransitionLink href="" className="active">1</TransitionLink>
+            <TransitionLink href="">2</TransitionLink>
+            <TransitionLink href="">3</TransitionLink>
+            <TransitionLink href="">4</TransitionLink>
+            <TransitionLink href="">5</TransitionLink>
           </div>
-          <a href=""><img className="p_last" src="/arrow_left.svg" alt="" /></a>
+          <TransitionLink href=""><img className="p_last" src="/arrow_left.svg" alt="" /></TransitionLink>
         </div>
         <div className="mob load_more">LOAD MORE</div>
       </section>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import TransitionLink from "../../lib/TransitionLink";
+import TransitionLink from "../common/TransitionLink";
 
 const navigationItems = [
   { label: "COMPANY", href: "/company" },
@@ -17,11 +17,11 @@ export default function Header() {
 
   return (
     <header
-      className={`w-full flex justify-between items-center border-black`}
+      className={`header w-full flex justify-between items-center border-black ${pathname !== "/" ? "no-filter" : ""}`}
+      
     >
       <TransitionLink
         href="/"
-        removeHeaderFilter
         className="flex flex-col w-[183px] h-14 items-start gap-2.5 relative bg-[#ffffff1a] rounded-xl"
       >
         <div className="relative">

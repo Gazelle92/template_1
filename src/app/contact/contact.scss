@@ -114,7 +114,7 @@
         .failed{position: absolute; right: 15.385vw; color: #FF0000; display: none; top: 0.6vw;
           &.active{display: block;}
         }
-        .submit{padding: 0.769vw 3.333vw 0.577vw; background-color: #00FFA1; border-radius: 0.513vw; cursor: pointer; position: absolute; right: 0; top: 0;
+        .submit{/*padding: 0.769vw 3.333vw 0.577vw; background-color: #00FFA1; border-radius: 0.513vw;*/ cursor: pointer; position: absolute; right: 0; top: 0;
           span{font-weight: 600; font-size: 1.538vw; line-height: 1;}
           input{display: none;}
         }
@@ -211,4 +211,35 @@
       }
     }
   }
+}
+
+
+
+.contact_bottom_inner{
+  .submit.progress-button{position:relative; display:inline-block; width:250px; height:70px; cursor:pointer;}
+  .submit.progress-button input{display:none;}
+
+  .submit.progress-button > button{display:block; width:250px; height:70px; padding:0; margin:0 auto; border:2px solid #1ECD97; border-radius:40px; background:transparent; color:#1ECD97; font-size:18px; letter-spacing:1px; transition:background-color .3s, color .3s, width .3s, border-width .3s, border-color .3s;}
+  .submit.progress-button > button span{transition:opacity .2s .1s;}
+
+  .submit.progress-button svg{position:absolute; top:0; left:50%; transform:translateX(-50%); pointer-events:none;}
+  .submit.progress-button svg path,
+  .submit.progress-button svg circle{fill:none; opacity:0;}
+
+  .submit.progress-button .progress-circle circle{stroke:#1ECD97; stroke-width:5; transform:rotate(-90deg); transform-origin:50% 50%; transition:stroke-dashoffset .25s linear, opacity .2s;}
+  .submit.progress-button .checkmark path,
+  .submit.progress-button .cross path{stroke:#fff; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:100; stroke-dashoffset:100; transition:stroke-dashoffset .3s ease, opacity .2s;}
+
+  .submit.progress-button.loading > button{width:70px; border-width:5px; border-color:#ddd; background-color:transparent; color:transparent;}
+  .submit.progress-button.loading > button span,
+  .submit.progress-button.success > button span,
+  .submit.progress-button.error > button span{opacity:0;}
+
+  .submit.progress-button.loading .progress-circle circle{opacity:1;}
+
+  .submit.progress-button.success > button{width:70px; border-width:5px; border-color:#1ECD97; background:#1ECD97;}
+  .submit.progress-button.success .checkmark path{opacity:1; stroke-dashoffset:0;}
+
+  .submit.progress-button.error > button{width:70px; border-width:5px; border-color:#FB797E; background:#FB797E;}
+  .submit.progress-button.error .cross path{opacity:1; stroke-dashoffset:0;}
 }

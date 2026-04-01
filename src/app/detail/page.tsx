@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./detail.scss";
-
+import TransitionLink from "../components/common/TransitionLink";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Detail() {
@@ -79,16 +79,16 @@ export default function Detail() {
         
       </section>
       <section className="detail_foot ani bar">
-        <a href="" className="prev hide">
+        <TransitionLink href="/newsroom" className="prev hide">
           <span>PREV</span>
           <h4>신규 바이오 플랫폼 개발로 연구 경쟁력 강화</h4>
-        </a>
+        </TransitionLink>
 
-        <a href="/newsroom" className="to_list  hide">LIST PAGE</a>
-        <a href="" className="next  hide">
+        <TransitionLink href="/newsroom" className="to_list  hide">LIST PAGE</TransitionLink>
+        <TransitionLink href="/newsroom" className="next  hide">
           <span>NEXT</span>
           <h4>글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
-        </a>
+        </TransitionLink>
       </section>
     </div>
   );

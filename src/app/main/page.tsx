@@ -21,6 +21,20 @@ export default function Home() {
   const sec2Ref = useRef<HTMLElement | null>(null);
   const listRef = useRef<HTMLUListElement | null>(null);
 
+
+const pageRef = useRef<HTMLDivElement | null>(null);
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 350);
+
+  return () => {
+    clearTimeout(timer);
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  };
+}, []);
+
   useEffect(() => {
     const mm = gsap.matchMedia();
     mm.add("(min-width: 1025px)", () => {
@@ -393,7 +407,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
 
 
   return (
-    <div className="min-h-screen page_main">
+    <div ref={pageRef} className="min-h-screen page_main">
       <main>
         <section className="main_sec_1" ref={sectionRef}>
           <div className="m1_img_w">
