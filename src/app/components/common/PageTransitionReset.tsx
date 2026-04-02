@@ -15,12 +15,12 @@ export default function PageTransitionReset() {
     //page.classList.remove("page-leave");
 
     requestAnimationFrame(() => {
-      page.classList.add("page-enter");
+      document.body.classList.add("page-enter");
     });
 
     const timer = setTimeout(() => {
-      page.classList.remove("page-leave");
-      page.classList.remove("page-enter");
+      document.body.classList.remove("page-leave");
+      document.body.classList.remove("page-enter");
     }, 300);
 
     return () => clearTimeout(timer);

@@ -40,11 +40,11 @@ export default function TransitionLink({
       return;
     }
 
-    page.classList.remove("page-enter");
-    page.classList.remove("page-leave");
+    document.body.classList.remove("page-enter");
+    document.body.classList.remove("page-leave");
 
     setTimeout(() => {
-      page.classList.add("page-leave");
+      document.body.classList.add("page-leave");
 
       setTimeout(() => {
         router.push(nextHref);

@@ -1,6 +1,13 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/contact") return null;
+
   return (
     <section className="footer">
       <div className="inner">
@@ -26,7 +33,6 @@ export default function Footer() {
         <div className="icon_w">
           <a href=""><img src="/icon_instagram.svg" alt="" /></a>
           <a href=""><img src="/icon_youtube.svg" alt="" /></a>
-          
         </div>
       </div>
       <span className="copyright">Company name © 2026</span>

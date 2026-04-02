@@ -208,6 +208,12 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
 }
 
 .page-content{opacity:1; transition:opacity .8s ease;}
-.page-content.page-leave{opacity:0;}
-.page-content:not(.page-leave){opacity: 1;}
+.page-leave .page-content{opacity:0;}
+body:not(.page-leave) .page-content{opacity: 1;}
 /*.page-content.page-enter{opacity: 0;}*/
+.page-leave, .page-enter{pointer-events: none;}
+.loading_w {background-color: #595043;
+  clip-path: inset(0% 0% 0%);
+}
+.loading_w { opacity: 0; clip-path: inset(0% 0% 0%); will-change: opacity, clip-path;  display: flex; align-items: center; justify-content: center;}
+.loading-logo { will-change: transform; background-color: #fff;}

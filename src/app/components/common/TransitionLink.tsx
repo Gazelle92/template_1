@@ -15,8 +15,8 @@ export default function TransitionLink({
   href,
   children,
   className,
-  leaveDuration = 700,
-  activeResetDelay = 800,
+  leaveDuration = 500,
+  activeResetDelay = 550,
   ...props
 }: TransitionLinkProps) {
   const router = useRouter();
@@ -40,11 +40,11 @@ export default function TransitionLink({
       return;
     }
 
-    page.classList.remove("page-enter");
-    page.classList.remove("page-leave");
+    document.body.classList.remove("page-enter");
+    document.body.classList.remove("page-leave");
 
     setTimeout(() => {
-      page.classList.add("page-leave");
+      document.body.classList.add("page-leave");
 
       setTimeout(() => {
         router.push(nextHref);
