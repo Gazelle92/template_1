@@ -15,8 +15,8 @@ export default function TransitionLink({
   href,
   children,
   className,
-  leaveDuration = 400,
-  activeResetDelay = 500,
+  leaveDuration = 700,
+  activeResetDelay = 800,
   ...props
 }: TransitionLinkProps) {
   const router = useRouter();
