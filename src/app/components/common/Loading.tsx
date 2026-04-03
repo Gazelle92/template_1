@@ -112,7 +112,7 @@ export default function Loading() {
             duration: 1.2,
             ease: "power3.inOut",
           }, "<")
-      }, 2000);
+      }, 1000);
     };
 
     if (document.readyState === "complete") {
@@ -137,7 +137,8 @@ export default function Loading() {
       } loading_w`}
     >
       <div ref={logoRef} className="loading-logo">
-        <img src="/loading-logo.svg" alt="Loading Logo" style={{ width: "100%", height: "100%" }} />
+        {/*<img src="/loading-logo.svg" alt="Loading Logo" style={{ width: "100%", height: "100%" }} />*/}
+        <img src="/logo.svg" alt="Loading Logo" style={{ width: "100%", height: "100%" }} />
       </div>
     </div>
   );
