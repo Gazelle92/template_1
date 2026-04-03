@@ -40,9 +40,9 @@ export default function Loading() {
       // 1번 상태
       gsap.set(logoRef.current, {
         transformPerspective: 600,
-        rotationX: 102,
-        yPercent: 80,
-        z: 10,
+        rotationX: -89,
+        yPercent: 90,
+        z: -100,
         opacity: 1,
         transformOrigin: "50% 50%",
       });
@@ -101,15 +101,15 @@ export default function Loading() {
         })
           // 3번 상태
           .to(logoRef.current, {
-            rotationX: 85,
-            yPercent: -100,
+            rotationX: 83,
+            yPercent: -55,
             z: -10,
-            duration: 0.6,
+            duration: 0.8,
             ease: "power3.inOut",
           })
           .to(loadingRef.current, {
             clipPath: "inset(0% 0% 100% 0%)",
-            duration: 0.8,
+            duration: 1.2,
             ease: "power3.inOut",
           }, "<")
       }, 2000);
@@ -136,7 +136,9 @@ export default function Loading() {
         isLoading ? "loading-now" : ""
       } loading_w`}
     >
-      <div ref={logoRef} className="loading-logo w-32 h-32"></div>
+      <div ref={logoRef} className="loading-logo">
+        <img src="/loading-logo.svg" alt="Loading Logo" style={{ width: "100%", height: "100%" }} />
+      </div>
     </div>
   );
 }
