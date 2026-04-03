@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+
 import TransitionLink from "../common/TransitionLink";
 
 const navigationItems = [
@@ -12,8 +14,9 @@ const navigationItems = [
 
 export default function Header() {
   const pathname = usePathname();
-
   const isMain = pathname === "/";
+  const [isOpen, setIsOpen] = useState(false);
+
 
   return (
     <header
@@ -54,6 +57,41 @@ export default function Header() {
           CONTACT
         </TransitionLink>
       </nav>
+       <div className={`mob mob_nav ${isOpen ? "active" : ""}`}>
+        <div
+          className="mob_nav_btn"
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          <div className="inner"></div>
+        </div>
+        <div className="mob_menu_w">
+          <ul>
+            <li>
+              <TransitionLink
+                href="/"
+              >
+                Home
+              </TransitionLink>
+            </li>
+            {navigationItems.map((item, index) => (
+              <li key={index}>
+                <TransitionLink
+                  href={item.href}
+                >
+                  {item.label}
+                </TransitionLink>
+              </li>
+            ))}
+            <li>
+              <TransitionLink
+                href="/contact"
+              >
+                CONTACT
+              </TransitionLink>
+            </li>
+          </ul>
+        </div>
+      </div>
     </header>
   );
 }

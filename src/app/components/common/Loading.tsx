@@ -33,7 +33,7 @@ export default function Loading() {
       gsap.killTweensOf([loadingRef.current, logoRef.current]);
 
       gsap.set(loadingRef.current, {
-        opacity: 0,
+        opacity: 1,
         clipPath: "inset(0% 0% 0% 0%)",
       });
 
@@ -43,7 +43,7 @@ export default function Loading() {
         rotationX: -89,
         yPercent: 90,
         z: -100,
-        opacity: 1,
+
         transformOrigin: "50% 50%",
       });
 
