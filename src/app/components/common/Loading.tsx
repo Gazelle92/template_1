@@ -17,6 +17,7 @@ export default function Loading() {
 
   const loadingRef = useRef<HTMLDivElement | null>(null);
   const logoRef = useRef<HTMLDivElement | null>(null);
+  const logoImg = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     if (!isMain) {
@@ -37,10 +38,15 @@ export default function Loading() {
         clipPath: "inset(0% 0% 0% 0%)",
       });
 
+      gsap.set(logoImg.current, {
+        opacity: 1,
+      });
+
       // 1번 상태
       gsap.set(logoRef.current, {
+        opacity: 0,
         transformPerspective: 600,
-        rotationX: -89,
+        rotationX: -90,
         yPercent: 90,
         z: -100,
 
@@ -55,6 +61,7 @@ export default function Loading() {
         })
         // 2번 상태
         .to(logoRef.current, {
+          opacity: 1,
           rotationX: 0,
           yPercent: 0,
           z: 0,
@@ -129,6 +136,8 @@ export default function Loading() {
     };
   }, [pathname, isMain]);
 
+  if (!isMain) return null;
+
   return (
     <div
       ref={loadingRef}
@@ -138,7 +147,7 @@ export default function Loading() {
     >
       <div ref={logoRef} className="loading-logo">
         {/*<img src="/loading-logo.svg" alt="Loading Logo" style={{ width: "100%", height: "100%" }} />*/}
-        <img src="/logo.svg" alt="Loading Logo" style={{ width: "100%", height: "100%" }} />
+        <img ref={logoImg} src="/logo.svg" alt="Loading Logo" style={{ width: "100%", height: "100%" }} />
       </div>
     </div>
   );

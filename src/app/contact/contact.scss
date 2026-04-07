@@ -1,5 +1,4 @@
-.footer {display: none;
-}
+
 /*
 .page_contact{background-color: #00FFA1; padding: 148px 60px 60px; position: relative; min-height: 100vh;
   .contact_inner{background-color: #fff; border-radius: 24px; padding:60px 0 80px;
@@ -56,6 +55,7 @@
   
 }*/
 .page_contact{background-color: #00FFA1; padding: 146px 60px 84px; position: relative; min-height: 100vh;
+  .footer {display: none;}
   .contact_inner{background-color: #fff; border-radius: 1.538vw; padding:3.846vw 0 5.128vw;
     .contact_head{display: flex; align-items: flex-end; position: relative; padding: 0 calc(100% / 12) 2.051vw; 
       h1{flex: 4; font-size: 6.154vw; font-weight: 200; line-height: 1.1;}

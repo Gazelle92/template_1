@@ -5,6 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./detail.scss";
 import TransitionLink from "../components/common/TransitionLink";
+import Footer from "../components/common/Footer";
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Detail() {
@@ -90,6 +92,7 @@ export default function Detail() {
           <h4>글로벌 시장 진출을 위한 전략적 파트너십 체결</h4>
         </TransitionLink>
       </section>
+      <Footer />
     </div>
   );
 }

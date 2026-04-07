@@ -256,10 +256,19 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
 body:not(.page-leave) .page-content{opacity: 1;}
 /*.page-content.page-enter{opacity: 0;}*/
 .page-leave, .page-enter{pointer-events: none;}
-.loading_w {background-color: #254416;
+.loading_w {
+  display: flex;
+  background-color: #254416;
   clip-path: inset(0% 0% 0%);
+  opacity: 1;
+  will-change: opacity, clip-path;
+  align-items: center;
+  justify-content: center;
 }
-.loading_w { opacity: 1; clip-path: inset(0% 0% 0%); will-change: opacity, clip-path;  display: flex; align-items: center; justify-content: center;}
+.loading_w.loading-now {
+  display: flex;
+  opacity: 1;
+}
 .loading-logo { will-change: transform; width: 150px; height: 50px;
- img{filter: invert(0);}
+ img{filter: invert(0); opacity: 0;}
 }

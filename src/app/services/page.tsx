@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./services.scss";
+import Footer from "../components/common/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -128,130 +129,133 @@ export default function Services() {
 
   return (
     <div className="page_service">
-      <div className="page_service_bg">
-        <video autoPlay muted loop playsInline>
-          <source src="https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_039eb4db2afd4f41aa39155e34c21e14/video/video_folder/templete_video_1.mp4"/>
-        </video>
-      </div>
-      <div className="parent">
-        <div className="child">
-          {/* Content goes here */}
+      <div className="page_service_inner">
+        <div className="page_service_bg">
+          <video autoPlay muted loop playsInline>
+            <source src="https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_039eb4db2afd4f41aa39155e34c21e14/video/video_folder/templete_video_1.mp4"/>
+          </video>
         </div>
-      </div>
-
-      <section className="sec_1">
-        <div className="txt_w bar ani">
-          <h1 className="quote bar ani">Services</h1>
-          <span className="quote">
-            우리는 연구와 데이터에 기반한 혁신적인 생명과학 솔루션을 개발하며,과학적 검증과 기술적
-            <br />
-            전문성을 바탕으로지속 가능하고 장기적인 가치를 꾸준히 만들어갑니다.
-          </span>
+        <div className="parent">
+          <div className="child">
+            {/* Content goes here */}
+          </div>
         </div>
-      </section>
 
-      <section className="sec_2 sc_el_w float-wrap ani hide">
-        <ul className="float-el" ref={floatRef}>
-          <li className="sc_el">
-            <div className="sc_el_title">
-              <div className="dot_icon_w">
-                <div></div>
-                <span>our service 01</span>
+        <section className="sec_1">
+          <div className="txt_w bar ani">
+            <h1 className="quote bar ani">Services</h1>
+            <span className="quote">
+              우리는 연구와 데이터에 기반한 혁신적인 생명과학 솔루션을 개발하며,과학적 검증과 기술적
+              <br />
+              전문성을 바탕으로지속 가능하고 장기적인 가치를 꾸준히 만들어갑니다.
+            </span>
+          </div>
+        </section>
+
+        <section className="sec_2 sc_el_w float-wrap ani hide">
+          <ul className="float-el" ref={floatRef}>
+            <li className="sc_el">
+              <div className="sc_el_title">
+                <div className="dot_icon_w">
+                  <div></div>
+                  <span>our service 01</span>
+                </div>
+                <h4 className="quote">Research & Development</h4>
               </div>
-              <h4 className="quote">Research & Development</h4>
-            </div>
 
-            <div className="sc_el_line"></div>
+              <div className="sc_el_line"></div>
+
+              
+
+              <div className="sc_el_p">
+                <img src="/dots.svg" />
+                <p className="quote">
+                  우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며,
+                  <br />
+                  과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다.
+                </p>
+              </div>
+              <div className="sym_w">
+                <img src="/sc_el_1.png" alt="Research & Development" />
+              </div>
+
+              <div className="sc_el_img_w">
+                <img src="/s_s_1_1.jpg" />
+                <img src="/s_s_1_2.jpg" />
+                <img src="/s_s_1_3.jpg" />
+              </div>
+            </li>
+
+            <li className="sc_el">
+              <div className="sc_el_title">
+                <div className="dot_icon_w">
+                  <div></div>
+                  <span>our service 02</span>
+                </div>
+                <h4 className="quote">Biotechnology Solutions</h4>
+              </div>
+
+              <div className="sc_el_line"></div>
+
+              
+
+              <div className="sc_el_p">
+                <img src="/dots.svg" />
+                <p className="quote">
+                  생명과학에 대한 깊은 이해와 기술적 전문성을 결합해 현실적인 문제 해결에 집중한 솔루션을 개발하며,
+                  <br />
+                  연구 환경과 산업 현장의 요구를 고려한 접근을 통해 실질적인 적용 가능성과 확장성을 확보합니다.
+                </p>
+              </div>
+              <div className="sym_w">
+                <img src="/sc_el_2.png" alt="Biotechnology Solutions" />
+              </div>
+
+              <div className="sc_el_img_w">
+                <img src="/s_s_2_1.jpg" />
+                <img src="/s_s_2_2.jpg" />
+                <img src="/s_s_2_3.jpg" />
+              </div>
+            </li>
+
+            <li className="sc_el">
+              <div className="sc_el_title">
+                <div className="dot_icon_w">
+                  <div></div>
+                  <span>our service 03</span>
+                </div>
+                <h4 className="quote">Data-Driven Innovation</h4>
+              </div>
+
+              <div className="sc_el_line"></div>
 
             
 
-            <div className="sc_el_p">
-              <img src="/dots.svg" />
-              <p className="quote">
-                우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며,
-                <br />
-                과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다.
-              </p>
-            </div>
-            <div className="sym_w">
-              <img src="/sc_el_1.png" alt="Research & Development" />
-            </div>
-
-            <div className="sc_el_img_w">
-              <img src="/s_s_1_1.jpg" />
-              <img src="/s_s_1_2.jpg" />
-              <img src="/s_s_1_3.jpg" />
-            </div>
-          </li>
-
-          <li className="sc_el">
-            <div className="sc_el_title">
-              <div className="dot_icon_w">
-                <div></div>
-                <span>our service 02</span>
+              <div className="sc_el_p">
+                <img src="/dots.svg" />
+                <p className="quote">
+                  연구 데이터와 분석 결과를 기반으로 의사결정의 정확성과 효율성을 높이고,
+                  <br />
+                  데이터 중심의 접근 방식을 통해 지속 가능한 혁신과 장기적인 가치를 만들어갑니다.
+                </p>
               </div>
-              <h4 className="quote">Biotechnology Solutions</h4>
-            </div>
 
-            <div className="sc_el_line"></div>
-
-            
-
-            <div className="sc_el_p">
-              <img src="/dots.svg" />
-              <p className="quote">
-                생명과학에 대한 깊은 이해와 기술적 전문성을 결합해 현실적인 문제 해결에 집중한 솔루션을 개발하며,
-                <br />
-                연구 환경과 산업 현장의 요구를 고려한 접근을 통해 실질적인 적용 가능성과 확장성을 확보합니다.
-              </p>
-            </div>
-            <div className="sym_w">
-              <img src="/sc_el_2.png" alt="Biotechnology Solutions" />
-            </div>
-
-            <div className="sc_el_img_w">
-              <img src="/s_s_2_1.jpg" />
-              <img src="/s_s_2_2.jpg" />
-              <img src="/s_s_2_3.jpg" />
-            </div>
-          </li>
-
-          <li className="sc_el">
-            <div className="sc_el_title">
-              <div className="dot_icon_w">
-                <div></div>
-                <span>our service 03</span>
+              <div className="sym_w">
+                <img src="/sc_el_3.png" alt="Data Driven Innovation" />
               </div>
-              <h4 className="quote">Data-Driven Innovation</h4>
-            </div>
 
-            <div className="sc_el_line"></div>
+              <div className="sc_el_img_w">
+                <img src="/s_s_3_1.jpg" />
+                <img src="/s_s_3_2.jpg" />
+                <img src="/s_s_3_3.jpg" />
+              </div>
+            </li>
+          </ul>
+        </section>
 
-           
-
-            <div className="sc_el_p">
-              <img src="/dots.svg" />
-              <p className="quote">
-                연구 데이터와 분석 결과를 기반으로 의사결정의 정확성과 효율성을 높이고,
-                <br />
-                데이터 중심의 접근 방식을 통해 지속 가능한 혁신과 장기적인 가치를 만들어갑니다.
-              </p>
-            </div>
-
-             <div className="sym_w">
-              <img src="/sc_el_3.png" alt="Data Driven Innovation" />
-            </div>
-
-            <div className="sc_el_img_w">
-              <img src="/s_s_3_1.jpg" />
-              <img src="/s_s_3_2.jpg" />
-              <img src="/s_s_3_3.jpg" />
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <section className="sec_32"></section>
+        <section className="sec_32"></section>
+      </div>
+      <Footer />
     </div>
   );
 }

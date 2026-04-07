@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./main.scss";
-
+import Footer from "../components/common/Footer";
+import Loading from "../components/common/Loading";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -408,6 +409,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
 
   return (
     <div ref={pageRef} className="min-h-screen page_main">
+      <Loading />
       <main>
         <section className="main_sec_1" ref={sectionRef}>
           <div className="m1_img_w">
@@ -613,6 +615,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
             </div>
           </div>
         </section>
+        <Footer/>
       </main>
     </div>
   );

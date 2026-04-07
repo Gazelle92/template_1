@@ -5,6 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./newsroom.scss";
 import TransitionLink from "../components/common/TransitionLink";
+import Footer from "../components/common/Footer";
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Newsroom() {
@@ -148,6 +150,7 @@ export default function Newsroom() {
 
   return (
     <div className="page_newsroom">
+      <div className="page_newsroom_inner">
       <section className="list_head bar ani">
         <h1 className="quote bar ani">Newsroom</h1>
         <div className="tag_w ani hide">
@@ -319,6 +322,8 @@ export default function Newsroom() {
         </div>
         <div className="mob load_more">LOAD MORE</div>
       </section>
+      </div>
+      <Footer />
     </div>
   );
 }
