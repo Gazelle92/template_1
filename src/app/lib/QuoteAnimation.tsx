@@ -48,11 +48,12 @@ export default function QuoteAnimationProvider() {
               enterTween?.kill();
               el.classList.add("active");
 
+              const isMainPage = pathname === "/";
               enterTween = gsap.to(words, {
                 y: 0,
                 opacity: 1,
-                duration: 1.2,
-                delay: 0.2,
+                duration: isMainPage ? 0.8 : 1.2,
+                delay: isMainPage ? 0.1 : 0.2,
                 stagger: 0.01,
                 ease: "power3.out",
               });
