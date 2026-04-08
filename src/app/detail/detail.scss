@@ -1,8 +1,11 @@
-.footer {background-color: #F6F6F3;
-  .copyright{color: #000;}
-}
 
-.page_detail{background-color: #F6F6F3; padding: 260px 60px 110px; position: relative;
+
+.page_detail{background-color: #F6F6F3; padding: 0; position: relative;
+  .page_detail_inner{padding: 260px 60px 110px; position: relative;}
+
+  .footer {background-color: #F6F6F3;
+    .copyright{color: #000;}
+  }
   .list_head{display: flex; justify-content: space-between; border-bottom: 1px solid #000; padding-bottom: 28px; align-items: flex-end;
     
     
@@ -49,7 +52,8 @@
 
 
 @media (max-width:1024px) {
-  .page_detail{padding: 164px 20px 80px;
+  .page_detail{padding: 0;
+    .page_detail_inner{padding: 164px 20px 80px;}
     .detail_head{position: relative;
       .tag_w{display: flex; padding-bottom: 0; gap: 12px; position: absolute;
         div{padding: 2px 8px; border-radius: 4px;font-size: 8px;}

@@ -90,6 +90,10 @@ export default function Header() {
               </TransitionLink>
             </li>
           </ul>
+          <div className="icon_w">
+            <a href=""><img src="/icon_instagram.svg" alt="" /></a>
+            <a href=""><img src="/icon_youtube.svg" alt="" /></a>
+          </div>
         </div>
       </div>
     </header>
