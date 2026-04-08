@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./main.scss";
 import Footer from "../components/common/Footer";
 import Loading from "../components/common/Loading";
+import TransitionLink from "../components/common/TransitionLink";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -611,7 +612,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
               </div>
               <h1>Get in Touch With Us</h1>
               <span>연구 및 기술 협업, 사업 파트너십 등 다양한 협력 가능성에 대해<br/>편하게 문의해 주시기 바랍니다.</span>
-              <a href="#"><span>Contact us</span><img src="/arrow_right.svg"/></a>
+              <TransitionLink href="/contact"><span>Contact us</span><img src="/arrow_right.svg"/></TransitionLink>
             </div>
           </div>
         </section>
