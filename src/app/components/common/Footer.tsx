@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import TransitionLink from "../common/TransitionLink";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -13,10 +14,10 @@ export default function Footer() {
       <div className="inner">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/company">Company</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><TransitionLink href="/company">Company</TransitionLink></li>
+          <li><TransitionLink href="/services">Services</TransitionLink></li>
+          <li><TransitionLink href="/newsroom">Newsroom</TransitionLink></li>
+          <li><TransitionLink href="/contact">Contact</TransitionLink></li>
         </ul>
         <div className="info_w">
           <h4>Email</h4>
@@ -31,8 +32,8 @@ export default function Footer() {
           </div>
         </div>
         <div className="icon_w">
-          <a href=""><img src="/icon_instagram.svg" alt="" /></a>
-          <a href=""><img src="/icon_youtube.svg" alt="" /></a>
+          <a href="#"><img src="/icon_instagram.svg" alt="" /></a>
+          <a href="#"><img src="/icon_youtube.svg" alt="" /></a>
         </div>
       </div>
       <span className="copyright">Company name © 2026</span>
