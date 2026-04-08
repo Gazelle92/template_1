@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import TransitionLink from "../common/TransitionLink";
 
@@ -16,6 +16,16 @@ export default function Header() {
   const pathname = usePathname();
   const isMain = pathname === "/";
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const lenis = (window as any).lenis;
+
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, []);
 
 
   return (
@@ -67,11 +77,11 @@ export default function Header() {
         <div className="mob_menu_w">
           <ul>
             <li>
-              <TransitionLink
+              <a
                 href="/"
               >
                 Home
-              </TransitionLink>
+              </a>
             </li>
             {navigationItems.map((item, index) => (
               <li key={index}>

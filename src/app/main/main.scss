@@ -247,9 +247,13 @@
       .intro_img{position: absolute;}
       .main_1_txt_1{opacity: 1!important; clip-path: unset!important; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 20px 40px; height: 708px;
         h1{position: unset; position: unset; font-size: 6.667vw; padding-left: 8px;}
-        .main_1_txt_1_b{left: 3.333vw; bottom: 11.111vw; position: unset;font-size: 3.056vw; width: 100%; gap: 3.333vw; padding-top: 5.556vw;
+        .main_1_txt_1_b{left: unset; right: unset; bottom: unset; position: relative;font-size: 3.056vw; width: 100%; gap: 3.333vw; padding-top: 5.556vw;
           img:first-child{width: 11.111vw; height: 11.111vw;}
           img:last-child{width: 6.667vw; height: 11.111vw; top: unset; right: unset; position: unset;  display: none;}
+          img{opacity: 0; transition: ease 0.8s opacity;}
+          &.active{
+            img{opacity: 1;}
+          }
         }
       }
       .main_1_txt_2{height: unset; min-height: unset; padding-top: 22.222vw;
