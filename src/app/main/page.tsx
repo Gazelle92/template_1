@@ -38,6 +38,9 @@ useEffect(() => {
 }, []);
 
   useEffect(() => {
+    // iOS Safari 호환성을 위한 GSAP 설정
+    gsap.defaults({ force3D: false });
+
     const mm = gsap.matchMedia();
     mm.add("(min-width: 1025px)", () => {
       const section = sectionRef.current;
@@ -59,6 +62,7 @@ useEffect(() => {
           scrub: true,
           pin: true,
           pinSpacing: false,
+          invalidateOnRefresh: true,
 
           onUpdate: (self) => {
             if (!header) return;

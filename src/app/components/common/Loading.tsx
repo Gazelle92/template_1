@@ -8,6 +8,9 @@ import "./loading.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// iOS Safari 호환성을 위한 GSAP 설정
+gsap.defaults({ force3D: false });
+
 export default function Loading() {
   const pathname = usePathname();
   const isMain = pathname === "/";
@@ -90,7 +93,12 @@ export default function Loading() {
         });
       });
 
-      await Promise.all([...imagePromises, ...videoPromises]);
+      const assetPromise = Promise.all([...imagePromises, ...videoPromises]);
+      const timeoutPromise = new Promise<void>((resolve) => {
+        window.setTimeout(resolve, 5000);
+      });
+
+      await Promise.race([assetPromise, timeoutPromise]);
 
       if (cancelled || loadingRunId.current !== currentRunId) return;
 

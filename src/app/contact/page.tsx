@@ -7,6 +7,9 @@ import "./contact.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// iOS Safari 호환성을 위한 GSAP 설정
+gsap.defaults({ force3D: false });
+
 type SubmitStatus = "idle" | "loading" | "success" | "error";
 
 const CIRCLE_LENGTH = 204.2;
