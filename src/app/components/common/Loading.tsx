@@ -48,7 +48,7 @@ export default function Loading() {
       // 1번 상태
       gsap.set(logoRef.current, {
         opacity: 0,
-        transformPerspective: 600,
+        //transformPerspective: 600,
         rotationX: -90,
         yPercent: 90,
         z: -100,
