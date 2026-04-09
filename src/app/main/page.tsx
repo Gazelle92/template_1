@@ -142,13 +142,16 @@ useEffect(() => {
     img2,
     { left: "calc((8% - 0px) / 1 * 1)" },
     {
-      left: `calc((100% - ${img2.offsetWidth}px) / 3 * 1)`,
+      //left: `calc((100% - ${img2.offsetWidth}px) / 3 * 1)`,
+      left: () => `calc((100% - ${img2.offsetWidth}px) / 3 * 1)`,
       duration: 0.5 , ease: "power1.inOut",
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
         end: "top+=20%",
         scrub: true,
+        invalidateOnRefresh: true,
+
       },
     }
   );
@@ -157,13 +160,15 @@ useEffect(() => {
     img3,
     { left: "calc((16% - 0px) / 1 * 1)" },
     {
-      left: `calc((100% - ${img3.offsetWidth}px) / 3 * 2)`,
+      //left: `calc((100% - ${img3.offsetWidth}px) / 3 * 2)`,
+      left: () => `calc((100% - ${img3.offsetWidth}px) / 3 * 2)`,
       duration: 0.5 , ease: "power1.inOut",
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
         end: "top+=20%",
         scrub: true,
+        invalidateOnRefresh: true,
       },
     }
   );
@@ -172,13 +177,15 @@ useEffect(() => {
     img4,
     { left: "24%" },
     {
-      left: `calc(100% - ${img4.offsetWidth}px)`,
+      //left: `calc(100% - ${img4.offsetWidth}px)`,
+      left: () => `calc(100% - ${img4.offsetWidth}px)`,
       duration: 0.5 , ease: "power1.inOut",
       scrollTrigger: {
         trigger: sec3,
         start: "top top",
         end: "top+=20%",
         scrub: true,
+        invalidateOnRefresh: true,
       },
     }
   );
@@ -220,6 +227,10 @@ useEffect(() => {
     trigger: sec3,
     start: "top+=10%",
     toggleClass: { targets: ".m3_img_w", className: "txt_up" },
+  });
+
+  window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
   });
 
 
