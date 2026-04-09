@@ -258,14 +258,14 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sec4,
         start: "top top",
-        end: "top+=30%",
+        end: "top+=20%",
         scrub: true,
       },
     }
   );
   ScrollTrigger.create({
     trigger: sec4,
-    start: "bottom bottom+=50%",
+    start: "top+=20%",
     toggleClass: { targets: ".m_4_txt_w", className: "txt_up" },
   });
 }, []);
