@@ -46,6 +46,7 @@ export default function Loading() {
       });
 
       // 1번 상태
+      /*
       gsap.set(logoRef.current, {
         opacity: 0,
         //transformPerspective: 600,
@@ -55,6 +56,7 @@ export default function Loading() {
 
         transformOrigin: "50% 50%",
       });
+      */
 
       gsap.timeline()
         .to(loadingRef.current, {
