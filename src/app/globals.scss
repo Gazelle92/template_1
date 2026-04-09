@@ -81,13 +81,12 @@
 
 body{
  -ms-overflow-style: none;
- background-color: #000;
  }
 /*::-webkit-scrollbar {
   display: none;
 }*/
 body {
-  background: var(--background);
+  /*background: var(--background);*/
   background-color: #f6f6f3;
   color: var(--foreground);
   font-family: 'Barlow', 'Pretendard', sans-serif;
