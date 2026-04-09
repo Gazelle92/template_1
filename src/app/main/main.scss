@@ -7,7 +7,8 @@
     .main_1_txt_1{position: relative; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100vh; z-index: 1; overflow: hidden; white-space: nowrap; clip-path: inset(0% 0%);
       h1{font-size: 6.154vw; font-weight: 200; line-height: 1.1; color: #fff; position: absolute; top: 50%; transform: translateY(-50%); left: 2.564vw;}
       .main_1_txt_1_b{position: absolute; bottom: 3.846vw; left: 60px; right: 60px; display: flex; align-items: center; justify-content: flex-start; padding-top: 1.538vw; color: #fff; gap: 1.538vw; font-size: 0.962vw; line-height: 1.5; width: calc(100% - 120px);
-        &::after{position: absolute; top: 0; left: 0; background-color: #fff; transition: ease 0.8s all;}
+        &::after{position: absolute; top: 0; left: 0; background-color: #fff; transition: ease 0.8s all; width: 0;}
+        &.active::after{width: 100%;}
       }
       .main_1_txt_1_b img:first-child{width: 4.103vw; height: 4.103vw;}
       .main_1_txt_1_b img:last-child{width: 2.564vw; height: 4.359vw; position: absolute; right: 0; top: 1.795vw;}

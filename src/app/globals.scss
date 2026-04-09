@@ -266,8 +266,8 @@ body:not(.page-leave) .page-content{opacity: 1;}
 .loading_w {
   display: flex;
   background-color: #254416;
-  clip-path: inset(0% 0% 0%);
-  opacity: 1;
+  clip-path: inset(0% 0% 0% 0%);
+  opacity: 0!important;
   will-change: opacity, clip-path;
   align-items: center;
   justify-content: center;
