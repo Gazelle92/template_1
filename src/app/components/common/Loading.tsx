@@ -46,17 +46,17 @@ export default function Loading() {
       });
 
       // 1번 상태
-      /*
+      
       gsap.set(logoRef.current, {
         opacity: 0,
         //transformPerspective: 600,
         rotationX: -90,
         yPercent: 90,
-        z: -100,
+        z: 100,
 
         transformOrigin: "50% 50%",
       });
-      */
+      
 
       gsap.timeline()
         .to(loadingRef.current, {
@@ -120,7 +120,7 @@ export default function Loading() {
           .to(logoRef.current, {
             rotationX: 83,
             yPercent: -55,
-            z: -10,
+            z: 200,
             duration: 0.8,
             ease: "power3.inOut",
           })
