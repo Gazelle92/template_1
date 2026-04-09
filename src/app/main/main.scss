@@ -321,7 +321,7 @@
           &:nth-child(2){padding-left: calc((100% / 14) * 8)!important;}
           &:nth-child(3){padding-left: calc((100% / 14) * 2)!important;}
           &:nth-child(4){padding-left: calc((100% / 14) * 8)!important;} 
-          span{position: unset; margin-top: 3.333vw; border-radius: 1.111vw; padding: 1.111vw 2.222vw 1.111vw 5.556vw; top: calc(100%); font-size: 3.056vw; transform: unset!important; opacity: 1!important; white-space: nowrap;
+          span{position: relative; margin-top: 3.333vw; border-radius: 1.111vw; padding: 1.111vw 2.222vw 1.111vw 5.556vw; top: calc(100%); font-size: 3.056vw; transform: unset!important; opacity: 1!important; white-space: nowrap;
             &::before{left: 2.222vw; width: 1.111vw; height: 1.111vw; top: 2.778vw;}
           }
           .sym_w{width: calc((100vw / 14) * 4); border-radius: 4.444vw;}
