@@ -449,7 +449,12 @@ const floatRef = useRef<HTMLUListElement | null>(null);
               <span className="quote">
                 우리는 연구와 데이터에 기반한 혁신적인 <br className="pc" /> 생명과학 솔루션을 <br className="mob" />개발하며, 장기적인 가치를 추구합니다.
               </span>
-              <img className="ani hide" src="/main_1_icon_2.png" alt="Icon 2" />
+              {/*<img className="ani hide" src="/main_1_icon_2.png" alt="Icon 2" />*/}
+              <div className="scroll-downs ani hide img">
+                <div className="mousey">
+                  <div className="scroller"></div>
+                </div>
+              </div>
             </div>
           </div>
 
