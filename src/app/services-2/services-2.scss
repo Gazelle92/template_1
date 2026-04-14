@@ -1,0 +1,36 @@
+
+.page_service-2{position: relative; padding: 20px; color: #fff;
+  .page_service_inner{background-color: #000; padding: 20px; position: relative; height: calc(100vh - 40px); border-radius: 24px; display: flex; gap:calc((100% / 12) * 1); overflow-y: hidden;
+    .left-box{width: calc((100% / 12) * 5);
+      .title_w{position: absolute; left: 40px; top: 260px;
+        h1{font-size: 96px; font-weight: 200; margin-bottom: 40px;  line-height: 1.1;}
+        span{font-size: 15px; line-height: 1.5;}
+      }
+    }
+    .right-box{width: calc((100% / 12) * 7);
+      ul{ gap: 20px;
+        li{ position: relative; padding: 20px 0 40px 70px;
+          img{position: absolute; left: 0; top: 0; height: 100%; width: 100%; object-fit: cover;}
+        }
+      }
+    }
+    .right-box{height:100%; overflow:hidden;}
+    .service-swiper-wrap{height:100%; overflow:hidden;}
+    .service-swiper{height:100%;}
+    .service-slide{height:auto; display:flex; align-items:center;}
+    .service-item{width:100%; position: relative; min-height: 100%; position: relative; padding: 20px 0 40px 70px;
+      h1{font-size: 48px; font-weight: 400; color: #fff;}
+    }
+
+    .img-box{cursor:pointer; position: absolute; width:100%; height:100%; left: 0; top: 0;}
+    .service-item img{display:block; position: absolute; inset:0; width:100%; height: 100%; object-fit: cover; opacity: 0.8;}
+    .back-button{position:absolute; top:40px; right:40px; z-index:10;
+      span{cursor:pointer; display:inline-block; padding:8px 18px; border:1px solid #fff; border-radius:999px; font-size:14px;}
+    }
+  }
+  
+  .dot_icon_w {
+    div{backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.1);}
+    span{backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.1);}
+  }
+}

@@ -437,7 +437,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
             </video>
           </div>
 
-          <div ref={txtRef} className="main_1_txt_1">
+          <div ref={txtRef} className="main_1_txt_1 hide ani">
             <h1 className="quote">
               Advancing Biology
               <br />
@@ -445,7 +445,7 @@ const floatRef = useRef<HTMLUListElement | null>(null);
             </h1>
 
             <div className="main_1_txt_1_b ani bar">
-              <img src="/main_1_icon_1.png" alt="Icon 1" />
+              <img className="ani hide" src="/main_1_icon_1.png" alt="Icon 1" />
               <span className="quote">
                 우리는 연구와 데이터에 기반한 혁신적인 <br className="pc" /> 생명과학 솔루션을 <br className="mob" />개발하며, 장기적인 가치를 추구합니다.
               </span>
