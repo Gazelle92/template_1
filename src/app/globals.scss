@@ -107,9 +107,15 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
     & > a{background-color: #fff;
       img{filter: invert(1);}
     }
-    & > nav{background-color: #fff;}
-    li > a{color: #000;}
+    & > nav{background-color: #fff;
+      li {position: relative;
+        *{color: #000;}
+        .depth_2{position: absolute; display: flex; flex-direction: column; gap: 6px; padding: 20px 40px; border-radius: 8px;}
+      }
+    }
+    
   }
+  
 }
 
 .footer{padding: 20px 20px 20px; background-color: #131313;

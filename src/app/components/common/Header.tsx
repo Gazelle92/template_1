@@ -33,10 +33,7 @@ export default function Header() {
       className={`header w-full flex justify-between items-center border-black ${pathname !== "/" ? "no-filter" : ""}`}
       
     >
-      <a
-        href="/"
-        className="flex flex-col w-[183px] h-14 items-start gap-2.5 relative bg-[#ffffff1a] rounded-xl"
-      >
+      <a href="/" className="flex flex-col w-[183px] h-14 items-start gap-2.5 relative bg-[#ffffff1a] rounded-xl">
         <div className="relative">
           <Image src="/logo.svg" alt="Logo" width={149.76} height={28} className="w-full h-full object-contain" />
         </div>
@@ -48,16 +45,36 @@ export default function Header() {
         aria-label="Main navigation"
       >
         <ul className="flex items-center gap-10 rounded-[8px]">
-          {navigationItems.map((item, index) => (
-            <li key={index}>
+            <li>
               <TransitionLink
-                href={item.href}
+                href="/company"
                 className="relative w-fit mt-[-1px] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
-              >
-                {item.label}
+              >COMPANY
               </TransitionLink>
             </li>
-          ))}
+            <li>
+              <span className="relative w-fit mt-[-1px] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity">SERVICES</span>
+              <div className="depth_2">
+                <TransitionLink
+                  href="/services"
+                  className="relative w-fit mt-[-1px] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
+                >SERVICE 01
+                </TransitionLink>
+                <TransitionLink
+                  href="/services-2"
+                  className="relative w-fit mt-[-1px] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
+                >SERVICE 02
+                </TransitionLink>
+              </div>
+              
+            </li>
+            <li>
+              <TransitionLink
+                href="/newsroom"
+                className="relative w-fit mt-[-1px] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
+              >NEWSROOM
+              </TransitionLink>
+            </li>
         </ul>
 
         <TransitionLink

@@ -8,6 +8,7 @@ import type { Swiper as SwiperClass } from "swiper";
 import { Mousewheel } from "swiper/modules";
 import "./swiper.scss";
 import "./services-2.scss";
+import BrandsScrollCanvas from "../components/common/BrandsScrollCanvas";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,74 +90,70 @@ export default function Services2() {
   };
 
   const handleSlideClick = (index: number) => {
-    if (isExpanded) return;
+  if (isExpanded) return;
 
-    const swiper = swiperRef.current;
-    const target = sliderInnerRef.current;
-    const { marginTop } = getSlideOffsets(index);
+  const swiper = swiperRef.current;
 
-    setIsExpanded(true);
-    setIsTransition(true);
-    setIsEnd(false);
-    setIsBack(false);
+  setIsExpanded(true);
+  setIsTransition(true);
+  setIsEnd(false);
+  setIsBack(false);
+  setClickedSlideIndex(index);
 
-    if (swiper) {
-      swiper.slideToLoop(index, 1000, false);
-      swiper.params.speed = 1000;
-      swiper.params.slideToClickedSlide = true;
-      swiper.mousewheel.disable();
-      swiper.update();
-    }
+  // ❗ 먼저 상태 변경 (CSS 커짐)
+  requestAnimationFrame(() => {
+    if (!swiper) return;
 
-    setClickedSlideIndex(index);
+    // ❗ 핵심: 커진 상태 기준으로 다시 계산
+    swiper.update();
 
-    if (target) {
-      gsap.fromTo(target, { marginTop: 0 }, { marginTop, duration: 0 });
-    }
+    // ❗ 핵심: 실제 위치 재정렬
+    swiper.slideToLoop(index, 0, false);
 
-    window.setTimeout(() => {
-      setIsTransition(false);
-      setIsEnd(true);
-      if (swiper) {
-        swiper.update();
-      }
-    }, 1000);
-  };
+    swiper.params.speed = 1000;
+    swiper.params.slideToClickedSlide = true;
+    swiper.mousewheel.disable();
+  });
+
+  setTimeout(() => {
+    setIsTransition(false);
+    setIsEnd(true);
+  }, 300);
+};
 
   const handleBack = () => {
-    if (!isExpanded) return;
+  if (!isExpanded) return;
 
-    const swiper = swiperRef.current;
-    const target = sliderInnerRef.current;
-    const slideIndex = clickedSlideIndex ?? 0;
-    const { reverseMarginTop } = getSlideOffsets(slideIndex);
+  const swiper = swiperRef.current;
 
-    setIsTransition(true);
-    setIsBack(true);
-    setIsEnd(false);
+  setIsTransition(true);
+  setIsBack(true);
+  setIsEnd(false);
 
-    if (target) {
-      gsap.fromTo(target, { marginTop: 0 }, { marginTop: reverseMarginTop, duration: 0 });
-    }
+  setTimeout(() => {
+    setIsTransition(false);
+    setIsBack(false);
+    setIsExpanded(false);
 
-    window.setTimeout(() => {
-      setIsTransition(false);
-      setIsBack(false);
-      setIsExpanded(false);
+    requestAnimationFrame(() => {
+      if (!swiper) return;
 
-      if (swiper) {
-        swiper.update();
-        swiper.slideToLoop(clickedSlideIndex ?? 0, 0, false);
-        swiper.params.speed = 300;
-        swiper.params.slideToClickedSlide = false;
-        swiper.mousewheel.enable();
-      }
-    }, 1000);
-  };
+      // ❗ 다시 작은 상태 기준으로 재계산
+      swiper.update();
 
+      swiper.slideToLoop(clickedSlideIndex ?? 0, 0, false);
+      swiper.params.speed = 300;
+      swiper.params.slideToClickedSlide = false;
+      swiper.mousewheel.enable();
+    });
+  }, 300);
+};
   return (
     <div className={`page_service-2${isExpanded ? " expand" : ""}${isTransition ? " transition" : ""}${isEnd ? " end" : ""}${isBack ? " back" : ""}`}>
       <div className="page_service_inner">
+        <div className="back" onClick={() => handleBack()}>
+          <img src="/arrow_left_slide.svg" alt="Back" />
+        </div>
         <div className="left-box">
           <div className="title_w">
             <h1 className="quote">Services</h1>
@@ -168,21 +165,23 @@ export default function Services2() {
         </div>
         <div className="right-box">
           <div className="service-swiper-wrap" ref={sliderInnerRef}>
-            <Swiper
-              modules={[Mousewheel]}
-              direction="vertical"
-              slidesPerView={4}
-              spaceBetween={40}
-              loop={true}
-              speed={300}
-              initialSlide={1}
-              mousewheel={true}
-              slideToClickedSlide={false}
-              onSwiper={(swiper) => {
-                swiperRef.current = swiper;
-              }}
-              className="service-swiper"
-            >
+
+              <Swiper
+        slidesPerView="auto"
+        spaceBetween={40}
+        loop={true}
+        modules={[Mousewheel]}
+        mousewheel={{
+          forceToAxis: true,
+          sensitivity: 1,
+          releaseOnEdges: false
+        }}
+        slideToClickedSlide={false}
+        //centeredSlides={true}
+        direction="vertical"
+        className="service-swiper"
+        
+      >
               {serviceList.map((item, index) => (
                 <SwiperSlide key={index} className="service-slide">
                   <div className="service-item">
@@ -202,6 +201,9 @@ export default function Services2() {
             </Swiper>
           </div>
         </div>
+      </div>
+      <div className="canvas_w">
+      <BrandsScrollCanvas />
       </div>
     </div>
   );

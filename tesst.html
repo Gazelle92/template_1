@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brands Scroll Texture Rotation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+    body { position: relative; }
+    canvas { display: block; width: 100%; height: 100%; }
+    .info { position: absolute; left: 20px; bottom: 20px; z-index: 10; color: #fff; font-family: Arial, sans-serif; font-size: 12px; opacity: 0.7; letter-spacing: 0.04em; }
+  </style>
+</head>
+<body>
+  <canvas id="brandsCanvas"></canvas>
+  <div class="info">/brands-scroll-text.png</div>
+
+  <script type="module">
+  import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js';
+
+  const canvas = document.getElementById('brandsCanvas');
+  const scene = new THREE.Scene();
+
+  const sizes = { width: window.innerWidth, height: window.innerHeight };
+
+  const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+  camera.position.z = 17;
+  scene.add(camera);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const loader = new THREE.TextureLoader();
+
+  loader.load('/brands-scroll-text.png', (texture) => {
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.repeat.x = 4;
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.ClampToEdgeWrapping;
+
+    const geometry = new THREE.CylinderGeometry(7, 7, 2.8, 20, 1, true);
+
+const material = new THREE.MeshBasicMaterial({
+  map: texture,
+  side: THREE.DoubleSide,
+  transparent: true,
+  depthWrite: false
+});
+
+const mesh = new THREE.Mesh(geometry, material);
+
+const group = new THREE.Group();
+group.rotation.z = 0.2 * Math.PI;
+group.rotation.x = 0.2 * Math.PI;
+
+group.add(mesh);
+scene.add(group);
+
+camera.position.z = 17;
+
+function animate() {
+  mesh.rotation.y -= 0.01;
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+
+    animate();
+  });
+
+  window.addEventListener('resize', () => {
+    sizes.width = window.innerWidth;
+    sizes.height = window.innerHeight;
+    camera.aspect = sizes.width / sizes.height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  });
+</script>
+</body>
+</html>
