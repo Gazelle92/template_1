@@ -97,20 +97,55 @@ body {
   position: relative;
   /*overflow: hidden;*/
 }
+:root {
+  --white-10: rgba(255, 255, 255, 0.1);
+}
 header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 'Barlow'; padding: 52px 60px 0;
-  & > a{background-color: rgba(255,255,255,0.1); backdrop-filter: blur(40px); transition: ease 0.3s all;  padding: 14px 16px; height: unset;
-    img{filter: invert(0); transition: ease 0.5s filter; width: 184px;}
-  }
-  & > nav{background-color: rgba(255,255,255,0.1); backdrop-filter: blur(40px);transition: ease 0.3s all;}
-  li > a{color: #fff; transition: ease 0.3s all;}
-  &.no-filter{
-    & > a{background-color: #fff;
-      img{filter: invert(1);}
+  & > a{background-color: var(--white-10); backdrop-filter: blur(40px); transition: ease 0.3s all;  padding: 14px 16px; position: relative; width: 184px; height: 56px;
+    img{transition: ease 0.5s opacity; width: 150px; position: absolute;
+      &.icon_dark{opacity: 0;}
     }
-    & > nav{background-color: #fff;
+  }
+  &.no-filter{
+    & > a{
+      img{opacity: 0;
+        &.icon_dark{opacity: 1;}
+      }
+    }
+  }
+  & > nav{transition: ease 0.3s all; position: relative;
+    &::before{content: ''; position: absolute; top: 0; left: 0; width: 100%; height:100%; z-index: -1; background-color: var(--white-10); backdrop-filter: blur(40px); border-radius: 8px;}
+    ul{height: 100%;
+      li{display: flex; align-items: center; justify-content: center; height: 100%;
+        & > span{cursor: default;}
+        & > a, & > span{position: relative; display: flex; align-items: center;
+          &::after{content: ''; position: absolute; left: -16px; width: 5px; height: 5px; background-color: #00FFA1; transition: ease 0.3s all; opacity: 0;}
+          &:hover::after{opacity: 1;}
+        }
+        .depth_2{position: absolute; display:none; flex-direction: column; gap: 6px; padding: 20px 40px; border-radius: 8px; left:50%; transform:translateX(-50%); background-color:var(--white-10); top: calc(100% + 8px);backdrop-filter: blur(40px);
+          a{position: relative; padding-bottom: 2px;
+            &::after{content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background-color: #000; transition: ease 0.3s all;}
+            &:hover::after{width: 100%;}
+          }
+          &::before{content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 100%; height: 40px; z-index: -1;}
+        }
+        &:hover .depth_2{display: flex;}
+        &:hover > a::after, &:hover > span::after{opacity: 1;}
+      }
+    }
+    
+  }
+  li{
+    & > a{color: #fff; transition: ease 0.3s all;}
+  }
+  &.no-filter{
+    & > a{/*background-color: #fff;*/
+      /*img{filter: invert(1);}**/
+    }
+    & > nav{/*background-color: #fff;*/
       li {position: relative;
         *{color: #000;}
-        .depth_2{position: absolute; display: flex; flex-direction: column; gap: 6px; padding: 20px 40px; border-radius: 8px;}
+        
       }
     }
     

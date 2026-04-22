@@ -34,8 +34,9 @@ export default function Header() {
       
     >
       <a href="/" className="flex flex-col w-[183px] h-14 items-start gap-2.5 relative bg-[#ffffff1a] rounded-xl">
-        <div className="relative">
-          <Image src="/logo.svg" alt="Logo" width={149.76} height={28} className="w-full h-full object-contain" />
+        <div className="relative w-full h-full object-contain">
+          <Image src="/logo.svg" alt="Logo" width={149.76} height={28} className="" />
+          <Image src="/logo_black.svg" alt="Logo" width={149.76} height={28} className="icon_dark" />
         </div>
       </a>
 

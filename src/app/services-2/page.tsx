@@ -9,6 +9,7 @@ import { Mousewheel } from "swiper/modules";
 import "./swiper.scss";
 import "./services-2.scss";
 import BrandsScrollCanvas from "../components/common/BrandsScrollCanvas";
+import CursorFollower from "../lib/CursorFollower";
 import { update } from "three/examples/jsm/libs/tween.module.js";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -70,21 +71,7 @@ export default function Services2() {
     { img: "/service_img_01.jpg", num: "our service 01", title: "Research & Development" },
     { img: "/service_img_02.jpg", num: "our service 02", title: "Research & Development" },
     { img: "/service_img_03.jpg", num: "our service 03", title: "Research & Development" },
-    { img: "/service_img_01.jpg", num: "our service 04", title: "Research & Development" },
-    { img: "/service_img_02.jpg", num: "our service 05", title: "Research & Development" },
-    { img: "/service_img_03.jpg", num: "our service 06", title: "Research & Development" },
-     { img: "/service_img_01.jpg", num: "our service 01", title: "Research & Development" },
-    { img: "/service_img_02.jpg", num: "our service 02", title: "Research & Development" },
-    { img: "/service_img_03.jpg", num: "our service 03", title: "Research & Development" },
-    { img: "/service_img_01.jpg", num: "our service 04", title: "Research & Development" },
-    { img: "/service_img_02.jpg", num: "our service 05", title: "Research & Development" },
-    { img: "/service_img_03.jpg", num: "our service 06", title: "Research & Development" },
-    { img: "/service_img_01.jpg", num: "our service 01", title: "Research & Development" },
-    { img: "/service_img_02.jpg", num: "our service 02", title: "Research & Development" },
-    { img: "/service_img_03.jpg", num: "our service 03", title: "Research & Development" },
-    { img: "/service_img_01.jpg", num: "our service 04", title: "Research & Development" },
-    { img: "/service_img_02.jpg", num: "our service 05", title: "Research & Development" },
-    { img: "/service_img_03.jpg", num: "our service 06", title: "Research & Development" },
+    
   ];
 
 
@@ -92,7 +79,7 @@ export default function Services2() {
 
 
   const getSlideOffsets = (clickedIndex: number) => {
-    const bodyHeight = document.body.clientHeight;
+    const bodyHeight = window.innerHeight;
     let a = (120 / 900) * bodyHeight;
     let o = 0.48 * bodyHeight;
     const vh = window.innerHeight;
@@ -101,8 +88,9 @@ export default function Services2() {
     const expanded = vh * 0.48;
 
     const distance = expanded - base;
+    //const distance = base;
 
-    const gap = 20;
+    const gap = 40;
 
     if (document.body.clientWidth <= 768) {
       a = (77 / 720) * bodyHeight;
@@ -112,7 +100,7 @@ export default function Services2() {
     return {
       //marginTop: -distance * clickedIndex - distance / 2,
       //marginTop: -(window.innerHeight * 0.48 - window.innerHeight * 0.18 - 40) * (clickedIndex + 1),
-      marginTop: -(distance * clickedIndex) - gap * clickedIndex,
+      marginTop: -(distance * clickedIndex) - distance / 2,
       reverseMarginTop: distance * clickedIndex + distance / 2,
     };
   };
@@ -211,12 +199,13 @@ const handleBack = () => {
     container.style.marginTop = "0px";
 
     // 6️⃣ swiper 위치 재정렬
-    swiper.update();
+    
     swiper.slideTo(index, 0, false);
     swiper.mousewheel.enable();
 
     setIsTransition(false);
     setIsBack(false);
+    swiper.update();
   }, 500); // 🔥 height 줄어드는 transition 시간 맞춰라
 };
   return (
@@ -238,23 +227,23 @@ const handleBack = () => {
           <div className="service-swiper-wrap" ref={sliderInnerRef}>
 
               <Swiper
-  slidesPerView="auto"
-  spaceBetween={40}
-  loop={true}
-  modules={[Mousewheel]}
-  mousewheel={{
-    forceToAxis: true,
-    sensitivity: 1,
-    releaseOnEdges: false
-  }}
-  slideToClickedSlide={false}
-  centeredSlides={true}
-  direction="vertical"
-  className="service-swiper"
-  onSwiper={(swiper) => {
-    swiperRef.current = swiper;
-  }}
->
+                slidesPerView="auto"
+                spaceBetween={40}
+                loop={true}
+                modules={[Mousewheel]}
+                mousewheel={{
+                  forceToAxis: true,
+                  sensitivity: 1,
+                  releaseOnEdges: false
+                }}
+                slideToClickedSlide={false}
+                centeredSlides={true}
+                direction="vertical"
+                className="service-swiper"
+                onSwiper={(swiper) => {
+                  swiperRef.current = swiper;
+                }}
+              >
               {serviceList.map((item, index) => (
                 <SwiperSlide key={index} className="service-slide" onClick={handleSlideClick}>
                   <div className="service-item">
@@ -276,8 +265,10 @@ const handleBack = () => {
         </div>
       </div>
       <div className="canvas_w">
-      <BrandsScrollCanvas />
+        <BrandsScrollCanvas />
+        <CursorFollower />
       </div>
+      
     </div>
   );
 }

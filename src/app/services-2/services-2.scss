@@ -1,7 +1,7 @@
 
 .page_service-2{position: relative; padding: 20px; color: #fff;
-  .canvas_w{position: absolute; bottom: 0; right: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden;}
-  .page_service_inner{background-color: #000; padding: 20px; position: relative; height: calc(100vh - 40px); border-radius: 24px; display: flex; gap:calc((100% / 12) * 1); overflow-y: hidden;
+  .canvas_w{position: absolute; bottom: 0; right: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; z-index: 1; pointer-events: none;}
+  .page_service_inner{background-color: #000; /*padding: 20px;*/ position: relative; height: calc(100vh - 40px); border-radius: 24px; display: flex; gap:calc((100% / 12) * 1); overflow-y: hidden;
     .back{width: 52px; height: 60px; position: absolute; left: 40px; top: 174px; z-index: 1; cursor: pointer;
       img{width: 100%; height: 100%; object-fit: contain;}
     }
@@ -12,12 +12,7 @@
         span{font-size: 15px; line-height: 1.5;}
       }
     }
-    .right-box{width: calc((100% / 12) * 7); overflow: hidden;
-      ul{ gap: 20px;
-        li{ position: relative; padding: 20px 0 40px 70px;
-          img{position: absolute; left: 0; top: 0; height: 100%; width: 100%; object-fit: cover;}
-        }
-      }
+    .right-box{width: calc((100% / 12) * 7); overflow: hidden; padding: 0 40px; border-left: 1px solid rgb(255 255 255 / 20%);      
       .service-swiper-wrap{ 
         &.transition{transition: margin-top 0.5s ease;}
       .swiper{overflow: unset;}
@@ -33,16 +28,16 @@
       }*/
     }
     .service-slide{height:auto; display:flex; align-items:center;  transition: height 1s cubic-bezier(.075,.82,.165,1); padding: 20px 0 40px 70px; position: relative; cursor: pointer;
-      .service-item{width:100%;  min-height: 100%;
+      .service-item{width:100%;  min-height: 100%; opacity: 0.3; transition: opacity 1s cubic-bezier(.075,.82,.165,1);
         h1{font-size: 48px; font-weight: 400; color: #fff; line-height: 1.2;}
-        .img-box{ position: absolute; width:100%; height:100%; left: 0; top: 0; display: flex; align-items: center; overflow: hidden;
+        .img-box{ position: absolute; width:100%; height:100%; left: 0; top: 0; display: flex; align-items: center; overflow: hidden; z-index: -1;
           img{display:block; position: absolute; inset:0; width:100%; height: 100%; object-fit: cover; opacity: 0; border-radius: 20px; transition: opacity 1s cubic-bezier(.075,.82,.165,1); top: 50%; transform: translateY(-50%);}
         }
         
         &:hover img{opacity: 0.8;}
       }
       &.swiper-slide-active{/*background-color: salmon;*/
-        .service-item{
+        .service-item{opacity: 1;
           img{opacity: 1!important;}
         }
         
@@ -72,4 +67,13 @@
     div{backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.1);}
     span{backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.1);}
   }
+}
+.cursor.test{width: 80px; height: 80px; backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.1); position: absolute; z-index: 9; display: flex; align-items: center; justify-content: center; border-radius: 100%; font-size: 10px; text-transform: uppercase;
+  /*&.hover-back{width: 120px; height: 120px;}*/
+  span{position: absolute; width: 100%; text-align: center; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: 500; opacity: 1; transition: opacity 0.3s ease; height: 100%; display: flex; justify-content: center; align-items: center;}
+  .cursor-txt-back{opacity: 0;}
+  &.hover-back .cursor-txt-back{opacity: 1;}
+  &.hover-back span{opacity: 0;}
+
+
 }
