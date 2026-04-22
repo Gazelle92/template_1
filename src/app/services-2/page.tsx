@@ -16,6 +16,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Services2() {
   useEffect(() => {
+    const setViewportHeight = () => {
+      document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+    };
+
+    setViewportHeight();
+    window.addEventListener("resize", setViewportHeight);
+
+    return () => {
+      window.removeEventListener("resize", setViewportHeight);
+      document.documentElement.style.removeProperty("--vh");
+    };
+  }, []);
+
+  useEffect(() => {
   document.body.classList.add("bg_black");
 
   return () => {
@@ -62,16 +76,15 @@ export default function Services2() {
   const [clickedSlideIndex, setClickedSlideIndex] = useState<number | null>(null);
 
   const serviceList = [
-    { img: "/service_img_01.jpg", num: "our service 01", title: "Research & Development" },
-    { img: "/service_img_02.jpg", num: "our service 02", title: "Research & Development" },
-    { img: "/service_img_03.jpg", num: "our service 03", title: "Research & Development" },
-    { img: "/service_img_01.jpg", num: "our service 04", title: "Research & Development" },
-    { img: "/service_img_02.jpg", num: "our service 05", title: "Research & Development" },
-    { img: "/service_img_03.jpg", num: "our service 06", title: "Research & Development" },
-    { img: "/service_img_01.jpg", num: "our service 01", title: "Research & Development" },
-    { img: "/service_img_02.jpg", num: "our service 02", title: "Research & Development" },
-    { img: "/service_img_03.jpg", num: "our service 03", title: "Research & Development" },
-    
+    { img: "/service_img_01.jpg", num: "our service 01", title: "11Research & Development", contents:"111우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며, 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다."},
+    { img: "/service_img_02.jpg", num: "our service 02", title: "22Research & Development", contents:"222우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며, 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다."},
+    { img: "/service_img_03.jpg", num: "our service 03", title: "33Research & Development", contents:"333우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며, 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다."},
+    { img: "/service_img_01.jpg", num: "our service 04", title: "44Research & Development", contents:"444우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며, 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다."},
+    { img: "/service_img_02.jpg", num: "our service 05", title: "55Research & Development", contents:"555우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며, 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다."},
+    { img: "/service_img_03.jpg", num: "our service 06", title: "66Research & Development", contents:"666우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며, 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다."},
+    { img: "/service_img_01.jpg", num: "our service 01", title: "77Research & Development", contents:"777우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며, 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다."},
+    { img: "/service_img_02.jpg", num: "our service 02", title: "88Research & Development", contents:"888우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며, 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다."},
+    { img: "/service_img_03.jpg", num: "our service 03", title: "99Research & Development", contents:"999우리는 기초 연구부터 응용 연구, 개발 단계까지 전 과정을 아우르는 체계적인 연구개발을 수행하며, 과학적 근거와 검증된 데이터를 바탕으로 신뢰할 수 있는 연구 결과와 기술적 성과를 도출합니다."}
   ];
 
 
@@ -140,10 +153,10 @@ const handleSlideClick = () => {
   setClickedSlideIndex(clickedIndex);
 
   swiper.params.speed = 500;
-  swiper.mousewheel.disable();
+  //swiper.mousewheel.disable();
 
   swiper.slideTo(clickedIndex, 500, false);
-const { marginTop } = getSlideOffsets(clickedIndex);
+  const { marginTop } = getSlideOffsets(clickedIndex);
 
     container.style.marginTop = `${marginTop}px`;
     setIsExpanded(true);
@@ -165,6 +178,8 @@ const { marginTop } = getSlideOffsets(clickedIndex);
 
     }, 500);
 };
+
+
 const handleBack = () => {
   if (!isExpanded) return;
 
@@ -208,6 +223,45 @@ const handleBack = () => {
     swiper.update();
   }, 500); // 🔥 height 줄어드는 transition 시간 맞춰라
 };
+
+
+
+const [activeIndex, setActiveIndex] = useState(0);
+const [prevIndex, setPrevIndex] = useState<number | null>(null);
+const [direction, setDirection] = useState<"up" | "down" | null>(null);
+
+const syncActiveList = () => {
+  setTimeout(() => {
+    const activeSlide = document.querySelector(
+      ".service-swiper .swiper-slide-active"
+    ) as HTMLElement | null;
+
+    if (!activeSlide) return;
+
+    const nextIndex = Number(activeSlide.dataset.slideIndex);
+
+    // 방향 계산 ⭐
+    if (nextIndex > activeIndex) {
+      setDirection("down");
+    } else if (nextIndex < activeIndex) {
+      setDirection("up");
+    }
+
+    setPrevIndex(activeIndex);
+    setActiveIndex(nextIndex);
+  }, 100);
+};
+
+useEffect(() => {
+  if (prevIndex === null) return;
+
+  const timer = setTimeout(() => {
+    setPrevIndex(null);
+  }, 100); // 👈 exit 애니 시간 맞춰
+
+  return () => clearTimeout(timer);
+}, [prevIndex]);
+
   return (
     <div className={`page_service-2${isExpanded ? " expand" : ""}${isTransition ? " transition" : ""}${isEnd ? " end" : ""}${isBack ? " back" : ""}`}>
       <div className="page_service_inner">
@@ -219,9 +273,36 @@ const handleBack = () => {
             <h1 className="quote">Services</h1>
             <span className="quote">연구와 데이터에 기반한 혁신적인 생명과학 솔루션을 개발하며,<br/>전문성을 바탕으로지속 가능하고 장기적인 가치를 꾸준히 만들어갑니다.</span>
           </div>
-          <div className="back-button">
-            <span onClick={handleBack}>Back</span>
-          </div>
+          <ul className="left_list">
+            {serviceList.map((item, index) => {
+              let className = "";
+
+              if (index === activeIndex) {
+                className = `active ${direction}`;
+              } else if (index === prevIndex) {
+                className = `exit ${direction}`;
+              }
+
+              return (
+                <li
+                  key={index}
+                  data-index={index}
+                  className={className}
+                >
+                  <div className="dot_icon_w">
+                    <div></div>
+                    <span>{item.num}</span>
+                  </div>
+                  <div className="list_title">
+                    <h1>{item.title}</h1>
+                  </div>
+                  <div className="list_contents">
+                    <span>{item.contents}</span>
+                  </div>
+                </li>
+              );  
+            })}
+          </ul>
         </div>
         <div className="right-box">
           <div className="service-swiper-wrap" ref={sliderInnerRef}>
@@ -243,9 +324,11 @@ const handleBack = () => {
                 onSwiper={(swiper) => {
                   swiperRef.current = swiper;
                 }}
+                onSlideChange={syncActiveList}
+                //onTransitionEnd={syncActiveList}
               >
               {serviceList.map((item, index) => (
-                <SwiperSlide key={index} className="service-slide" onClick={handleSlideClick}>
+                <SwiperSlide key={index} data-slide-index={index} className="service-slide" onClick={handleSlideClick}>
                   <div className="service-item">
                     <div className="img-box" >
                       <img src={item.img} alt={item.title} />
