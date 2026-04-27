@@ -30,8 +30,9 @@ export default function Header() {
 
   return (
     <header
-      className={`header w-full flex justify-between items-center border-black ${pathname !== "/" ? "no-filter" : ""}`}
-      
+      className={`header w-full flex justify-between items-center border-black ${
+        pathname !== "/" && pathname !== "/services-2" ? "no-filter" : ""
+      }`}
     >
       <a href="/" className="flex flex-col w-[183px] h-14 items-start gap-2.5 relative bg-[#ffffff1a] rounded-xl">
         <div className="relative w-full h-full object-contain">

@@ -130,6 +130,32 @@
     div{backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.1);}
     span{backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.1);}
   }
+  &:not(.expand){
+  .left_list{opacity: 0;}
+ }
+  
+ @media(max-width:1024px){
+  &{padding: 8px; height: 100vh;}
+  .page_service_inner{flex-direction: column; gap: 0; height: calc(100%);
+    .left-box{width: 100%; height: 300px; 
+      .title_w{top: 160px; left: 20px;
+        h1{font-size: 40px; margin-bottom: 20px;}
+        span{font-size: 11px; line-height: 1.5; display: block;
+          div{line-height: 1.5; font-size: 11px;}
+        }
+      }
+    }
+    .right-box{width: 100%; height: calc(100% - 300px); padding: 0 12px;
+      .service-swiper-wrap{
+        .service-slide {padding: 16px 0 20px 16px; height: 160px;
+          .service-item {
+            h1{font-size: 24px;}
+          }
+        }
+      }
+    }
+  }
+ }
 }
 .cursor.test{width: 80px; height: 80px; backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.1); position: absolute; z-index: 9; display: flex; align-items: center; justify-content: center; border-radius: 100%; font-size: 10px; text-transform: uppercase;
   /*&.hover-back{width: 120px; height: 120px;}*/

@@ -173,8 +173,9 @@ const handleSlideClick = () => {
       container.style.marginTop = "0px";
 
       // 3️⃣ swiper 재정렬
-      swiper.update();
+      
       swiper.slideTo(clickedIndex, 0, false);
+      swiper.update();
 
     }, 500);
 };
@@ -221,7 +222,11 @@ const handleBack = () => {
     setIsTransition(false);
     setIsBack(false);
     swiper.update();
+    setTimeout(() => {
+      swiper.update();
+    }, 200);
   }, 500); // 🔥 height 줄어드는 transition 시간 맞춰라
+  
 };
 
 
