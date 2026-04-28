@@ -177,7 +177,7 @@ const handleSlideClick = () => {
       swiper.slideTo(clickedIndex, 0, false);
       swiper.update();
 
-    }, 500);
+    }, 550);
 };
 
 
@@ -225,7 +225,7 @@ const handleBack = () => {
     setTimeout(() => {
       swiper.update();
     }, 200);
-  }, 500); // 🔥 height 줄어드는 transition 시간 맞춰라
+  }, 550); // 🔥 height 줄어드는 transition 시간 맞춰라
   
 };
 
