@@ -60,12 +60,12 @@ export default function Header() {
                 <TransitionLink
                   href="/services"
                   className="relative w-fit mt-[-1px] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
-                >SERVICE 01
+                ><span>SERVICE 01</span>
                 </TransitionLink>
                 <TransitionLink
                   href="/services-2"
                   className="relative w-fit mt-[-1px] font-medium text-white whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
-                >SERVICE 02
+                ><span>SERVICE 02</span>
                 </TransitionLink>
               </div>
               
