@@ -115,8 +115,7 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
   }
 
   @keyframes pulseScale{
-    0%{transform:translate(-50%, -50%) scale(1);}
-    30%{transform:translate(-50%, -50%) scale(1.1);}
+    0%{transform:translate(-50%, -50%) scale(0.8);}
     100%{transform:translate(-50%, -50%) scale(1);}
   }
   & > nav{transition: ease 0.3s all; position: relative;
@@ -128,16 +127,28 @@ header{z-index: 99; position: fixed; top: 0; left: 0; width: 100%; font-family: 
           &::after{content: ''; position: absolute; left: -16px; width: 5px; height: 5px; background-color: #00FFA1; transition: ease 0.3s all; opacity: 0;}
           &:hover::after{opacity: 1;}
         }
-        .depth_2{position: absolute; display:flex; flex-direction: column; gap: 6px; padding: 20px 40px;  left:50%; transform:translateX(-50%);  top: calc(100% + 8px); pointer-events: none;
-          a{position: relative; padding-bottom: 2px;
+        .depth_2{position: absolute; display:flex; flex-direction: column; gap: 6px; padding: 20px 40px;  left:50%; top: calc(100% + 8px); pointer-events: none; transform: translate3d(0, calc(var(--spacing, .25rem) * 4), 0) translateX(-50%); transition-property: transform, opacity; transition-duration: 0.2s, .1s; transition-timing-function: cubic-bezier(.5,0,0,1), cubic-bezier(.5,0,0,1); visibility: hidden;
+          a{position: relative; padding-bottom: 2px; overflow: hidden;
             &::after{content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background-color: #fff; transition: ease 0.3s all;}
             &:hover::after{width: 100%;}
+            span{display: block; transform: translateY(110%); transition: ease 0.4s transform;
+              
+            }
+            @for $i from 1 through 10 {
+              &:nth-child(#{$i}) span {
+                transition-delay: #{($i - 1) * 0.1}s;
+              }
+            }
+            
           }
           &::before{content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 100%; height: 40px; z-index: -1;}
           &::after{content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; background-color: var(--white-10); backdrop-filter: blur(40px); z-index: -1;  background-color:var(--white-10); backdrop-filter: blur(40px); border-radius: 8px; opacity: 0;}
         }
-        &:hover .depth_2{display: flex; pointer-events: all;
-          &::after{opacity: 1; animation:pulseScale 0.2s ease-in-out;}
+        &:hover .depth_2{display: flex; pointer-events: all; transform: translateX(-50%); visibility: visible;
+          &::after{opacity: 1; animation:.4s cubic-bezier(0.17, 0.67, 0.26, 1.44) pulseScale}
+          a{
+            span{transform: translateY(0%);}
+          }
         }
 
         &:hover > a::after, &:hover > span::after{opacity: 1;}
